@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'ko' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% if page.title %}
+      {{ page.title }} · {{ site.title }}
+    {% else %}
+      {{ site.title }}
+    {% endif %}
+  </title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        macros: {
+          odv: ["{\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}}", 2],
+          odif: ["{\\mathrm{d}#1}", 1],
+          pdv: ["{\\frac{\\partial#1}{\\partial#2}}", 2],
+          mdv: ["{\\frac{\\mathrm{D}#1}{\\mathrm{D}#2}}", 2],
+          grad: "{\\nabla}",
+          divg: "{\\nabla \\cdot}",
+          curl: "{\\nabla \\times}",
+          laplacian: "{\\nabla^2}",
+          oddv: ["{\\frac{\\mathrm{d}^2#1}{\\mathrm{d}#2^2}}", 2],
+          pddv: ["{\\frac{\\partial^2#1}{\\partial#2^2}}", 2],
+          ehat: ["{\\hat{\\mathbf{e}}_{#1}}", 1],
+          uhat: ["{\\hat{\\mathbf{u}}_{#1}}", 1]
+        }
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <div class="site">
+    <header class="topbar">
+      <a class="site-title" href="{{ '/' | relative_url }}">Home</a>
+
+      <nav>
+        <a href="https://github.com/saika-sei">GitHub</a>
+        <a href="mailto:jayyoo2002@snu.ac.kr">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer class="footer">
+      © {{ site.time | date: "%Y" }} {{ site.title }}
+    </footer>
+  </div>
+</body>
+</html>

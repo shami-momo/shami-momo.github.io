@@ -1,0 +1,15 @@
+title: "Hojun Yoo"
+description: "Personal academic site and study notes"
+lang: "ko"
+
+url: ""
+baseurl: ""
+
+markdown: kramdown
+
+permalink: /notes/:year/:month/:day/:title/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

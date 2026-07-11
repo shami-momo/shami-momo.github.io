@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<article class="page">
+<p class="back">
+    <a href="{{ '/' | relative_url }}">← Home</a>
+</p>
+
+<header class="page-header {% if page.logo %}page-header-with-logo{% endif %}">
+    <div>
+    <h1>{{ page.title }}</h1>
+
+    {% if page.subtitle %}
+        <p>{{ page.subtitle }}</p>
+    {% endif %}
+    </div>
+
+    {% if page.logo %}
+    <img
+        class="page-logo"
+        src="{{ page.logo | relative_url }}"
+        alt="{{ page.logo_alt | default: page.title }}"
+    >
+    {% endif %}
+</header>
+
+<div class="content">
+    {{ content }}
+</div>
+</article>
