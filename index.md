@@ -32,7 +32,7 @@ layout: default
 </section>
 
 <section class="section">
-  <h2>Recent posts</h2>
+  <h2>최근 글</h2>
 
   <ol class="post-list">
     {% for post in site.posts limit:3 %}

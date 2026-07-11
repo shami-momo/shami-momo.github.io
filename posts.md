@@ -3,7 +3,7 @@ layout: page
 title: "Posts"
 subtitle: "공부하면서 정리한 글들을 모아둡니다."
 eyebrow: "Study Archive"
-permalink: /Posts/
+permalink: /posts/
 ---
 
 <ol class="post-list large">
