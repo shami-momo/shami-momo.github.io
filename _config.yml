@@ -7,7 +7,7 @@ baseurl: ""
 
 markdown: kramdown
 
-permalink: /notes/:year/:month/:day/:title/
+permalink: /posts/:title/
 
 exclude:
   - Gemfile

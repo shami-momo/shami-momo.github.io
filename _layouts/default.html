@@ -12,6 +12,20 @@
   </title>
   <meta name="description" content="{{ site.description }}">
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+
+  <script>
+    (function () {
+      try {
+        const theme = localStorage.getItem("theme");
+
+        if (theme === "dark" || theme === "light") {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch (e) {
+      }
+    })();
+  </script>
+
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <script>
     window.MathJax = {
@@ -47,8 +61,11 @@
       <a class="site-title" href="{{ '/' | relative_url }}">Home</a>
 
       <nav>
-        <a href="https://github.com/saika-sei">GitHub</a>
-        <a href="mailto:jayyoo2002@snu.ac.kr">Contact</a>
+        <nav>
+          <a href="https://github.com/saika-sei">GitHub</a>
+          <a href="mailto:jayyoo2002@snu.ac.kr">Contact</a>
+          <button class="theme-toggle" type="button" aria-label="Switch to dark theme">Dark</button>
+        </nav>
       </nav>
     </header>
 
@@ -60,5 +77,64 @@
       © {{ site.time | date: "%Y" }} {{ site.title }}
     </footer>
   </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const button = document.querySelector(".theme-toggle");
+
+      if (!button) return;
+
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function getStoredTheme() {
+        try {
+          return localStorage.getItem("theme");
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function setStoredTheme(theme) {
+        try {
+          localStorage.setItem("theme", theme);
+        } catch (e) {}
+      }
+
+      function getCurrentTheme() {
+        const stored = getStoredTheme();
+
+        if (stored === "dark" || stored === "light") {
+          return stored;
+        }
+
+        return media.matches ? "dark" : "light";
+      }
+
+      function updateButton() {
+        const theme = getCurrentTheme();
+        const nextTheme = theme === "dark" ? "light" : "dark";
+
+        button.textContent = nextTheme === "dark" ? "Dark" : "Light";
+        button.setAttribute("aria-label", "Switch to " + nextTheme + " theme");
+      }
+
+      button.addEventListener("click", function () {
+        const nextTheme = getCurrentTheme() === "dark" ? "light" : "dark";
+
+        root.dataset.theme = nextTheme;
+        setStoredTheme(nextTheme);
+        updateButton();
+      });
+
+      media.addEventListener("change", function () {
+        if (!getStoredTheme()) {
+          updateButton();
+        }
+      });
+
+      updateButton();
+    })();
+  </script>
 </body>
 </html>

@@ -8,6 +8,14 @@ layout: default
   </p>
 
   <header class="post-header">
+    {% if page.tags %}
+      <p class="meta tag-list">
+        {% for tag in page.tags %}
+          <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </p>
+    {% endif %}
+
     <h1>{{ page.title }}</h1>
 
     {% assign plain_text = content | strip_html | strip_newlines %}
@@ -17,13 +25,6 @@ layout: default
     <p class="meta">
       {{ page.date | date: "%Y.%m.%d" }}
       · {{ reading_minutes }}분 소요
-
-      {% if page.tags %}
-        ·
-        {% for tag in page.tags %}
-          #{{ tag }}
-        {% endfor %}
-      {% endif %}
     </p>
   </header>
 
