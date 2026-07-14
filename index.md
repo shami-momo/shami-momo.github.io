@@ -11,7 +11,7 @@ layout: default
   </p>
 
   <p>
-    <a href="{{ '/travel/' | relative_url }}">여행</a> 다니며 <a href="https://www.instagram.com/yyuuu.sei/">사진</a> 찍는 것을 좋아합니다. 이곳은 공부하면서 정리한 내용을 모아두거나 이러저러 하고 싶은 말들을 적는 곳입니다.
+    여행 다니며 사진 찍는 것을 좋아합니다. 이곳은 공부하면서 정리한 내용을 모아두거나 이러저러 하고 싶은 말들을 적는 곳입니다.
   </p>
 
   <p>
@@ -22,6 +22,8 @@ layout: default
     <a href="{{ '/snu/' | relative_url }}">SNU</a>
     <a href="{{ '/posts/' | relative_url }}">Posts</a>
     <a href="{{ '/travel/' | relative_url }}">Travel</a>
+    <a href="https://github.com/saika-sei">GitHub</a>
+    <a href="https://www.instagram.com/yyuuu.sei">Instagram</a>
   </div>
   </div>
 

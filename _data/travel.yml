@@ -1,0 +1,281 @@
+trips:
+  - id: "1009"
+    start: "2010-09-21"
+    end: "2010-09-25"
+    countries: [PH]
+
+  - id: "1212"
+    start: "2012-12-26"
+    end: "2012-12-29"
+    countries: [US]
+
+  - id: "1505"
+    start: "2015-05-02"
+    end: "2015-05-06"
+    countries: [US]
+
+  - id: "1510"
+    start: "2015-10-08"
+    end: "2015-10-12"
+    countries: [TH]
+
+  - id: "1601"
+    start: "2016-01-01"
+    end: "2016-01-03"
+    countries: [CN]
+  
+  - id: "1710"
+    start: "2017-10-06"
+    end: "2017-10-09"
+    countries: [JP]
+    prefectures: [Osaka, Kyoto, Hyogo]
+
+  - id: "1712"
+    url: "https://sei-and-the-world.tistory.com/category/여행/1712 간사이"
+    emoji: "⛩️"
+    title: "간사이"
+    start: "2017-12-22"
+    end: "2017-12-26"
+    description: "첫 혼자 일본 여행!"
+    countries: [JP]
+    prefectures: [Osaka, Kyoto]
+
+  - id: "1812"
+    url: "https://sei-and-the-world.tistory.com/category/여행/1812 도쿄"
+    emoji: "🏙️"
+    title: "도쿄"
+    start: "2018-12-25"
+    end: "2018-12-28"
+    description: "첫 도쿄, 너의 이름은 성지순례"
+    countries: [JP]
+    prefectures: [Tokyo]
+
+  - id: "2201"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2201 미국 동・서해안"
+    emoji: "🗽"
+    title: "미국 동・서해안"
+    start: "2022-01-19"
+    end: "2022-02-01"
+    description: "뉴욕, 보스턴, 플로리다, 그리고 샌프란시스코"
+    countries: [US]
+    prefectures: []
+
+  - id: "2301"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2301 일본 중・남부"
+    emoji: "🌸"
+    title: "일본 중・남부"
+    start: "2023-01-04"
+    end: "2023-01-25"
+    description: "도쿄, 카와구치코, 간사이, 그리고 큐슈"
+    countries: [JP]
+    prefectures: [Tokyo, Chiba, Yamanashi, Osaka, Kyoto, Shiga, Fukuoka, Kumamoto, Oita, Saga]
+
+  - id: "2302"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2302 도쿄・카와구치코"
+    emoji: "🍣"
+    title: "도쿄・카와구치코"
+    start: "2023-01-31"
+    end: "2023-02-03"
+    description: "아쉬워서 다시 떠난 여행"
+    countries: [JP]
+    prefectures: [Tokyo, Yamanashi]
+
+  - id: "2308"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2308 C102・야마나시"
+    emoji: "💫"
+    title: "C102・야마나시"
+    start: "2023-08-13"
+    end: "2023-08-17"
+    description: "첫 나츠코미!"
+    countries: [JP]
+    prefectures: [Tokyo, Yamanashi]
+
+  - id: "2401"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2401 나고야・기후・시즈오카・도쿄"
+    emoji: "🏯"
+    title: "나고야・기후・시즈오카・도쿄"
+    start: "2024-01-20"
+    end: "2024-01-25"
+    description: "테마 없이 이리저리 돌아다니기"
+    countries: [JP]
+    prefectures: [Aichi, Gifu, Shizuoka, Tokyo]
+
+  - id: "2405"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2405 오카야마・시코쿠・간사이"
+    emoji: "🍜"
+    title: "오카야마・시코쿠・간사이"
+    start: "2024-05-19"
+    end: "2024-05-22"
+    description: "닥터 옐로우를 보다"
+    countries: [JP]
+    prefectures: [Okayama, Kagawa, Tokushima, Wakayama, Osaka]
+
+  - id: "2408"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2408 일본 동・북부"
+    emoji: "🚅"
+    title: "일본 동・북부"
+    start: "2024-08-26"
+    end: "2024-09-03"
+    description: "HHP로 떠나는 보통열차 여행"
+    countries: [JP]
+    prefectures: [Tokyo, Ibaraki, Fukushima, Miyagi, Iwate, Aomori, Hokkaido]
+
+  - id: "2411"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2411 나가사키"
+    emoji: "🌋"
+    title: "나가사키"
+    start: "2024-11-14"
+    end: "2024-11-17"
+    description: "화산과 지질 탐방"
+    countries: [JP]
+    prefectures: [Nagasaki]
+
+  - id: "2412"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2412 C105"
+    emoji: "💫"
+    title: "C105"
+    start: "2024-12-27"
+    end: "2024-12-31"
+    description: "첫 후유코미!"
+    countries: [JP]
+    prefectures: [Tokyo]
+
+  - id: "2501"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2501 시즈오카・하코네・도쿄"
+    emoji: "🗻"
+    title: "시즈오카・하코네・도쿄"
+    start: "2025-01-15"
+    end: "2025-01-22"
+    description: "유루캠을 찾아 시즈오카 한바퀴"
+    countries: [JP]
+    prefectures: [Shizuoka, Kanagawa, Tokyo]
+
+  - id: "2504"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2504 마이아베 합동 라이브"
+    emoji: "🎵"
+    title: "MyGO!!!! × Ave Mujica 합동 라이브"
+    start: "2025-04-25"
+    end: "2025-04-28"
+    description: "첫 겐바는 마이아베 합동 라이브!"
+    countries: [JP]
+    prefectures: [Tokyo, Kanagawa]
+
+  - id: "2506"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2506 시즈오카・야마나시・도쿄"
+    emoji: "🌲"
+    title: "시즈오카・야마나시・도쿄"
+    start: "2025-06-23"
+    end: "2025-06-27"
+    description: "유루캠, mono, 그리고 히비메시"
+    countries: [JP]
+    prefectures: [Shizuoka, Yamanashi, Tokyo]
+
+  - id: "2507"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2507 타카마츠・쇼도시마"
+    emoji: "🍜"
+    title: "타카마츠・쇼도시마"
+    start: "2025-07-05"
+    end: "2025-07-08"
+    description: "Ave Mujica 성지순례와 우동"
+    countries: [JP]
+    prefectures: [Kagawa]
+
+  - id: "2507_eu"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2507 유럽 7개국"
+    emoji: "🏞️"
+    title: "유럽 7개국"
+    start: "2025-07-14"
+    end: "2025-08-10"
+    description: "첫 유럽! 아이슬란드, 독일, 스위스, 이탈리아 등등"
+    countries: [IS, DE, CH, IT, DK, NL, AT]
+    prefectures: []
+
+  - id: "2512"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2512 MyGO!!!!! 8th"
+    emoji: "🎵"
+    title: "MyGO!!!!! 8th 라이브"
+    start: "2025-12-05"
+    end: "2025-12-08"
+    description: "두 번째 겐바는 마이고 단독 라이브!"
+    countries: [JP]
+    prefectures: [Tokyo, Kanagawa, Shizuoka, Saitama]
+
+  - id: "2601"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2601 C107・포피파 신년・닛코"
+    emoji: "💫"
+    title: "C107・Poppin'Party 신년 라이브"
+    start: "2026-12-29"
+    end: "2026-01-04"
+    description: "새해를 일본에서! 코미케, 라이브, 그리고 닛코 여행"
+    countries: [JP]
+    prefectures: [Tokyo, Kanagawa, Tochigi]
+
+  - id: "2602"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2602 홋카이도 중・남부"
+    emoji: "❄️"
+    title: "홋카이도 중・남부"
+    start: "2026-02-06"
+    end: "2026-02-10"
+    description: "삿포로 눈축제와 비에이, 토야호"
+    countries: [JP]
+    prefectures: [Hokkaido]
+
+  - id: "2603"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2603 마이아베 투맨・후지"
+    emoji: "🎵"
+    title: "MyGO!!!! × Ave Mujica 투맨 라이브・후지산"
+    start: "2026-02-25"
+    end: "2026-03-03"
+    description: "마이아베는 어느덧 두 번째"
+    countries: [JP]
+    prefectures: [Tokyo, Yamanashi, Shizuoka, Kanagawa]
+
+  - id: "2605"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2605 아오키 히나 라이브"
+    emoji: "🎵"
+    title: "아오키 히나 라이브 투어"
+    start: "2026-05-21"
+    end: "2026-05-24"
+    description: "첫 개인 라이브! 히나삐요 보러가기"
+    countries: [JP]
+    prefectures: [Osaka, Hyogo]
+
+  - id: "2606"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2606 세토내해"
+    emoji: "🌊"
+    title: "세토내해"
+    start: "2026-06-17"
+    end: "2026-06-24"
+    description: "히로시마, 에히메, 오이타, 그리고 후쿠오카"
+    countries: [JP]
+    prefectures: [Hiroshima, Ehime, Oita, Fukuoka]
+
+  - id: "2607_jeju"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2607 제주"
+    emoji: "🍊"
+    title: "제주도"
+    start: "2026-07-07"
+    end: "2026-07-09"
+    description: "제주도 폭포 탐방기"
+    countries: [KR]
+    prefectures: []
+
+  - id: "2607"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2607 MyGO!!!!! 9th・치치부"
+    emoji: "🎵"
+    title: "MyGO!!!!! 9th 라이브・치치부"
+    start: "2026-07-16"
+    end: "2026-07-20"
+    description: "카미이나 보탄 성지순례를 곁들인 라이브"
+    countries: [JP]
+    prefectures: [Tokyo, Saitama]
+
+  - id: "2608"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2608 오키나와・일본 알프스・C108"
+    emoji: "🏞️"
+    title: "오키나와・일본 알프스・C108"
+    start: "2026-07-28"
+    end: "2026-08-18"
+    description: "미야코지마부터 시작하는 장기 여행! 알펜루트와 코미케까지"
+    countries: [JP]
+    prefectures: [Okinawa, Aichi, Gifu, Toyama, Ishikawa, Nagano, Yamanashi, Tokyo]
