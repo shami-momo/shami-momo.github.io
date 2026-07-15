@@ -19,9 +19,7 @@ layout: default
   </p>
 
   <div class="links">
-    <a href="{{ '/posts/' | relative_url }}">Posts</a>
     <a href="{{ '/travel/' | relative_url }}">Travel</a>
-    <a href="https://github.com/saika-sei">GitHub</a>
     <a href="https://www.instagram.com/yyuuu.sei">Instagram</a>
   </div>
   </div>
