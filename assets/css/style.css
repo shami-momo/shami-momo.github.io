@@ -13,13 +13,18 @@
   --line: #ded8cd;
   --line-soft: #ebe6dc;
 
+  --accent: #ffb100;
+
   --highlight: rgba(255, 229, 120, 0.55);
   --highlight-hover: rgba(255, 228, 120, 0.9);
 
-  --blockquote-border: #ffc524;
+  --blockquote-border: #ffb100;
 
   --map-base: #e7dfd3;
-  --map-visited: #ffc524;
+  --map-visited: #ffb100;
+
+  --chart-area-top: rgba(255, 197, 36, 0.32);
+  --chart-area-bottom: rgba(255, 197, 36, 0);
 }
 
 :root[data-theme="dark"] {
@@ -36,10 +41,7 @@
   --highlight: rgba(255, 198, 73, 0.28);
   --highlight-hover: rgba(255, 198, 73, 0.42);
 
-  --blockquote-border: #d7aa32;
-
-  --map-base: #383226;
-  --map-visited: #d6a62f;
+  --map-base: #635843;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,10 +59,7 @@
     --highlight: rgba(255, 198, 73, 0.28);
     --highlight-hover: rgba(255, 198, 73, 0.42);
 
-    --blockquote-border: #d7aa32;
-
-    --map-base: #383226;
-    --map-visited: #d6a62f;
+    --map-base: #635843;
   }
 }
 
@@ -160,19 +159,33 @@ a {
 
 .content a,
 .intro p a {
-  color: inherit;
+  color: var(--accent);
   text-decoration: none;
-  background-image: linear-gradient(var(--highlight), var(--highlight));
-  background-repeat: no-repeat;
-  background-size: 100% 0.42em;
-  background-position: 0 88%;
-  transition: background-size 0.16s ease, background-color 0.16s ease;
 }
 
-.content a:hover,
-.intro p a:hover {
-  background-image: linear-gradient(var(--highlight-hover), var(--highlight-hover));
-  background-size: 100% 0.58em;
+.content p a[href]::after,
+.content li a[href]::after,
+.content figcaption a[href]::after, 
+.intro p a[href]::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 0.12em;
+  font-size: 0.68em;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.75;
+  transform: translateY(-0.35em);
+}
+
+.content .post-list a[href],
+.post-list a[href] {
+  color: inherit;
+  background-image: none;
+}
+
+.content .post-list a[href]::after,
+.post-list a[href]::after {
+  content: none;
 }
 
 /* Home */
@@ -224,7 +237,7 @@ a {
 }
 
 .links a {
-  padding: .2rem .6rem;
+  padding: .4rem .8rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bg);
@@ -247,9 +260,9 @@ a {
 }
 
 .section h2 {
-  margin: 0 0 20px;
+  margin: 0;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -281,6 +294,30 @@ a {
 
 .post-list.large li {
   padding: 18px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.section-more {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.section-more:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* Pages */
@@ -316,7 +353,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .tag {
@@ -500,6 +537,132 @@ mjx-container[display="true"] mjx-math {
   stroke-width: 1px;
 }
 
+/* Travel Timeline */
+
+.travel-timeline {
+  margin-top: 16px;
+}
+
+.travel-card {
+  display: block;
+  padding: 8px 0 16px;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--line-soft);
+  color: inherit;
+  text-decoration: none;
+}
+
+.content a.travel-card,
+.content a.travel-card:hover {
+  background-image: none;
+  text-decoration: none;
+}
+
+.travel-card:hover {
+  border-color: var(--line);
+  background: var(--bg);
+}
+
+.travel-card-body {
+  min-width: 0;
+}
+
+.travel-card-meta {
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.travel-card-count {
+  color: var(--map-visited);
+}
+
+.travel-card h3 {
+  margin: 0.35rem 0 0;
+  color: var(--text);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.travel-card p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.travel-card:hover h3 {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.travel-timeline-shell {
+  position: relative;
+  margin-top: 16px;
+}
+
+.travel-timeline {
+  overflow: hidden;
+  max-height: 520px;
+  transition: max-height 0.24s ease;
+}
+
+.travel-timeline-shell.is-expanded .travel-timeline {
+  max-height: none;
+}
+
+.travel-timeline-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 90px 0 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--bg) 72%
+  );
+  pointer-events: none;
+}
+
+.travel-timeline-shell.is-expanded .travel-timeline-overlay {
+  position: static;
+  padding: 20px 0 0;
+  background: none;
+}
+
+.travel-timeline-toggle {
+  pointer-events: auto;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.travel-timeline-toggle:hover {
+  border-color: var(--text);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.travel-timeline-toggle[hidden] {
+  display: none;
+}
+
 /* Responsive */
 
 @media (max-width: 640px) {
@@ -546,5 +709,17 @@ mjx-container[display="true"] mjx-math {
   .post-list time {
     display: block;
     margin-top: 4px;
+  }
+
+  .travel-card-meta {
+    font-size: 0.84rem;
+  }
+
+  .travel-card h3 {
+    font-size: 1.02rem;
+  }
+
+  .travel-card p {
+    font-size: 0.88rem;
   }
 }

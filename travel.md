@@ -5,8 +5,6 @@ subtitle: "지금까지 갔던 곳들을 한눈에 돌아봅니다."
 permalink: /travel/
 ---
 
-자세한 여행기는 <a href="https://sei-and-the-world.tistory.com/">티스토리</a>를 방문해주세요.
-
 ## 지금까지 <span id="totalTravelDays">-</span> 동안 여행했어요.
 
 <div class="chart-wrap">
@@ -37,6 +35,17 @@ permalink: /travel/
   </figcaption>
 </figure>
 
+## 이런 여행들을 했어요.
+<div id="travelTimelineShell" class="travel-timeline-shell">
+  <div id="travelTimeline" class="travel-timeline"></div>
+
+  <div class="travel-timeline-overlay">
+    <button id="travelTimelineToggle" class="travel-timeline-toggle" type="button">
+      전체 여행 연표 펼치기
+    </button>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -51,9 +60,30 @@ permalink: /travel/
       .trim();
   }
 
+  function lineGradient(context) {
+    const { chart } = context;
+    const { ctx, chartArea } = chart;
+
+    if (!chartArea) {
+      return cssVar("--chart-area-top");
+    }
+
+    const gradient = ctx.createLinearGradient(
+      0,
+      chartArea.top,
+      0,
+      chartArea.bottom
+    );
+
+    gradient.addColorStop(0, cssVar("--chart-area-top"));
+    gradient.addColorStop(1, cssVar("--chart-area-bottom"));
+
+    return gradient;
+  }
+
   function date(dateString) {
-    const [year, month, day] = dateString.split("-").map(Number);
-    return new Date(Date.UTC(year, month - 1, day));
+    const [y, m, d] = dateString.split("-").map(Number);
+    return new Date(Date.UTC(y, m - 1, d));
   }
 
   function uniqueFrom(key) {
@@ -130,16 +160,26 @@ permalink: /travel/
     }
 
     new Chart(canvas, {
-      type: "bar",
+      type: "line",
       data: {
         labels,
         datasets: [
           {
             label: "여행일수",
             data,
-            backgroundColor: cssVar("--map-visited"),
-            hoverBackgroundColor: cssVar("--map-visited"),
-            borderSkipped: false,
+
+            fill: true,
+            backgroundColor: lineGradient,
+            borderColor: cssVar("--map-visited"),
+
+            borderWidth: 3,
+            tension: 0.35,
+
+            pointRadius: 5,
+            pointHoverRadius: 6,
+            pointBackgroundColor: cssVar("--map-visited"),
+            pointBorderColor: cssVar("--bg"),
+            pointBorderWidth: 2,
           },
         ],
       },
@@ -200,6 +240,94 @@ permalink: /travel/
     });
   }
 
+  function daysBetween(start, end) {
+    const startDate = date(start);
+    let endDate = date(end);
+    return Math.round((endDate - startDate) / DAY) + 1;
+  }
+
+  const TIMELINE_INITIAL_COUNT = 5;
+  let timelineExpanded = false; 
+
+  function formatTripMonth(trip) {
+    const [year, month] = trip.start.split("-");
+    return `${year}년 ${Number(month)}월`;
+  }
+
+  function formatTripCount(trip) {
+    const days = daysBetween(trip.start, trip.end);
+    return trip.count ?? `${days-1}박 ${days}일`;
+  }
+
+  function createTravelCard(trip) {
+    return `
+      <a class="travel-card" href="${trip.url}">
+        <div class="travel-card-body">
+          <div class="travel-card-meta">
+            <span>${formatTripMonth(trip)}</span>
+            <span>・</span>
+            <span class="travel-card-count">${formatTripCount(trip)}</span>
+          </div>
+
+          <h3>${trip.title} <span class="travel-card-icon">${trip.emoji ?? "✈️"}</span></h3>
+          <p>${trip.description ?? ""}</p>
+        </div>
+      </a>
+    `;
+  }
+
+  function renderTimeline() {
+    const root = $("#travelTimeline");
+    const shell = $("#travelTimelineShell");
+    const toggle = $("#travelTimelineToggle");
+
+    if (!root) return;
+
+    const sortedTrips = trips
+      .filter((trip) => trip.url)
+      .sort((a, b) => date(b.start) - date(a.start));
+
+    root.innerHTML = sortedTrips.map(createTravelCard).join("");
+
+    if (shell) {
+      shell.classList.toggle("is-expanded", timelineExpanded);
+    }
+
+    if (!toggle) return;
+
+    if (sortedTrips.length <= TIMELINE_INITIAL_COUNT) {
+      toggle.hidden = true;
+      return;
+    }
+
+    toggle.hidden = false;
+    toggle.textContent = timelineExpanded
+      ? "접기"
+      : `펼치기`;
+  }
+
+  function setupTimelineToggle() {
+    const toggle = $("#travelTimelineToggle");
+
+    if (!toggle) return;
+
+    toggle.onclick = () => {
+      timelineExpanded = !timelineExpanded;
+      renderTimeline();
+
+      if (!timelineExpanded) {
+        const timeline = $("#travelTimeline");
+
+        if (timeline) {
+          timeline.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+    };
+  }
+
   const countries = uniqueFrom("countries");
   const prefectures = uniqueFrom("prefectures");
 
@@ -208,4 +336,6 @@ permalink: /travel/
 
   renderVisitedStats(countries, prefectures);
   renderChart();
+  renderTimeline();
+  setupTimelineToggle();
 </script>

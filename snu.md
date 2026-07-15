@@ -2,7 +2,7 @@
 layout: page
 title: "서울대학교"
 subtitle: "항공우주공학 전공, 2022.03. - 2027.06.(예정)"
-logo: "/assets/images/aerospace_logo.png"
+logo: "/assets/images/snu.webp"
 permalink: /snu/
 ---
 

@@ -19,7 +19,6 @@ layout: default
   </p>
 
   <div class="links">
-    <a href="{{ '/snu/' | relative_url }}">SNU</a>
     <a href="{{ '/posts/' | relative_url }}">Posts</a>
     <a href="{{ '/travel/' | relative_url }}">Travel</a>
     <a href="https://github.com/saika-sei">GitHub</a>
@@ -32,9 +31,14 @@ layout: default
     src="{{ '/assets/images/profile.webp' | relative_url }}"
   >
 </section>
-
 <section class="section">
-  <h2>최근 글</h2>
+  <div class="section-header">
+    <h2>최근 글</h2>
+
+    <a class="section-more" href="{{ '/posts/' | relative_url }}">
+      더보기 →
+    </a>
+  </div>
 
   <ol class="post-list">
     {% for post in site.posts limit:3 %}
