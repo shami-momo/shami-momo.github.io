@@ -170,14 +170,14 @@ permalink: /travel/
 
             fill: true,
             backgroundColor: lineGradient,
-            borderColor: cssVar("--map-visited"),
+            borderColor: cssVar("--main"),
 
             borderWidth: 3,
             tension: 0.35,
 
             pointRadius: 5,
             pointHoverRadius: 6,
-            pointBackgroundColor: cssVar("--map-visited"),
+            pointBackgroundColor: cssVar("--main"),
             pointBorderColor: cssVar("--bg"),
             pointBorderWidth: 2,
           },
@@ -301,9 +301,13 @@ permalink: /travel/
     }
 
     toggle.hidden = false;
-    toggle.textContent = timelineExpanded
-      ? "접기"
-      : `펼치기`;
+    toggle.innerHTML = timelineExpanded
+      ? `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
+      `
+      : `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+      `;
   }
 
   function setupTimelineToggle() {
