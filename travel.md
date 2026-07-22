@@ -169,7 +169,7 @@ permalink: /travel/
             data,
 
             fill: true,
-            backgroundColor: lineGradient,
+            backgroundColor: cssVar("--highlight-soft"),
             borderColor: cssVar("--main"),
 
             borderWidth: 3,

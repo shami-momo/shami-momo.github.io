@@ -248,7 +248,7 @@ trips:
     end: "2026-06-24"
     description: "히로시마, 에히메, 오이타, 그리고 후쿠오카"
     countries: [JP]
-    prefectures: [Hiroshima, Ehime, Oita, Fukuoka]
+    prefectures: [Hiroshima, Ehime, Oita, Fukuoka, Yamaguchi]
 
   - id: "2607_jeju"
     url: "https://sei-and-the-world.tistory.com/category/여행/2607 제주"
