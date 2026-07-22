@@ -270,12 +270,12 @@ trips:
     countries: [JP]
     prefectures: [Tokyo, Saitama]
 
-  - id: "2608"
-    url: "https://sei-and-the-world.tistory.com/category/여행/2608 오키나와・일본 알프스・C108"
-    emoji: "🏞️"
-    title: "오키나와・일본 알프스・C108"
-    start: "2026-07-28"
-    end: "2026-08-18"
-    description: "미야코지마부터 시작하는 장기 여행! 알펜루트와 코미케까지"
-    countries: [JP]
-    prefectures: [Okinawa, Aichi, Gifu, Toyama, Ishikawa, Nagano, Yamanashi, Tokyo]
+#  - id: "2608"
+#    url: "https://sei-and-the-world.tistory.com/category/여행/2608 오키나와・일본 알프스・C108"
+#    emoji: "🏞️"
+#    title: "오키나와・일본 알프스・C108"
+#    start: "2026-07-28"
+#    end: "2026-08-18"
+#    description: "미야코지마부터 시작하는 장기 여행! 알펜루트와 코미케까지"
+#    countries: [JP]
+#    prefectures: [Okinawa, Aichi, Gifu, Toyama, Ishikawa, Nagano, Yamanashi, Tokyo]

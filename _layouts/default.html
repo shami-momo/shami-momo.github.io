@@ -60,9 +60,15 @@
     <header class="topbar">
       <a class="site-title" href="{{ '/' | relative_url }}">Home</a>
 
-      <nav>
-        <button class="theme-toggle" type="button" aria-label="Switch to dark theme">Dark</button>
-      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" data-next-theme="dark">
+        <span class="theme-toggle-icon theme-toggle-icon-dark" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+        </span>
+
+        <span class="theme-toggle-icon theme-toggle-icon-light" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        </span>
+      </button>
     </header>
 
     <main>
@@ -72,7 +78,7 @@
     <footer class="footer">
       <span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
 
-      <a class="site-copyright" href="https://github.com/saika-sei">Site Source</a>
+      <a class="site-copyright" href="https://github.com/shami-momo/shami-momo.github.io">Site Source</a>
     </footer>
   </div>
 
@@ -113,7 +119,7 @@
         const theme = getCurrentTheme();
         const nextTheme = theme === "dark" ? "light" : "dark";
 
-        button.textContent = nextTheme === "dark" ? "Dark" : "Light";
+        button.dataset.nextTheme = nextTheme;
         button.setAttribute("aria-label", "Switch to " + nextTheme + " theme");
       }
 
@@ -132,6 +138,51 @@
       });
 
       updateButton();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const header = document.querySelector(".topbar");
+
+      if (!header) return;
+
+      let lastY = window.scrollY;
+      let ticking = false;
+
+      const threshold = 8;
+      const delta = 2;
+
+      function updateHeader() {
+        const currentY = window.scrollY;
+        const diff = currentY - lastY;
+
+        if (currentY <= threshold) {
+          header.classList.remove("is-hidden");
+        } else if (diff > delta) {
+          header.classList.add("is-hidden");
+        } else if (diff < -delta) {
+          header.classList.remove("is-hidden");
+        }
+
+        lastY = currentY;
+        ticking = false;
+      }
+
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (!ticking) {
+            window.requestAnimationFrame(updateHeader);
+            ticking = true;
+          }
+        },
+        { passive: true }
+      );
+
+      header.addEventListener("focusin", function () {
+        header.classList.remove("is-hidden");
+      });
     })();
   </script>
 </body>
