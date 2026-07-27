@@ -1,30 +1,36 @@
 trips:
   - id: "1009"
+    title: "세부"
     start: "2010-09-21"
     end: "2010-09-25"
     countries: [PH]
 
   - id: "1212"
+    title: "괌"
     start: "2012-12-26"
     end: "2012-12-29"
     countries: [US]
 
   - id: "1505"
+    title: "보스턴"
     start: "2015-05-02"
     end: "2015-05-06"
     countries: [US]
 
   - id: "1510"
+    title: "방콕・파타야"
     start: "2015-10-08"
     end: "2015-10-12"
     countries: [TH]
 
   - id: "1601"
+    title: "칭다오"
     start: "2016-01-01"
     end: "2016-01-03"
     countries: [CN]
   
   - id: "1710"
+    title: "간사이"
     start: "2017-10-06"
     end: "2017-10-09"
     countries: [JP]

@@ -1,0 +1,358 @@
+#totalTravelDays, #visitedCountryCount, #visitedPrefectureCount {
+  color: inherit;
+  background-image: linear-gradient(var(--highlight), var(--highlight));
+  background-repeat: no-repeat;
+  background-size: 100% 0.42em;
+  background-position: 0 88%;
+}
+
+.chart-wrap {
+  width: 100%;
+  height: 320px;
+  margin: 32px auto;
+}
+
+.map-wrap {
+  overflow-x: auto;
+}
+
+.world-map,
+.japan-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.world-map path,
+.world-map polygon,
+.japan-map .prefecture {
+  fill: var(--map-base);
+  stroke: var(--bg);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+  transition: fill 0.16s ease;
+}
+
+.world-map .visited,
+.japan-map .visited {
+  fill: var(--main);
+}
+
+.japan-map .separator {
+  fill: none;
+  stroke: var(--map-base);
+  stroke-width: 1px;
+}
+
+/* Travel Timeline */
+
+.travel-timeline {
+  margin-top: 16px;
+}
+
+.travel-card {
+  display: block;
+  padding: 8px 0 16px;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--line-soft);
+  color: inherit;
+  text-decoration: none;
+}
+
+.content a.travel-card,
+.content a.travel-card:hover {
+  background-image: none;
+  text-decoration: none;
+}
+
+.travel-card:hover {
+  border-color: var(--line);
+  background: var(--bg);
+}
+
+.travel-card-body {
+  min-width: 0;
+}
+
+.travel-card-meta {
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.travel-card-count {
+  color: var(--main);
+}
+
+.travel-card h3 {
+  margin: 0.35rem 0 0;
+  color: var(--text);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.travel-card p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.travel-card:hover h3 {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.travel-timeline-shell {
+  position: relative;
+  margin-top: 16px;
+}
+
+.travel-timeline {
+  overflow: hidden;
+  max-height: 520px;
+  transition: max-height 0.24s ease;
+}
+
+.travel-timeline-shell.is-expanded .travel-timeline {
+  max-height: none;
+}
+
+.travel-timeline-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 90px 0 4px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--bg) 72%
+  );
+  pointer-events: none;
+}
+
+.travel-timeline-shell.is-expanded .travel-timeline-overlay {
+  position: static;
+  padding: 20px 0 0;
+  background: none;
+}
+
+.travel-timeline-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+
+  pointer-events: auto;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text-soft);
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.travel-timeline-toggle:hover {
+  border-color: var(--text);
+  background: var(--paper);
+  color: var(--text);
+}
+
+.travel-timeline-toggle .toggle-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.travel-timeline-toggle[hidden] {
+  display: none;
+}
+
+/* Travel map popup */
+
+.world-map .visited.is-clickable,
+.japan-map .visited.is-clickable {
+  cursor: pointer;
+}
+
+.world-map .visited.is-clickable:hover,
+.japan-map .visited.is-clickable:hover {
+  opacity: 0.78;
+}
+
+.world-map .is-clickable:focus:not(:focus-visible),
+.japan-map .is-clickable:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.world-map .is-clickable:focus-visible,
+.japan-map .is-clickable:focus-visible {
+  outline: none;
+  stroke: var(--text);
+  stroke-width: 1.25px;
+}
+
+body.is-popup-open {
+  overflow: hidden;
+}
+
+.travel-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.travel-popup[hidden] {
+  display: none;
+}
+
+.travel-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.travel-popup-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(640px, 100%);
+  max-height: min(760px, calc(100vh - 48px));
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg);
+  box-shadow: 0 24px 80px rgb(0 0 0 / 0.18);
+}
+
+.travel-popup .travel-timeline {
+  max-height: none;
+  overflow: visible;
+}
+
+.travel-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 32px 22px 16px;
+
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.content .travel-popup-header h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--text);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.travel-popup-close {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+
+  width: 32px;
+  height: 32px;
+  margin: -4px -4px 0 0;
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.travel-popup-close:hover {
+  background: var(--paper);
+  color: var(--text);
+}
+
+.travel-popup-close svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+.travel-popup-close:hover {
+  background: var(--paper);
+  color: var(--text);
+}
+
+.travel-popup-body {
+  overflow-y: auto;
+  padding: 0 22px 22px;
+}
+
+.travel-popup-list {
+  margin-top: 0!important;
+}
+
+.travel-card-static {
+  cursor: default;
+}
+
+.travel-card-static:hover {
+  text-decoration: none;
+}
+
+
+@media (max-width: 640px) {
+  .travel-card-meta {
+    font-size: 0.84rem;
+  }
+
+  .travel-card h3 {
+    font-size: 1.02rem;
+  }
+
+  .travel-card p {
+    font-size: 0.88rem;
+  }
+
+  .travel-popup {
+    padding: 14px;
+  }
+
+  .travel-popup-panel {
+    max-height: calc(100vh - 28px);
+    border-radius: 16px;
+  }
+
+  .travel-popup-header {
+    padding: 18px 18px 14px;
+  }
+
+  .travel-popup-body {
+    padding: 0 18px 18px;
+  }
+}

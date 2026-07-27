@@ -46,6 +46,31 @@ permalink: /travel/
   </div>
 </div>
 
+<div id="travelPopup" class="travel-popup" hidden>
+  <div class="travel-popup-backdrop" data-popup-close></div>
+
+  <section
+    class="travel-popup-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="travelPopupTitle"
+  >
+    <header class="travel-popup-header">
+      <div>
+        <h2 id="travelPopupTitle">여행 목록</h2>
+      </div>
+
+      <button id="travelPopupClose" class="travel-popup-close" type="button" aria-label="팝업 닫기" data-popup-close>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </header>
+
+    <div class="travel-popup-body">
+      <div id="travelPopupList" class="travel-timeline travel-popup-list"></div>
+    </div>
+  </section>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -332,14 +357,117 @@ permalink: /travel/
     };
   }
 
+  function getAreaLabel(value, el) {
+    const title = el.querySelector("title")?.textContent?.trim();
+
+    return (
+      el.dataset.name ||
+      el.getAttribute("name") ||
+      el.getAttribute("aria-label") ||
+      title ||
+      value
+    );
+  }
+
+  function getTripsByArea(type, value) {
+    const key = type === "country" ? "countries" : "prefectures";
+
+    return trips
+      .filter((trip) => (trip[key] ?? []).includes(value))
+      .sort((a, b) => date(b.start) - date(a.start));
+  }
+
+  function openTravelPopup(type, value, label) {
+    const popup = $("#travelPopup");
+    const title = $("#travelPopupTitle");
+    const list = $("#travelPopupList");
+    const close = $("#travelPopupClose");
+
+    if (!popup || !title || !list) return;
+
+    const matchedTrips = getTripsByArea(type, value);
+
+    if (matchedTrips.length === 0) return;
+
+    const typeLabel = type === "country" ? "나라" : "현";
+
+    title.textContent = `${label}`;
+
+    list.innerHTML = matchedTrips.map(createTravelCard).join("");
+
+    popup.hidden = false;
+    document.body.classList.add("is-popup-open");
+
+    if (close) {
+      close.focus();
+    }
+  }
+
+  function closeTravelPopup() {
+    const popup = $("#travelPopup");
+
+    if (!popup) return;
+
+    popup.hidden = true;
+    document.body.classList.remove("is-popup-open");
+  }
+
+  function setupTravelPopup() {
+    const popup = $("#travelPopup");
+
+    if (!popup) return;
+
+    popup.addEventListener("click", (event) => {
+      if (event.target.closest("[data-popup-close]")) {
+        closeTravelPopup();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !popup.hidden) {
+        closeTravelPopup();
+      }
+    });
+  }
+
+  function setupMapAreaClicks(values, selectorFactory, type) {
+    values.forEach((value) => {
+      const els = document.querySelectorAll(selectorFactory(value));
+
+      els.forEach((el) => {
+        const label = getAreaLabel(value, el);
+
+        el.classList.add("is-clickable");
+        el.setAttribute("tabindex", "0");
+        el.setAttribute("role", "button");
+        el.setAttribute("aria-label", `${label} 여행 보기`);
+
+        el.addEventListener("click", () => {
+          openTravelPopup(type, value, label);
+        });
+
+        el.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openTravelPopup(type, value, label);
+          }
+        });
+      });
+    });
+  }
+
   const countries = uniqueFrom("countries");
   const prefectures = uniqueFrom("prefectures");
 
   paintMap(countries, (country) => `.world-map [id="${country}"]`);
   paintMap(prefectures, (pref) => `.japan-map .prefecture[data-name="${pref}"]`);
 
+  setupMapAreaClicks(countries, (country) => `.world-map [id="${country}"]`, "country");
+  setupMapAreaClicks(prefectures, (pref) => `.japan-map .prefecture[data-name="${pref}"]`, "prefecture");
+
   renderVisitedStats(countries, prefectures);
   renderChart();
   renderTimeline();
   setupTimelineToggle();
+  setupTravelPopup();
 </script>
