@@ -34,7 +34,7 @@ trips:
     start: "2017-10-06"
     end: "2017-10-09"
     countries: [JP]
-    prefectures: [Osaka, Kyoto, Hyogo]
+    prefectures: [오사카, 교토, 효고]
 
   - id: "1712"
     url: "https://sei-and-the-world.tistory.com/category/여행/1712 간사이"
@@ -44,7 +44,7 @@ trips:
     end: "2017-12-26"
     description: "첫 혼자 일본 여행!"
     countries: [JP]
-    prefectures: [Osaka, Kyoto]
+    prefectures: [오사카, 교토]
 
   - id: "1812"
     url: "https://sei-and-the-world.tistory.com/category/여행/1812 도쿄"
@@ -54,7 +54,7 @@ trips:
     end: "2018-12-28"
     description: "첫 도쿄, 너의 이름은 성지순례"
     countries: [JP]
-    prefectures: [Tokyo]
+    prefectures: [도쿄]
 
   - id: "2201"
     url: "https://sei-and-the-world.tistory.com/category/여행/2201 미국 동・서해안"
@@ -74,7 +74,7 @@ trips:
     end: "2023-01-25"
     description: "도쿄, 카와구치코, 간사이, 그리고 큐슈"
     countries: [JP]
-    prefectures: [Tokyo, Chiba, Yamanashi, Osaka, Kyoto, Shiga, Fukuoka, Kumamoto, Oita, Saga]
+    prefectures: [도쿄, 치바, 야마나시, 오사카, 교토, 시가, 후쿠오카, 쿠마모토, 오이타, 사가]
 
   - id: "2302"
     url: "https://sei-and-the-world.tistory.com/category/여행/2302 도쿄・카와구치코"
@@ -84,7 +84,7 @@ trips:
     end: "2023-02-03"
     description: "아쉬워서 다시 떠난 여행"
     countries: [JP]
-    prefectures: [Tokyo, Yamanashi]
+    prefectures: [도쿄, 야마나시]
 
   - id: "2308"
     url: "https://sei-and-the-world.tistory.com/category/여행/2308 C102・야마나시"
@@ -94,7 +94,7 @@ trips:
     end: "2023-08-17"
     description: "첫 나츠코미!"
     countries: [JP]
-    prefectures: [Tokyo, Yamanashi]
+    prefectures: [도쿄, 치바, 야마나시]
 
   - id: "2401"
     url: "https://sei-and-the-world.tistory.com/category/여행/2401 나고야・기후・시즈오카・도쿄"
@@ -104,7 +104,7 @@ trips:
     end: "2024-01-25"
     description: "테마 없이 이리저리 돌아다니기"
     countries: [JP]
-    prefectures: [Aichi, Gifu, Shizuoka, Tokyo]
+    prefectures: [아이치, 치바, 기후, 시즈오카, 도쿄]
 
   - id: "2405"
     url: "https://sei-and-the-world.tistory.com/category/여행/2405 오카야마・시코쿠・간사이"
@@ -114,7 +114,7 @@ trips:
     end: "2024-05-22"
     description: "닥터 옐로우를 보다"
     countries: [JP]
-    prefectures: [Okayama, Kagawa, Tokushima, Wakayama, Osaka]
+    prefectures: [오카야마, 카가와, 도쿠시마, 와카야마, 오사카]
 
   - id: "2408"
     url: "https://sei-and-the-world.tistory.com/category/여행/2408 일본 동・북부"
@@ -124,7 +124,7 @@ trips:
     end: "2024-09-03"
     description: "HHP로 떠나는 보통열차 여행"
     countries: [JP]
-    prefectures: [Tokyo, Ibaraki, Fukushima, Miyagi, Iwate, Aomori, Hokkaido]
+    prefectures: [도쿄, 치바, 이바라키, 후쿠시마, 미야기, 이와테, 아오모리, 홋카이도]
 
   - id: "2411"
     url: "https://sei-and-the-world.tistory.com/category/여행/2411 나가사키"
@@ -134,7 +134,7 @@ trips:
     end: "2024-11-17"
     description: "화산과 지질 탐방"
     countries: [JP]
-    prefectures: [Nagasaki]
+    prefectures: [나가사키]
 
   - id: "2412"
     url: "https://sei-and-the-world.tistory.com/category/여행/2412 C105"
@@ -144,7 +144,7 @@ trips:
     end: "2024-12-31"
     description: "첫 후유코미!"
     countries: [JP]
-    prefectures: [Tokyo]
+    prefectures: [도쿄, 치바]
 
   - id: "2501"
     url: "https://sei-and-the-world.tistory.com/category/여행/2501 시즈오카・하코네・도쿄"
@@ -154,7 +154,7 @@ trips:
     end: "2025-01-22"
     description: "유루캠을 찾아 시즈오카 한바퀴"
     countries: [JP]
-    prefectures: [Shizuoka, Kanagawa, Tokyo]
+    prefectures: [시즈오카, 카나가와, 도쿄, 치바]
 
   - id: "2504"
     url: "https://sei-and-the-world.tistory.com/category/여행/2504 마이아베 합동 라이브"
@@ -164,7 +164,7 @@ trips:
     end: "2025-04-28"
     description: "첫 겐바는 마이아베 합동 라이브!"
     countries: [JP]
-    prefectures: [Tokyo, Kanagawa]
+    prefectures: [도쿄, 카나가와]
 
   - id: "2506"
     url: "https://sei-and-the-world.tistory.com/category/여행/2506 시즈오카・야마나시・도쿄"
@@ -174,7 +174,7 @@ trips:
     end: "2025-06-27"
     description: "유루캠, mono, 그리고 히비메시"
     countries: [JP]
-    prefectures: [Shizuoka, Yamanashi, Tokyo]
+    prefectures: [시즈오카, 야마나시, 도쿄]
 
   - id: "2507"
     url: "https://sei-and-the-world.tistory.com/category/여행/2507 타카마츠・쇼도시마"
@@ -184,7 +184,7 @@ trips:
     end: "2025-07-08"
     description: "Ave Mujica 성지순례와 우동"
     countries: [JP]
-    prefectures: [Kagawa]
+    prefectures: [카가와]
 
   - id: "2507_eu"
     url: "https://sei-and-the-world.tistory.com/category/여행/2507 유럽 7개국"
@@ -204,7 +204,7 @@ trips:
     end: "2025-12-08"
     description: "두 번째 겐바는 마이고 단독 라이브!"
     countries: [JP]
-    prefectures: [Tokyo, Kanagawa, Shizuoka, Saitama]
+    prefectures: [도쿄, 카나가와, 시즈오카, 사이타마, 치바]
 
   - id: "2601"
     url: "https://sei-and-the-world.tistory.com/category/여행/2601 C107・포피파 신년・닛코"
@@ -214,7 +214,7 @@ trips:
     end: "2026-01-04"
     description: "새해를 일본에서! 코미케, 라이브, 그리고 닛코 여행"
     countries: [JP]
-    prefectures: [Tokyo, Kanagawa, Tochigi]
+    prefectures: [도쿄, 카나가와, 도치기, 치바]
 
   - id: "2602"
     url: "https://sei-and-the-world.tistory.com/category/여행/2602 홋카이도 중・남부"
@@ -224,7 +224,7 @@ trips:
     end: "2026-02-10"
     description: "삿포로 눈축제와 비에이, 토야호"
     countries: [JP]
-    prefectures: [Hokkaido]
+    prefectures: [홋카이도]
 
   - id: "2603"
     url: "https://sei-and-the-world.tistory.com/category/여행/2603 마이아베 투맨・후지"
@@ -234,7 +234,7 @@ trips:
     end: "2026-03-03"
     description: "마이아베는 어느덧 두 번째"
     countries: [JP]
-    prefectures: [Tokyo, Yamanashi, Shizuoka, Kanagawa]
+    prefectures: [도쿄, 야마나시, 시즈오카, 카나가와, 치바]
 
   - id: "2605"
     url: "https://sei-and-the-world.tistory.com/category/여행/2605 아오키 히나 라이브"
@@ -244,7 +244,7 @@ trips:
     end: "2026-05-24"
     description: "첫 개인 라이브! 히나삐요 보러가기"
     countries: [JP]
-    prefectures: [Osaka, Hyogo]
+    prefectures: [오사카, 효고]
 
   - id: "2606"
     url: "https://sei-and-the-world.tistory.com/category/여행/2606 세토내해"
@@ -254,7 +254,7 @@ trips:
     end: "2026-06-24"
     description: "히로시마, 에히메, 오이타, 그리고 후쿠오카"
     countries: [JP]
-    prefectures: [Hiroshima, Ehime, Oita, Fukuoka, Yamaguchi]
+    prefectures: [히로시마, 에히메, 오이타, 후쿠오카, 야마구치]
 
   - id: "2607_jeju"
     url: "https://sei-and-the-world.tistory.com/category/여행/2607 제주"
@@ -274,14 +274,14 @@ trips:
     end: "2026-07-20"
     description: "카미이나 보탄 성지순례를 곁들인 라이브"
     countries: [JP]
-    prefectures: [Tokyo, Saitama]
+    prefectures: [도쿄, 사이타마]
 
   - id: "2608"
-    url: "https://sei-and-the-world.tistory.com/category/여행/2608 오키나와・츄부 산악・C108"
+    url: "https://sei-and-the-world.tistory.com/category/여행/2608 오키나와・북알프스・C108"
     emoji: "🏞️"
-    title: "오키나와・츄부 산악・C108"
+    title: "오키나와・북알프스・C108"
     start: "2026-07-28"
     end: "2026-08-18"
     description: "미야코지마부터 시작하는 장기 여행! 알펜루트와 코미케까지"
     countries: [JP]
-    prefectures: [Okinawa, Aichi, Gifu, Toyama, Nagano, Yamanashi, Tokyo]
+    prefectures: [오키나와, 아이치, 기후, 토야마, 나가노, 야마나시, 도쿄]
