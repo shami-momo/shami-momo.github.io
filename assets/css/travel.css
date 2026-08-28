@@ -44,6 +44,18 @@
   stroke-width: 1px;
 }
 
+.japan-map .prefecture.is-stayed {
+  fill: var(--main);
+}
+
+.japan-map .prefecture.is-walked {
+  fill: color-mix(in srgb, var(--main) 62%, white);
+}
+
+.japan-map .prefecture.is-passed {
+  fill: color-mix(in srgb, var(--main) 22%, white);
+}
+
 /* Travel Timeline */
 
 .travel-timeline {
@@ -180,6 +192,37 @@
 
 .travel-timeline-toggle[hidden] {
   display: none;
+}
+
+.keikenchi-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.keikenchi-meter {
+  width: 5.5rem;
+  height: 0.32rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--highlight-soft);
+}
+
+.keikenchi-meter-fill {
+  display: block;
+  width: var(--progress, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--main);
+}
+
+.keikenchi-summary .keikenchi-value {
+  color: var(--main);
 }
 
 /* Travel map popup */

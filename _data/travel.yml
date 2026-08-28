@@ -34,7 +34,8 @@ trips:
     start: "2017-10-06"
     end: "2017-10-09"
     countries: [JP]
-    prefectures: [오사카, 교토, 효고]
+    prefectures: [오사카, 교토]
+    prefectures_walked: [효고]
 
   - id: "1712"
     url: "https://sei-and-the-world.tistory.com/category/여행/1712 간사이"
@@ -74,7 +75,8 @@ trips:
     end: "2023-01-25"
     description: "도쿄, 카와구치코, 간사이, 그리고 큐슈"
     countries: [JP]
-    prefectures: [도쿄, 치바, 야마나시, 오사카, 교토, 시가, 후쿠오카, 쿠마모토, 오이타, 사가]
+    prefectures: [도쿄, 야마나시, 오사카, 교토, 후쿠오카, 쿠마모토, 오이타, 사가]
+    prefectures_walked: [치바, 시가]
 
   - id: "2302"
     url: "https://sei-and-the-world.tistory.com/category/여행/2302 도쿄・카와구치코"
@@ -94,7 +96,8 @@ trips:
     end: "2023-08-17"
     description: "첫 나츠코미!"
     countries: [JP]
-    prefectures: [도쿄, 치바, 야마나시]
+    prefectures: [도쿄, 야마나시]
+    prefectures_walked: [치바]
 
   - id: "2401"
     url: "https://sei-and-the-world.tistory.com/category/여행/2401 나고야・기후・시즈오카・도쿄"
@@ -104,7 +107,8 @@ trips:
     end: "2024-01-25"
     description: "테마 없이 이리저리 돌아다니기"
     countries: [JP]
-    prefectures: [아이치, 치바, 기후, 시즈오카, 도쿄]
+    prefectures: [아이치, 기후, 시즈오카, 도쿄]
+    prefectures_walked: [치바]
 
   - id: "2405"
     url: "https://sei-and-the-world.tistory.com/category/여행/2405 오카야마・시코쿠・간사이"
@@ -114,7 +118,8 @@ trips:
     end: "2024-05-22"
     description: "닥터 옐로우를 보다"
     countries: [JP]
-    prefectures: [오카야마, 카가와, 도쿠시마, 와카야마, 오사카]
+    prefectures: [오카야마, 카가와, 도쿠시마, 오사카]
+    prefectures_walked: [와카야마]
 
   - id: "2408"
     url: "https://sei-and-the-world.tistory.com/category/여행/2408 일본 동・북부"
@@ -124,7 +129,8 @@ trips:
     end: "2024-09-03"
     description: "HHP로 떠나는 보통열차 여행"
     countries: [JP]
-    prefectures: [도쿄, 치바, 이바라키, 후쿠시마, 미야기, 이와테, 아오모리, 홋카이도]
+    prefectures: [도쿄, 후쿠시마, 미야기, 이와테, 홋카이도]
+    prefectures_walked: [치바, 이바라키, 아오모리]
 
   - id: "2411"
     url: "https://sei-and-the-world.tistory.com/category/여행/2411 나가사키"
@@ -144,7 +150,8 @@ trips:
     end: "2024-12-31"
     description: "첫 후유코미!"
     countries: [JP]
-    prefectures: [도쿄, 치바]
+    prefectures: [도쿄]
+    prefectures_walked: [치바]
 
   - id: "2501"
     url: "https://sei-and-the-world.tistory.com/category/여행/2501 시즈오카・하코네・도쿄"
@@ -154,7 +161,8 @@ trips:
     end: "2025-01-22"
     description: "유루캠을 찾아 시즈오카 한바퀴"
     countries: [JP]
-    prefectures: [시즈오카, 카나가와, 도쿄, 치바]
+    prefectures: [시즈오카, 카나가와, 도쿄]
+    prefectures_walked: [치바]
 
   - id: "2504"
     url: "https://sei-and-the-world.tistory.com/category/여행/2504 마이아베 합동 라이브"
@@ -204,7 +212,8 @@ trips:
     end: "2025-12-08"
     description: "두 번째 겐바는 마이고 단독 라이브!"
     countries: [JP]
-    prefectures: [도쿄, 카나가와, 시즈오카, 사이타마, 치바]
+    prefectures: [도쿄, 카나가와, 시즈오카, 사이타마]
+    prefectures_walked: [치바]
 
   - id: "2601"
     url: "https://sei-and-the-world.tistory.com/category/여행/2601 C107・포피파 신년・닛코"
@@ -214,7 +223,9 @@ trips:
     end: "2026-01-04"
     description: "새해를 일본에서! 코미케, 라이브, 그리고 닛코 여행"
     countries: [JP]
-    prefectures: [도쿄, 카나가와, 도치기, 치바]
+    prefectures: [도쿄, 카나가와, 도치기]
+    prefectures_walked: [치바]
+    prefectures_passed: [군마]
 
   - id: "2602"
     url: "https://sei-and-the-world.tistory.com/category/여행/2602 홋카이도 중・남부"
@@ -234,7 +245,8 @@ trips:
     end: "2026-03-03"
     description: "마이아베는 어느덧 두 번째"
     countries: [JP]
-    prefectures: [도쿄, 야마나시, 시즈오카, 카나가와, 치바]
+    prefectures: [도쿄, 야마나시, 시즈오카, 카나가와]
+    prefectures_walked: [치바]
 
   - id: "2605"
     url: "https://sei-and-the-world.tistory.com/category/여행/2605 아오키 히나 라이브"
@@ -244,7 +256,8 @@ trips:
     end: "2026-05-24"
     description: "첫 개인 라이브! 히나삐요 보러가기"
     countries: [JP]
-    prefectures: [오사카, 효고]
+    prefectures: [오사카]
+    prefectures_walked: [효고]
 
   - id: "2606"
     url: "https://sei-and-the-world.tistory.com/category/여행/2606 세토내해"
@@ -254,7 +267,8 @@ trips:
     end: "2026-06-24"
     description: "히로시마, 에히메, 오이타, 그리고 후쿠오카"
     countries: [JP]
-    prefectures: [히로시마, 에히메, 오이타, 후쿠오카, 야마구치]
+    prefectures: [히로시마, 에히메, 오이타, 후쿠오카]
+    prefectures_walked: [야마구치]
 
   - id: "2607_jeju"
     url: "https://sei-and-the-world.tistory.com/category/여행/2607 제주"
@@ -275,6 +289,7 @@ trips:
     description: "카미이나 보탄 성지순례를 곁들인 라이브"
     countries: [JP]
     prefectures: [도쿄, 사이타마]
+    prefectures_walked: [치바]
 
   - id: "2608"
     url: "https://sei-and-the-world.tistory.com/category/여행/2608 오키나와・북알프스・C108"
@@ -284,4 +299,5 @@ trips:
     end: "2026-08-18"
     description: "미야코지마부터 시작하는 장기 여행! 알펜루트와 코미케까지"
     countries: [JP]
-    prefectures: [오키나와, 아이치, 기후, 토야마, 나가노, 야마나시, 도쿄]
+    prefectures: [오키나와, 아이치, 기후, 토야마, 나가노, 도쿄, 카나가와]
+    prefectures_walked: [야마나시]

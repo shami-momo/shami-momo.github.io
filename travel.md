@@ -24,12 +24,20 @@ permalink: /travel/
 </figure>
 
 ## 일본의 <span id="visitedPrefectureCount">-</span>을 여행했어요.
+
 <figure>
   <div class="map-wrap">
     {% include japan-map.svg %}
   </div>
 
   <figcaption>
+    <div class="keikenchi-summary">
+      <span class="keikenchi-label">경현치</span>
+      <span class="keikenchi-meter" aria-hidden="true">
+        <span class="keikenchi-meter-fill"></span>
+      </span>
+      <span class="keikenchi-value" id="keikenchi">-</span>
+    </div><br>
     Map adapted from
     <a href="https://github.com/Snack-X/keikenchi">Snack-X/keikenchi</a>.
   </figcaption>
@@ -74,36 +82,20 @@ permalink: /travel/
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  // Configuration
   const trips = {{ site.data.travel.trips | jsonify }};
   const DAY = 24 * 60 * 60 * 1000;
+  const TIMELINE_INITIAL_COUNT = 5;
 
+  let timelineExpanded = false;
+
+  // Shared utilities
   const $ = (selector) => document.querySelector(selector);
 
   function cssVar(name) {
     return getComputedStyle(document.documentElement)
       .getPropertyValue(name)
       .trim();
-  }
-
-  function lineGradient(context) {
-    const { chart } = context;
-    const { ctx, chartArea } = chart;
-
-    if (!chartArea) {
-      return cssVar("--chart-area-top");
-    }
-
-    const gradient = ctx.createLinearGradient(
-      0,
-      chartArea.top,
-      0,
-      chartArea.bottom
-    );
-
-    gradient.addColorStop(0, cssVar("--chart-area-top"));
-    gradient.addColorStop(1, cssVar("--chart-area-bottom"));
-
-    return gradient;
   }
 
   function date(dateString) {
@@ -115,18 +107,31 @@ permalink: /travel/
     return [...new Set(trips.flatMap((trip) => trip[key] ?? []))];
   }
 
-  function paintMap(values, selectorFactory) {
-    values.forEach((value) => {
-      const els = document.querySelectorAll(selectorFactory(value));
+  // Prefecture & statistics
+  const PREFECTURE_LEVELS = [
+    { key: "prefectures_passed", score: 1, mapClass: "is-passed" },
+    { key: "prefectures_landed", score: 2, mapClass: "is-landed" },
+    { key: "prefectures_walked", score: 3, mapClass: "is-walked" },
+    { key: "prefectures", score: 4, mapClass: "is-stayed" },
+    { key: "prefectures_lived", score: 5, mapClass: "is-stayed" },
+  ];
 
-      if (els.length === 0) {
-        console.warn("Map area not found:", value);
-      }
+  function getPrefectureLevels() {
+    const levels = new Map();
 
-      els.forEach((el) => {
-        el.classList.add("visited");
+    trips.forEach((trip) => {
+      PREFECTURE_LEVELS.forEach((level) => {
+        (trip[level.key] ?? []).forEach((prefecture) => {
+          const current = levels.get(prefecture);
+
+          if (!current || level.score > current.score) {
+            levels.set(prefecture, level);
+          }
+        });
       });
     });
+
+    return levels;
   }
 
   function renderVisitedStats(countries, prefectures) {
@@ -142,6 +147,22 @@ permalink: /travel/
     }
   }
 
+  function renderKeikenchi(prefectureLevels) {
+    const target = $("#keikenchi");
+    const meter = $(".keikenchi-meter-fill");
+
+    if (!target || !meter) return;
+
+    const maxScore = 47 * 5;
+    const total = [...prefectureLevels.values()]
+      .reduce((sum, level) => sum + level.score, 0);
+    const percentage = Math.min((total / maxScore) * 100, 100);
+
+    target.textContent = `${total}점`;
+    meter.style.setProperty("--progress", `${percentage}%`);
+  }
+
+  // Travel chart
   function getYearlyDays() {
     const yearly = {};
 
@@ -265,14 +286,12 @@ permalink: /travel/
     });
   }
 
+  // Travel timeline
   function daysBetween(start, end) {
     const startDate = date(start);
-    let endDate = date(end);
+    const endDate = date(end);
     return Math.round((endDate - startDate) / DAY) + 1;
   }
-
-  const TIMELINE_INITIAL_COUNT = 5;
-  let timelineExpanded = false; 
 
   function formatTripMonth(trip) {
     const [year, month] = trip.start.split("-");
@@ -326,12 +345,16 @@ permalink: /travel/
     }
 
     toggle.hidden = false;
+    toggle.setAttribute(
+      "aria-label",
+      timelineExpanded ? "전체 여행 연표 접기" : "전체 여행 연표 펼치기"
+    );
     toggle.innerHTML = timelineExpanded
       ? `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
       `
       : `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
       `;
   }
 
@@ -340,7 +363,7 @@ permalink: /travel/
 
     if (!toggle) return;
 
-    toggle.onclick = () => {
+    toggle.addEventListener("click", () => {
       timelineExpanded = !timelineExpanded;
       renderTimeline();
 
@@ -354,9 +377,10 @@ permalink: /travel/
           });
         }
       }
-    };
+    });
   }
 
+  // Area popup
   function getAreaLabel(value, el) {
     const title = el.querySelector("title")?.textContent?.trim();
 
@@ -370,10 +394,13 @@ permalink: /travel/
   }
 
   function getTripsByArea(type, value) {
-    const key = type === "country" ? "countries" : "prefectures";
+    const keys = type === "country"
+      ? ["countries"]
+      : ["prefectures", "prefectures_walked"];
 
     return trips
-      .filter((trip) => (trip[key] ?? []).includes(value))
+      .filter((trip) => keys.some((key) => (trip[key] ?? []).includes(value)))
+      .filter((trip) => trip.url)
       .sort((a, b) => date(b.start) - date(a.start));
   }
 
@@ -389,18 +416,12 @@ permalink: /travel/
 
     if (matchedTrips.length === 0) return;
 
-    const typeLabel = type === "country" ? "나라" : "현";
-
-    title.textContent = `${label}`;
-
+    title.textContent = label;
     list.innerHTML = matchedTrips.map(createTravelCard).join("");
 
     popup.hidden = false;
     document.body.classList.add("is-popup-open");
-
-    if (close) {
-      close.focus();
-    }
+    close?.focus();
   }
 
   function closeTravelPopup() {
@@ -430,6 +451,38 @@ permalink: /travel/
     });
   }
 
+  // Map rendering and interaction
+  function paintMap(values, selectorFactory) {
+    values.forEach((value) => {
+      const els = document.querySelectorAll(selectorFactory(value));
+
+      if (els.length === 0) {
+        console.warn("Map area not found:", value);
+      }
+
+      els.forEach((el) => el.classList.add("visited"));
+    });
+  }
+
+  function paintPrefectureMap(prefectureLevels) {
+    prefectureLevels.forEach((level, prefecture) => {
+      const selector = `.japan-map .prefecture[data-name="${prefecture}"]`;
+      const els = document.querySelectorAll(selector);
+
+      if (els.length === 0) {
+        console.warn("Map area not found:", prefecture);
+      }
+
+      els.forEach((el) => {
+        el.classList.add(level.mapClass);
+
+        if (level.score >= 3) {
+          el.classList.add("visited");
+        }
+      });
+    });
+  }
+
   function setupMapAreaClicks(values, selectorFactory, type) {
     values.forEach((value) => {
       const els = document.querySelectorAll(selectorFactory(value));
@@ -456,16 +509,30 @@ permalink: /travel/
     });
   }
 
+  // Initialization
   const countries = uniqueFrom("countries");
-  const prefectures = uniqueFrom("prefectures");
+  const prefectureLevels = getPrefectureLevels();
+  const clickablePrefectures = [...prefectureLevels]
+    .filter(([, level]) => level.score >= 3)
+    .map(([prefecture]) => prefecture);
 
   paintMap(countries, (country) => `.world-map [id="${country}"]`);
-  paintMap(prefectures, (pref) => `.japan-map .prefecture[data-name="${pref}"]`);
+  paintPrefectureMap(prefectureLevels);
 
-  setupMapAreaClicks(countries, (country) => `.world-map [id="${country}"]`, "country");
-  setupMapAreaClicks(prefectures, (pref) => `.japan-map .prefecture[data-name="${pref}"]`, "prefecture");
+  setupMapAreaClicks(
+    countries,
+    (country) => `.world-map [id="${country}"]`,
+    "country"
+  );
 
-  renderVisitedStats(countries, prefectures);
+  setupMapAreaClicks(
+    clickablePrefectures,
+    (pref) => `.japan-map .prefecture[data-name="${pref}"]`,
+    "prefecture"
+  );
+
+  renderVisitedStats(countries, clickablePrefectures);
+  renderKeikenchi(prefectureLevels);
   renderChart();
   renderTimeline();
   setupTimelineToggle();
