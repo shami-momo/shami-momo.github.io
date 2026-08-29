@@ -194,31 +194,18 @@
   display: none;
 }
 
+/* Keikenchi */
+
 .keikenchi-summary {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
+
+  margin: 0 auto 0.5rem;
   align-items: center;
-  gap: 0.5rem;
   font-weight: 700;
   color: var(--muted);
   border-bottom: 1px solid var(--line-soft);
-  margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.keikenchi-meter {
-  width: 5.5rem;
-  height: 0.32rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background: var(--highlight-soft);
-}
-
-.keikenchi-meter-fill {
-  display: block;
-  width: var(--progress, 0%);
-  height: 100%;
-  border-radius: inherit;
-  background: var(--main);
 }
 
 .keikenchi-summary .keikenchi-value {

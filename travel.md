@@ -32,12 +32,9 @@ permalink: /travel/
 
   <figcaption>
     <div class="keikenchi-summary">
-      <span class="keikenchi-label">경현치</span>
-      <span class="keikenchi-meter" aria-hidden="true">
-        <span class="keikenchi-meter-fill"></span>
-      </span>
+      <span class="keikenchi-label">경현치・</span>
       <span class="keikenchi-value" id="keikenchi">-</span>
-    </div><br>
+    </div>
     Map adapted from
     <a href="https://github.com/Snack-X/keikenchi">Snack-X/keikenchi</a>.
   </figcaption>
@@ -149,17 +146,10 @@ permalink: /travel/
 
   function renderKeikenchi(prefectureLevels) {
     const target = $("#keikenchi");
-    const meter = $(".keikenchi-meter-fill");
-
-    if (!target || !meter) return;
-
-    const maxScore = 47 * 5;
     const total = [...prefectureLevels.values()]
       .reduce((sum, level) => sum + level.score, 0);
-    const percentage = Math.min((total / maxScore) * 100, 100);
 
     target.textContent = `${total}점`;
-    meter.style.setProperty("--progress", `${percentage}%`);
   }
 
   // Travel chart
@@ -249,6 +239,7 @@ permalink: /travel/
                 return `${context.raw}일`;
               },
             },
+            boxPadding: 6,
           },
         },
 
@@ -304,20 +295,22 @@ permalink: /travel/
   }
 
   function createTravelCard(trip) {
-    return `
-      <a class="travel-card" href="${trip.url}">
-        <div class="travel-card-body">
-          <div class="travel-card-meta">
-            <span>${formatTripMonth(trip)}</span>
-            <span>・</span>
-            <span class="travel-card-count">${formatTripCount(trip)}</span>
-          </div>
-
-          <h3>${trip.title} <span class="travel-card-icon">${trip.emoji ?? "✈️"}</span></h3>
-          <p>${trip.description ?? ""}</p>
+    const content = `
+      <div class="travel-card-body">
+        <div class="travel-card-meta">
+          <span>${formatTripMonth(trip)}</span>
+          <span>・</span>
+          <span class="travel-card-count">${formatTripCount(trip)}</span>
         </div>
-      </a>
+
+        <h3>${trip.title} <span class="travel-card-icon">${trip.emoji ?? "✈️"}</span></h3>
+        <p>${trip.description ?? ""}</p>
+      </div>
     `;
+
+    return trip.url
+      ? `<a class="travel-card" href="${trip.url}">${content}</a>`
+      : `<article class="travel-card is-unlinked">${content}</article>`;
   }
 
   function renderTimeline() {
@@ -328,7 +321,6 @@ permalink: /travel/
     if (!root) return;
 
     const sortedTrips = trips
-      .filter((trip) => trip.url)
       .sort((a, b) => date(b.start) - date(a.start));
 
     root.innerHTML = sortedTrips.map(createTravelCard).join("");
@@ -400,7 +392,6 @@ permalink: /travel/
 
     return trips
       .filter((trip) => keys.some((key) => (trip[key] ?? []).includes(value)))
-      .filter((trip) => trip.url)
       .sort((a, b) => date(b.start) - date(a.start));
   }
 
