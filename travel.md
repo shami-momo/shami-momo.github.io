@@ -194,11 +194,9 @@ permalink: /travel/
           borderColor: cssVar("--main"),
           borderWidth: 3,
           tension: 0.35,
-          pointRadius: 5,
-          pointHoverRadius: 6,
+          pointRadius: 2,
+          pointHoverRadius: 5,
           pointBackgroundColor: cssVar("--main"),
-          pointBorderColor: cssVar("--bg"),
-          pointBorderWidth: 2,
         }],
       },
       options: {
