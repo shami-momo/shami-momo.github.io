@@ -1,0 +1,234 @@
+.djmax-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.djmax-stat {
+  min-width: 0;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--line-soft);
+  border-radius: 0.7rem;
+  background: var(--paper);
+}
+
+.djmax-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.djmax-value {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.djmax-top-songs {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.djmax-song-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.djmax-song {
+  display: grid;
+  grid-template-columns: 1.6rem auto minmax(0, 1fr) auto;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  background: var(--paper);
+}
+
+.djmax-song-rank {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 0.45rem;
+  background: var(--highlight-soft);
+  color: var(--main);
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.djmax-song-info {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.djmax-song-title {
+  overflow: hidden;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.djmax-song-meta {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.djmax-song-score {
+  color: var(--main);
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.filter-button {
+    padding: 0.32rem 0.8rem;
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.85rem;
+    transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+
+.filter-button:hover,
+.filter-button[aria-pressed="true"] {
+    border-color: var(--main);
+    background: var(--highlight-soft);
+    color: var(--main);
+}
+
+.count {
+    flex: 0 0 auto;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.year-section {
+    display: grid;
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--line-soft);
+}
+
+.year {
+    margin: 0;
+    color: var(--main);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+}
+
+.anime-list {
+    display: grid;
+    gap: 0.65rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.anime-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid transparent;
+    border-radius: 0.8rem;
+    background: var(--paper);
+}
+
+.season {
+    min-width: 3.65rem;
+    padding: 0.25rem 0.45rem;
+    border-radius: 0.4rem;
+    background: var(--highlight-soft);
+    color: var(--main);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.season.is-movie {
+    color: var(--sub);
+    background: color-mix(in srgb, var(--sub) 14%, transparent);
+}
+
+.anime-title {
+    min-width: 0;
+    font-size: 0.96rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+}
+
+.empty {
+    margin: 2rem 0 0;
+    color: var(--muted);
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .djmax-song {
+        grid-template-columns: 1.6rem auto minmax(0, 1fr);
+    }
+
+
+    .djmax-song-info {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.1rem;
+    }
+  
+    .toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .year-section {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+}

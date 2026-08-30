@@ -13,7 +13,8 @@
   --line: #ded8cd;
   --line-soft: #e7e7e7;
 
-  --main: #ff577b;
+  --main: #ff5f82;
+  --sub: #6e64c8;
 
   --highlight: color-mix(in srgb, var(--main) 25%, transparent);
   --highlight-soft: color-mix(in srgb, var(--main) 10%, transparent);
@@ -136,6 +137,7 @@ main {
   font: inherit;
   line-height: inherit;
   text-decoration: none;
+  transition: color 0.16s ease, text-decoration 0.16s ease;
 }
 
 .theme-toggle {
@@ -185,9 +187,29 @@ main {
   font-size: 0.9rem;
 }
 
+.subculture-link {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition:
+    color 0.42s ease,
+    transform 0.42s ease;
+}
+
+.subculture-link:hover {
+  color: var(--main);
+  transform: rotate(90deg);
+  text-decoration: none;
+}
+
 .site-copyright {
   letter-spacing: -0.02em;
   text-decoration: none;
+  transition: color 0.16s ease, text-decoration 0.16s ease;
 }
 
 /* Links */
@@ -195,6 +217,7 @@ main {
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.16s ease, text-decoration 0.16s ease;
 }
 
 a:hover {
@@ -286,7 +309,7 @@ a:hover {
   background: var(--bg);
   font-size: 0.94rem;
   text-decoration: none;
-  transition: border-color 0.16s ease;
+  transition: border-color 0.16s ease, background-color 0.16s ease;
 }
 
 .links a:hover {

@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/common.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/post.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/travel.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/anime.css' | relative_url }}">
   
   <script>
     window.MathJax = {
@@ -81,7 +82,20 @@
     <footer class="footer">
       <span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
 
-      <a class="site-copyright" href="https://github.com/shami-momo/shami-momo.github.io">Site Source</a>
+      <a
+        class="subculture-link"
+        href="{{ '/anime/' | relative_url }}"
+        aria-label="anime"
+      >
+        ✦
+      </a>
+
+      <a
+        class="site-copyright"
+        href="https://github.com/shami-momo/shami-momo.github.io"
+      >
+        Site Source
+      </a>
     </footer>
   </div>
 
