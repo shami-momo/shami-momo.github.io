@@ -84,16 +84,10 @@ permalink: /travel/
   const TIMELINE_INITIAL_COUNT = 5;
 
   let timelineExpanded = false;
+  let travelChart;
 
-  // Shared utilities
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
-
-  function cssVar(name) {
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue(name)
-      .trim();
-  }
 
   function date(dateString) {
     const [y, m, d] = dateString.split("-").map(Number);
@@ -170,8 +164,8 @@ permalink: /travel/
   }
 
   function renderChart() {
-    const canvas = $("#travelDaysChart");
-    if (!canvas || typeof Chart === "undefined") return;
+    const chartCanvas = $("#travelDaysChart");
+    if (!chartCanvas || typeof Chart === "undefined") return;
 
     const yearly = getYearlyDays();
     const labels = yearly.map((item) => item.year);
@@ -182,47 +176,19 @@ permalink: /travel/
 
     if (totalEl) totalEl.textContent = `${total}일`;
 
-    new Chart(canvas, {
-      type: "line",
-      data: {
-        labels,
-        datasets: [{
+    travelChart = createLineChart({
+      canvas: chartCanvas,
+      chart: travelChart,
+      labels,
+      datasets: [
+        createLineDataset({
           label: "여행일수",
           data,
-          fill: true,
-          backgroundColor: cssVar("--highlight-soft"),
-          borderColor: cssVar("--main"),
-          borderWidth: 3,
-          tension: 0.35,
-          pointRadius: 2,
-          pointHoverRadius: 5,
-          pointBackgroundColor: cssVar("--main"),
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            titleFont: { family: font },
-            bodyFont: { family: font },
-            callbacks: { label: (context) => `${context.raw}일` },
-            boxPadding: 6,
-          },
-        },
-        scales: {
-          x: {
-            grid: { display: false },
-            ticks: { color: cssVar("--muted"), font: { family: font, weight: "bold" } },
-          },
-          y: {
-            beginAtZero: true,
-            grid: { display: false },
-            ticks: { color: cssVar("--muted"), stepSize: 10, font: { family: font } },
-          },
-        },
-      },
+          color: "--main",
+          fillColor: "--highlight-soft"
+        })
+      ],
+      formatTooltip: (context) => `${context.raw}일`
     });
   }
 

@@ -115,13 +115,6 @@
   margin: 32px auto;
 }
 
-.anime-watch-chart {
-  --anime-yuri: var(--main);
-  --anime-yuri-fill: var(--highlight-soft);
-  --anime-non-yuri: var(--sub);
-  --anime-non-yuri-fill: var(--highlight-sub-soft);
-}
-
 /* Archive */
 
 .anime-archive {
@@ -166,15 +159,15 @@
   border-top: 1px solid var(--line-soft);
 }
 
-.year-section {
+.anime-year-section {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, 1fr);
+  grid-template-columns: 3.5rem minmax(0, 1fr);
   gap: 1rem;
   padding: 1.1rem 0;
   border-bottom: 1px solid var(--line-soft);
 }
 
-.year {
+.anime-year {
   color: var(--muted);
   font-size: 0.84rem;
   font-weight: 600;
@@ -191,37 +184,30 @@
 
 .anime-card {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto auto minmax(0, 1fr);
   align-items: baseline;
   gap: 0.65rem;
   min-width: 0;
   color: var(--text);
 }
 
+.anime-season, 
 .anime-rating {
   color: var(--muted);
   font-size: 0.75rem;
   font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  border-radius: 5px;
+  background: var(--muted-soft);
+  text-align: center;
+}
+
+.anime-rating {
   font-variant-numeric: tabular-nums;
-
-  padding: 0.1rem 0.4rem;
-  border-radius: 5px;
-  background: var(--muted-soft);
 }
 
-.season {
-  flex: 0 0 auto;
-  color: var(--main);
-  font-size: 0.75rem;
-  font-weight: 600;
-
-  padding: 0.1rem 0.4rem;
-  border-radius: 5px;
-  background: var(--muted-soft);
-}
-
-.season.is-movie {
-  color: var(--muted);
+.anime-season {
+  min-width: 2.8rem;
 }
 
 .anime-title {
@@ -233,17 +219,17 @@
 }
 
 .anime-card.is-perfect .anime-title {
-  font-weight: 750;
   color: var(--text);
+  font-weight: 750;
 }
 
+.anime-card.is-perfect .season,
 .anime-rating.is-perfect {
-  padding: 0.1rem 0.4rem;
-  border-radius: 5px;
   background: var(--highlight-soft);
   color: var(--main);
   font-weight: 750;
 }
+
 
 .empty {
   margin: 1.2rem 0;
@@ -277,9 +263,5 @@
 
   .anime-card {
     align-items: flex-start;
-  }
-
-  .season {
-    min-width: 2.9rem;
   }
 }

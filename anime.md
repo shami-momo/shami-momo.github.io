@@ -12,7 +12,7 @@ permalink: /anime/
 </div>
 -->
 
-## 지금까지 총 <span id="anime-count">-</span>를 봤어요.
+## 지금까지 총 <span id="anime-count">-</span>의 작품을 봤어요.
 <div class="chart-wrap">
   <canvas id="anime-watch-chart"></canvas>
 </div>
@@ -23,10 +23,13 @@ permalink: /anime/
       전체
     </button>
     <button type="button" class="anime-filter" data-filter="series" aria-pressed="false">
-      TV 시리즈
+      TVA
     </button>
     <button type="button" class="anime-filter" data-filter="movie" aria-pressed="false">
       극장판
+    </button>
+    <button type="button" class="anime-filter" data-filter="perfect" aria-pressed="false">
+      👍
     </button>
   </div>
 
@@ -133,246 +136,193 @@ permalink: /anime/
 </script>
 
 <script>
-  (() => {
-    const anime = JSON.parse(
-      document.querySelector("#anime-data").textContent
-    ).map((item) => ({
-      ...item,
-      type: item.season === "극장판" ? "movie" : "series"
-    }));
+  // Configuration
+  const anime = JSON.parse(
+    document.querySelector("#anime-data").textContent
+  ).map((item) => ({
+    ...item,
+    type: item.season === "극장판" ? "movie" : "series",
+    perfect: Number(item.rating) === 5
+  }));
 
-    const animeList = document.querySelector("#anime-list");
-    const animeCount = document.querySelector("#anime-count");
-    const animeFilters = [...document.querySelectorAll("[data-filter]")];
-    const chartCanvas = document.querySelector("#anime-watch-chart");
+  let animeWatchChart;
+  let redrawFrame;
 
-    let animeWatchChart;
-    let redrawFrame;
+  const $ = (selector) => document.querySelector(selector);
+  const $$ = (selector) => [...document.querySelectorAll(selector)];
 
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
+  const animeList = $("#anime-list");
+  const animeCount = $("#anime-count");
+  const animeFilters = $$("[data-filter]");
 
-    function formatYear(year) {
-      const value = String(year).trim();
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
 
-      return value === "2008년 이전"
-        ? value
-        : `${value.match(/\d{4}/)?.[0] ?? value}년`;
-    }
+  function formatYear(year) {
+    const value = String(year).trim();
 
-    function cssVar(name) {
-      return getComputedStyle(document.documentElement)
-        .getPropertyValue(name)
-        .trim();
-    }
+    return value === "2008 이전"
+      ? value
+      : `${value.match(/\d{4}/)?.[0] ?? value}`;
+  }
 
-    function createCard(item) {
-      const movieClass = item.type === "movie" ? " is-movie" : "";
-      const rating = Number(item.rating);
-      const perfectClass = rating === 5 ? " is-perfect" : "";
+  function createCard(item) {
+    const movieClass = item.type === "movie" ? " is-movie" : "";
+    const rating = Number(item.rating);
+    const perfectClass = rating === 5 ? " is-perfect" : "";
 
-      const ratingMarkup = Number.isFinite(rating)
-        ? `
-          <span class="anime-rating${perfectClass}" aria-label="평점 ${rating}점">${rating}</span>
+    const ratingMarkup = Number.isFinite(rating)
+      ? `
+        <span class="anime-rating${perfectClass}" aria-label="평점 ${rating}점">★${rating}</span>
+      `
+      : "";
+
+    return `
+      <div class="anime-card${perfectClass}">
+        <span class="anime-season${movieClass}">${escapeHtml(item.season)}</span>
+        ${ratingMarkup}
+        <span class="anime-title">${escapeHtml(item.title)}</span>
+      </div>
+    `;
+  }
+
+  function renderList(filter = "all") {
+    const visible = anime.filter((item) => {
+      if (filter === "all") return true;
+      if (filter === "perfect") return item.perfect;
+
+      return item.type === filter;
+    });
+
+    const groups = new Map();
+
+    visible.forEach((item) => {
+      const items = groups.get(item.year) ?? [];
+      items.push(item);
+      groups.set(item.year, items);
+    });
+
+    animeList.innerHTML = [...groups]
+      .map(
+        ([year, items]) => `
+          <section class="anime-year-section">
+            <span class="anime-year">${formatYear(year)}</span>
+            <div class="anime-list">
+              ${items.map(createCard).join("")}
+            </div>
+          </section>
         `
-        : "";
+      )
+      .join("") || '<p class="empty">해당하는 작품이 없어.</p>';
+  }
 
-      return `
-        <div class="anime-card${perfectClass}">
-          <span class="season${movieClass}">${escapeHtml(item.season)}</span>
-          <span class="anime-title">${escapeHtml(item.title)}</span>
-          ${ratingMarkup}
-        </div>
-      `;
-    }
+  function getChartLabels() {
+    const hasOlderWorks = anime.some(
+      (item) => formatYear(item.year) === "2008 이전"
+    );
 
-    function renderList(filter = "all") {
-      const visible = anime.filter(
-        (item) => filter === "all" || item.type === filter
-      );
+    const numericYears = anime
+      .map((item) => {
+        const yearText = String(item.year).trim();
 
-      const groups = new Map();
-
-      visible.forEach((item) => {
-        const items = groups.get(item.year) ?? [];
-        items.push(item);
-        groups.set(item.year, items);
-      });
-
-      animeList.innerHTML = [...groups]
-        .map(
-          ([year, items]) => `
-            <section class="year-section">
-              <span class="year">${formatYear(year)}</span>
-              <div class="anime-list">
-                ${items.map(createCard).join("")}
-              </div>
-            </section>
-          `
-        )
-        .join("") || '<p class="empty">해당하는 작품이 없어.</p>';
-    }
-
-    function getChartLabels() {
-      const hasOlderWorks = anime.some(
-        (item) => formatYear(item.year) === "2008년 이전"
-      );
-
-      const years = anime
-        .map((item) => Number(String(item.year).match(/\d{4}/)?.[0]))
-        .filter(Number.isFinite);
-
-      const firstYear = Math.min(...years);
-      const lastYear = Math.max(...years);
-
-      return [
-        ...(hasOlderWorks ? ["2008년 이전"] : []),
-        ...Array.from(
-          { length: lastYear - firstYear + 1 },
-          (_, index) => `${firstYear + index}년`
-        )
-      ];
-    }
-
-    function renderChart() {
-      if (!chartCanvas || !window.Chart) return;
-
-      const labels = getChartLabels();
-      const itemsByYear = new Map();
-      const font = getComputedStyle(document.body).fontFamily;
-
-      anime.forEach((item) => {
-        const year = formatYear(item.year);
-        const items = itemsByYear.get(year) ?? [];
-
-        items.push(item);
-        itemsByYear.set(year, items);
-      });
-
-      let yuriCount = 0;
-      let nonYuriCount = 0;
-
-      const yuriData = [];
-      const nonYuriData = [];
-
-      labels.forEach((year) => {
-        (itemsByYear.get(year) ?? []).forEach((item) => {
-          if (item.yuri) yuriCount += 1;
-          else nonYuriCount += 1;
-        });
-
-        yuriData.push(yuriCount);
-        nonYuriData.push(nonYuriCount);
-      });
-
-      animeWatchChart?.destroy();
-
-      animeWatchChart = new Chart(chartCanvas, {
-        type: "line",
-        data: {
-          labels,
-          datasets: [
-            {
-              label: "백합 없음",
-              data: nonYuriData,
-              fill: true,
-              backgroundColor: cssVar("--highlight-soft"),
-              borderColor: cssVar("--main"),
-              borderWidth: 3,
-              tension: 0.35,
-              pointRadius: 2,
-              pointHoverRadius: 5,
-              pointBackgroundColor: cssVar("--main"),
-              pointBorderWidth: 2
-            },
-            {
-              label: "백합",
-              data: yuriData,
-              fill: true,
-              backgroundColor: cssVar("--highlight-sub-soft"),
-              borderColor: cssVar("--sub"),
-              borderWidth: 3,
-              tension: 0.35,
-              pointRadius: 2,
-              pointHoverRadius: 5,
-              pointBackgroundColor: cssVar("--sub"),
-              pointBorderWidth: 2
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          interaction: {
-            mode: "index",
-            intersect: false
-          },
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltip: {
-              titleFont: { family: font },
-              bodyFont: { family: font },
-              boxPadding: 6,
-              callbacks: {
-                label(context) {
-                  return `${context.dataset.label}: ${context.raw}편`;
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              stacked: true,
-              grid: { display: false },
-              ticks: { color: cssVar("--muted"), font: { family: font, weight: "bold" } },
-            },
-            y: {
-              stacked: true,
-              grid: { display: false },
-              ticks: { color: cssVar("--muted"), stepSize: 10, font: { family: font } },
-            }
-          }
+        if (formatYear(item.year) === "2008 이전") {
+          return null;
         }
-      });
+
+        return Number(yearText.match(/\d{4}/)?.[0]);
+      })
+      .filter((year) => Number.isFinite(year));
+
+    if (numericYears.length === 0) {
+      return hasOlderWorks ? ["2008 이전"] : [];
     }
 
-    animeCount.textContent = `${anime.length}개`;
+    const firstYear = Math.min(...numericYears);
+    const lastYear = Math.max(...numericYears);
 
-    animeFilters.forEach((button) => {
-      button.addEventListener("click", () => {
-        animeFilters.forEach((item) => {
-          item.setAttribute("aria-pressed", "false");
-        });
+    return [
+      ...(hasOlderWorks ? ["2008 이전"] : []),
+      ...Array.from(
+        { length: lastYear - firstYear + 1 },
+        (_, index) => `${firstYear + index}`
+      )
+    ];
+  }
 
-        button.setAttribute("aria-pressed", "true");
-        renderList(button.dataset.filter);
+  function renderChart() {
+    const chartCanvas = $("#anime-watch-chart");
+    if (!chartCanvas || !window.Chart) return;
+
+    const labels = getChartLabels();
+    const itemsByYear = new Map();
+    const font = getComputedStyle(document.body).fontFamily;
+
+    anime.forEach((item) => {
+      const year = formatYear(item.year);
+      const items = itemsByYear.get(year) ?? [];
+
+      items.push(item);
+      itemsByYear.set(year, items);
+    });
+
+    let yuriCount = 0;
+    let nonYuriCount = 0;
+
+    const yuriData = [];
+    const nonYuriData = [];
+
+    labels.forEach((year) => {
+      (itemsByYear.get(year) ?? []).forEach((item) => {
+        if (item.yuri) yuriCount += 1;
+        else nonYuriCount += 1;
       });
+
+      yuriData.push(yuriCount);
+      nonYuriData.push(nonYuriCount);
     });
 
-    function queueChartRedraw() {
-      cancelAnimationFrame(redrawFrame);
-      redrawFrame = requestAnimationFrame(renderChart);
-    }
-
-    new MutationObserver(queueChartRedraw).observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class", "data-theme"]
+    animeWatchChart = createLineChart({
+      canvas: chartCanvas,
+      chart: animeWatchChart,
+      labels,
+      stacked: true,
+      datasets: [
+        createLineDataset({
+          label: "백합 없음",
+          data: nonYuriData,
+          color: "--sub",
+          fillColor: "--highlight-sub-soft"
+        }),
+        createLineDataset({
+          label: "백합",
+          data: yuriData,
+          color: "--main",
+          fillColor: "--highlight-soft"
+        })
+      ],
+      formatTooltip: (context) => `${context.dataset.label}: ${context.raw}편`
     });
+  }
 
-    new MutationObserver(queueChartRedraw).observe(document.body, {
-      attributes: true,
-      attributeFilter: ["class", "data-theme"]
+  animeCount.textContent = `${anime.length}편`;
+
+  animeFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      animeFilters.forEach((item) => {
+        item.setAttribute("aria-pressed", "false");
+      });
+
+      button.setAttribute("aria-pressed", "true");
+      renderList(button.dataset.filter);
     });
+  });
 
-    renderList();
-    renderChart();
-  })();
+  renderList();
+  renderChart();
 </script>

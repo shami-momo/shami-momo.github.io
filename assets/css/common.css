@@ -34,11 +34,15 @@
   --text: #F5F5F5;
   --text-soft: #d3d3d3;
   --muted: #a7a7a7;
+  --muted-soft: #2e2e2e;
   --line: #414141;
   --line-soft: #2e2e2e;
 
   --highlight: color-mix(in srgb, var(--main) 50%, transparent);
   --highlight-soft: color-mix(in srgb, var(--main) 15%, transparent);
+
+  --highlight-sub: color-mix(in srgb, var(--sub) 50%, transparent);
+  --highlight-sub-soft: color-mix(in srgb, var(--sub) 15%, transparent);
 
   --map-base: #555555;
 }

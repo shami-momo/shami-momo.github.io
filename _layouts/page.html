@@ -4,6 +4,113 @@ layout: default
 
 <article class="page">
 
+
+
+<script>
+function cssVar(name) {
+    return getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+}
+
+function createLineDataset({
+  label,
+  data,
+  color,
+  fillColor
+}) {
+  return {
+    label,
+    data,
+    fill: true,
+    backgroundColor: cssVar(fillColor),
+    borderColor: cssVar(color),
+    borderWidth: 3,
+    tension: 0.35,
+    pointRadius: 2,
+    pointHoverRadius: 5,
+    pointBackgroundColor: cssVar(color)
+  };
+}
+
+function createLineChart({
+  canvas,
+  chart,
+  labels,
+  datasets,
+  stacked = false,
+  formatTooltip
+}) {
+  if (!canvas || typeof Chart === "undefined") return chart;
+
+  const font = getComputedStyle(document.body).fontFamily;
+
+  chart?.destroy();
+
+  return new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          titleFont: {
+            family: font
+          },
+          bodyFont: {
+            family: font
+          },
+          boxPadding: 6,
+          callbacks: {
+            label: formatTooltip
+          }
+        }
+      },
+      scales: {
+        x: {
+          stacked,
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: cssVar("--muted"),
+            font: {
+              family: font,
+              weight: "bold"
+            }
+          }
+        },
+        y: {
+          beginAtZero: true,
+          stacked,
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: cssVar("--muted"),
+            stepSize: 10,
+            font: {
+              family: font
+            }
+          }
+        }
+      }
+    }
+  });
+}
+</script>
+
 <header class="page-header {% if page.logo %}page-header-with-logo{% endif %}">
     <div>
     <h1>{{ page.title }}</h1>
