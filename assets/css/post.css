@@ -213,13 +213,6 @@ mjx-container[display="true"] mjx-math {
 .post-toc a {
   display: block;
   color: inherit;
-  text-decoration: none;
-}
-
-.post-toc a:hover {
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .post-toc .toc-h3 {

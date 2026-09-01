@@ -82,13 +82,23 @@
     <footer class="footer">
       <span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
 
-      <a
-        class="subculture-link"
-        href="{{ '/anime/' | relative_url }}"
-        aria-label="anime"
-      >
-        ✦
-      </a>
+      <span class="subculture-easter-egg">
+        <a
+          class="subculture-link"
+          href="{{ '/anime/' | relative_url }}"
+          aria-label="애니메이션 페이지"
+        >
+          🌸✋
+        </a>
+
+        <span
+          class="subculture-message"
+          role="status"
+          aria-hidden="true"
+        >
+          이걸 클릭하다니 이상해!
+        </span>
+      </span>
 
       <a
         class="site-copyright"
@@ -156,9 +166,7 @@
 
       updateButton();
     })();
-  </script>
-
-  <script>
+    
     (function () {
       const header = document.querySelector(".topbar");
 
@@ -201,6 +209,20 @@
         header.classList.remove("is-hidden");
       });
     })();
+
+    const subcultureLink = document.querySelector(".subculture-link");
+    const subcultureMessage = document.querySelector(".subculture-message");
+
+    subcultureLink?.addEventListener("click", (event) => {
+      if (!subcultureMessage || subcultureMessage.classList.contains("is-visible")) {
+        return;
+      }
+
+      event.preventDefault();
+
+      subcultureMessage.classList.add("is-visible");
+      subcultureMessage.setAttribute("aria-hidden", "false");
+    });
   </script>
 </body>
 </html>
