@@ -28,8 +28,12 @@ permalink: /anime/
     <button type="button" class="anime-filter" data-filter="movie" aria-pressed="false">
       극장판
     </button>
+    <span class="anime-filter-divider" aria-hidden="true"></span>
     <button type="button" class="anime-filter" data-filter="perfect" aria-pressed="false">
-      ★5
+      👍
+    </button>
+    <button type="button" class="anime-filter" data-filter="yuri" aria-pressed="false">
+      🌸✋
     </button>
   </div>
 
@@ -189,27 +193,40 @@ permalink: /anime/
     `;
   }
 
-  function renderList(filter = "all") {
-    const visible = anime.filter((item) => {
-      if (filter === "all") return true;
-      if (filter === "perfect") return item.perfect;
+  const typeFilters = new Set(["all", "series", "movie"]);
 
-      return item.type === filter;
+  let activeTypeFilter = "all";
+  const activeTagFilters = new Set();
+
+  function renderList() {
+    const visible = anime.filter((item) => {
+      const matchesType =
+        activeTypeFilter === "all" || item.type === activeTypeFilter;
+
+      const matchesPerfect =
+        !activeTagFilters.has("perfect") || item.perfect;
+
+      const matchesYuri =
+        !activeTagFilters.has("yuri") || item.yuri;
+
+      return matchesType && matchesPerfect && matchesYuri;
     });
 
     const groups = new Map();
 
     visible.forEach((item) => {
-      const items = groups.get(item.year) ?? [];
+      const year = formatYear(item.year);
+      const items = groups.get(year) ?? [];
+
       items.push(item);
-      groups.set(item.year, items);
+      groups.set(year, items);
     });
 
     animeList.innerHTML = [...groups]
       .map(
         ([year, items]) => `
           <section class="anime-year-section">
-            <span class="anime-year">${formatYear(year)}</span>
+            <span class="anime-year">${year}</span>
             <div class="anime-list">
               ${items.map(createCard).join("")}
             </div>
@@ -218,6 +235,39 @@ permalink: /anime/
       )
       .join("") || '<p class="empty">해당하는 작품이 없어.</p>';
   }
+
+  function updateFilterButtons() {
+    animeFilters.forEach((button) => {
+      const filter = button.dataset.filter;
+      const isActive = typeFilters.has(filter)
+        ? filter === activeTypeFilter
+        : activeTagFilters.has(filter);
+
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  }
+
+  animeFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+
+      if (typeFilters.has(filter)) {
+        activeTypeFilter = filter;
+      } else if (activeTagFilters.has(filter)) {
+        activeTagFilters.delete(filter);
+      } else {
+        activeTagFilters.add(filter);
+      }
+
+      updateFilterButtons();
+      renderList();
+    });
+  });
+
+  animeCount.textContent = `${anime.length}편`;
+
+  updateFilterButtons();
+  renderList();
 
   function getChartLabels() {
     const years = anime.map((item) => formatYear(item.year));
@@ -359,20 +409,5 @@ permalink: /anime/
       }
     });
   }
-
-  animeCount.textContent = `${anime.length}편`;
-
-  animeFilters.forEach((button) => {
-    button.addEventListener("click", () => {
-      animeFilters.forEach((item) => {
-        item.setAttribute("aria-pressed", "false");
-      });
-
-      button.setAttribute("aria-pressed", "true");
-      renderList(button.dataset.filter);
-    });
-  });
-
-  renderList();
   renderChart();
 </script>

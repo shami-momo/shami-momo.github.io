@@ -149,11 +149,33 @@
   color: var(--main);
 }
 
-.anime-filter[aria-pressed="true"] {
+.anime-filter:is(
+  [data-filter="all"],
+  [data-filter="series"],
+  [data-filter="movie"]
+)[aria-pressed="true"] {
+  border-color: var(--main);
+  background: var(--main);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.anime-filter:is(
+  [data-filter="perfect"],
+  [data-filter="yuri"]
+)[aria-pressed="true"] {
   border-color: var(--main);
   background: var(--highlight-soft);
   color: var(--main);
   font-weight: 600;
+}
+
+.anime-filter-divider {
+  width: 1px;
+  height: 1.5rem;
+  margin: 0 0.15rem;
+  background: var(--line-soft);
+  align-self: center;
 }
 
 .anime-groups {
