@@ -15,13 +15,11 @@
   --line-soft: #e7e7e7;
 
   --main: #ff5f82;
-  --sub: #6e64c8;
+  --main-soft: color-mix(in srgb, var(--main) 62%, transparent);
+  --main-softer: color-mix(in srgb, var(--main) 42%, transparent);
 
   --highlight: color-mix(in srgb, var(--main) 25%, transparent);
   --highlight-soft: color-mix(in srgb, var(--main) 10%, transparent);
-
-  --highlight-sub: color-mix(in srgb, var(--sub) 25%, transparent);
-  --highlight-sub-soft: color-mix(in srgb, var(--sub) 10%, transparent);
 
   --map-base: #e2e2e2;
 }

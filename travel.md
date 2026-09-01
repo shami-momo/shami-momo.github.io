@@ -150,17 +150,23 @@ permalink: /travel/
     const yearly = {};
 
     trips.forEach((trip) => {
+      const isJapan = trip.countries?.includes("JP");
       const end = date(trip.end);
 
       for (let current = date(trip.start); current <= end; current = new Date(+current + DAY)) {
         const year = current.getUTCFullYear();
-        yearly[year] = (yearly[year] ?? 0) + 1;
+        const days = yearly[year] ?? { japan: 0, nonJapan: 0 };
+
+        if (isJapan) days.japan += 1;
+        else days.nonJapan += 1;
+
+        yearly[year] = days;
       }
     });
 
     return Object.entries(yearly)
-      .map(([year, days]) => ({ year, days }))
-      .sort((a, b) => Number(a.year) - Number(b.year));
+      .map(([year, days]) => ({ year: Number(year), ...days }))
+      .sort((a, b) => a.year - b.year);
   }
 
   function renderChart() {
@@ -169,26 +175,98 @@ permalink: /travel/
 
     const yearly = getYearlyDays();
     const labels = yearly.map((item) => item.year);
-    const data = yearly.map((item) => item.days);
-    const total = data.reduce((sum, value) => sum + value, 0);
     const font = getComputedStyle(document.body).fontFamily;
     const totalEl = $("#totalTravelDays");
 
+    const japanData = yearly.map((item) => item.japan);
+    const nonJapanData = yearly.map((item) => item.nonJapan);
+
+    const total = japanData.reduce((sum, days) => sum + days, 0)
+      + nonJapanData.reduce((sum, days) => sum + days, 0);
+
     if (totalEl) totalEl.textContent = `${total}일`;
 
-    travelChart = createLineChart({
-      canvas: chartCanvas,
-      chart: travelChart,
-      labels,
-      datasets: [
-        createLineDataset({
-          label: "여행일수",
-          data,
-          color: "--main",
-          fillColor: "--highlight-soft"
-        })
-      ],
-      formatTooltip: (context) => `${context.raw}일`
+    travelChart?.destroy();
+
+    travelChart = new Chart(chartCanvas, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "일본",
+            data: japanData,
+            backgroundColor: cssVar("--main-soft"),
+          },
+          {
+            label: "일본 외",
+            data: nonJapanData,
+            backgroundColor: cssVar("--highlight"),
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              color: cssVar("--muted"),
+              font: {
+                family: font,
+                size: 13,
+                weight: "bold"
+              }
+            }
+          },
+          tooltip: {
+            titleFont: {
+              family: font
+            },
+            bodyFont: {
+              family: font
+            },
+            boxPadding: 6,
+            callbacks: {
+              label: (context) => `${context.dataset.label}: ${context.raw}일`
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: cssVar("--muted"),
+              font: {
+                family: font,
+                weight: "bold"
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            stacked: true,
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: cssVar("--muted"),
+              stepSize: 10,
+              font: {
+                family: font
+              }
+            }
+          }
+        }
+      }
     });
   }
 

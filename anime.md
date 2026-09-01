@@ -29,7 +29,7 @@ permalink: /anime/
       극장판
     </button>
     <button type="button" class="anime-filter" data-filter="perfect" aria-pressed="false">
-      👍
+      ★5
     </button>
   </div>
 
@@ -146,7 +146,6 @@ permalink: /anime/
   }));
 
   let animeWatchChart;
-  let redrawFrame;
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -175,12 +174,10 @@ permalink: /anime/
   function createCard(item) {
     const movieClass = item.type === "movie" ? " is-movie" : "";
     const rating = Number(item.rating);
-    const perfectClass = rating === 5 ? " is-perfect" : "";
+    const perfectClass = item.perfect ? " is-perfect" : "";
 
     const ratingMarkup = Number.isFinite(rating)
-      ? `
-        <span class="anime-rating${perfectClass}" aria-label="평점 ${rating}점">★${rating}</span>
-      `
+      ? `<span class="anime-rating${perfectClass}" aria-label="평점 ${rating}점">★${rating}</span>`
       : "";
 
     return `
@@ -223,23 +220,15 @@ permalink: /anime/
   }
 
   function getChartLabels() {
-    const hasOlderWorks = anime.some(
-      (item) => formatYear(item.year) === "2008 이전"
-    );
+    const years = anime.map((item) => formatYear(item.year));
+    const hasOlderWorks = years.includes("2008 이전");
 
-    const numericYears = anime
-      .map((item) => {
-        const yearText = String(item.year).trim();
+    const numericYears = years
+      .filter((year) => year !== "2008 이전")
+      .map(Number)
+      .filter(Number.isFinite);
 
-        if (formatYear(item.year) === "2008 이전") {
-          return null;
-        }
-
-        return Number(yearText.match(/\d{4}/)?.[0]);
-      })
-      .filter((year) => Number.isFinite(year));
-
-    if (numericYears.length === 0) {
+    if (!numericYears.length) {
       return hasOlderWorks ? ["2008 이전"] : [];
     }
 
@@ -250,7 +239,7 @@ permalink: /anime/
       ...(hasOlderWorks ? ["2008 이전"] : []),
       ...Array.from(
         { length: lastYear - firstYear + 1 },
-        (_, index) => `${firstYear + index}`
+        (_, index) => String(firstYear + index)
       )
     ];
   }
@@ -271,13 +260,13 @@ permalink: /anime/
       itemsByYear.set(year, items);
     });
 
-    let yuriCount = 0;
-    let nonYuriCount = 0;
-
     const yuriData = [];
     const nonYuriData = [];
 
     labels.forEach((year) => {
+      let yuriCount = 0;
+      let nonYuriCount = 0;
+
       (itemsByYear.get(year) ?? []).forEach((item) => {
         if (item.yuri) yuriCount += 1;
         else nonYuriCount += 1;
@@ -287,26 +276,87 @@ permalink: /anime/
       nonYuriData.push(nonYuriCount);
     });
 
-    animeWatchChart = createLineChart({
-      canvas: chartCanvas,
-      chart: animeWatchChart,
-      labels,
-      stacked: true,
-      datasets: [
-        createLineDataset({
-          label: "백합 없음",
-          data: nonYuriData,
-          color: "--sub",
-          fillColor: "--highlight-sub-soft"
-        }),
-        createLineDataset({
-          label: "백합",
-          data: yuriData,
-          color: "--main",
-          fillColor: "--highlight-soft"
-        })
-      ],
-      formatTooltip: (context) => `${context.dataset.label}: ${context.raw}편`
+    animeWatchChart = new Chart(chartCanvas, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "백합",
+            data: yuriData,
+            fill: true,
+            backgroundColor: cssVar("--main-soft"),
+          },
+          {
+            label: "노말",
+            data: nonYuriData,
+            fill: true,
+            backgroundColor: cssVar("--highlight"),
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              color: cssVar("--muted"),
+              font: {
+                family: font,
+                size: 13,
+                weight: "bold"
+              }
+            }
+          },
+          tooltip: {
+            titleFont: {
+              family: font
+            },
+            bodyFont: {
+              family: font
+            },
+            boxPadding: 6,
+            callbacks: {
+              label: (context) => `${context.dataset.label}: ${context.raw}편`
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: cssVar("--muted"),
+              font: {
+                family: font,
+                weight: "bold"
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            stacked: true,
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: cssVar("--muted"),
+              stepSize: 5,
+              font: {
+                family: font
+              }
+            }
+          }
+        }
+      }
     });
   }
 

@@ -67,15 +67,15 @@
 }
 
 .japan-map .prefecture.is-walked {
-  fill: color-mix(in srgb, var(--main) 62%, var(--bg));
+  fill: var(--main-soft);
 }
 
 .japan-map .prefecture.is-landed {
-  fill: color-mix(in srgb, var(--main) 42%, var(--bg));
+  fill: var(--main-softer);
 }
 
 .japan-map .prefecture.is-passed {
-  fill: color-mix(in srgb, var(--main) 22%, var(--bg));
+  fill: var(--highlight);
 }
 
 .japan-map .separator {
@@ -334,6 +334,10 @@ body.is-popup-open {
 
 
 @media (max-width: 640px) {
+  .chart-wrap {
+    height: 275px;
+  }
+
   .travel-card-meta {
     font-size: 0.84rem;
   }
