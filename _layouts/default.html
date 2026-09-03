@@ -82,23 +82,9 @@
     <footer class="footer">
       <span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
 
-      <span class="subculture-easter-egg">
-        <a
-          class="subculture-link"
-          href="{{ '/anime/' | relative_url }}"
-          aria-label="애니메이션 페이지"
-        >
-          🌸✋
-        </a>
-
-        <span
-          class="subculture-message"
-          role="status"
-          aria-hidden="true"
-        >
-          이걸 클릭하다니 이상해!
-        </span>
-      </span>
+      <button class="tadashikunai" type="button">
+        🌸✋
+      </button>
 
       <a
         class="site-copyright"
@@ -210,18 +196,33 @@
       });
     })();
 
-    const subcultureLink = document.querySelector(".subculture-link");
-    const subcultureMessage = document.querySelector(".subculture-message");
+    const ANIME_URL = "{{ '/anime/' | relative_url }}";
+    const PASSWORD_HASH = "5fd0ddd64b4a3992b2f1834e0db26007393acd8c40b0ad93477a779e97b612cb";
 
-    subcultureLink?.addEventListener("click", (event) => {
-      if (!subcultureMessage || subcultureMessage.classList.contains("is-visible")) {
+    const easterEggButton = document.querySelector(".tadashikunai");
+
+    async function sha256(value) {
+      const data = new TextEncoder().encode(value);
+      const hash = await crypto.subtle.digest("SHA-256", data);
+
+      return [...new Uint8Array(hash)]
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    easterEggButton?.addEventListener("click", async () => {
+      const password = window.prompt("병을 구우면 【   】가 돼!");
+
+      if (password === null) return;
+
+      const passwordHash = await sha256(password);
+
+      if (passwordHash === PASSWORD_HASH) {
+        window.location.assign(ANIME_URL);
         return;
       }
 
-      event.preventDefault();
-
-      subcultureMessage.classList.add("is-visible");
-      subcultureMessage.setAttribute("aria-hidden", "false");
+      window.alert("틀려버렸어...");
     });
   </script>
 </body>

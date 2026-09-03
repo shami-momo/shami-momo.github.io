@@ -336,6 +336,8 @@ body.is-popup-open {
   color: var(--muted);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: color 0.16s ease, background-color 0.16s ease;
+
 }
 
 .travel-popup-close:hover {
@@ -354,18 +356,18 @@ body.is-popup-open {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
-  padding: 0 1.5rem;
+  padding: 0 1.5rem 0.95rem;
   overscroll-behavior: contain;
-}
-
-.travel-popup-list .travel-year-section {
-  grid-template-columns: 4rem minmax(0, 1fr);
-  gap: 1rem;
 }
 
 .travel-popup-list .travel-year-section:first-child {
   padding-top: 0;
   border-top: 0;
+}
+
+.travel-popup-list .travel-year-section:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 

@@ -190,13 +190,7 @@ main {
   font-size: 0.9rem;
 }
 
-.subculture-easter-egg {
-  position: relative;
-  display: inline-grid;
-  place-items: center;
-}
-
-.subculture-link {
+.tadashikunai {
   display: inline-grid;
   place-items: center;
   font-size: 0.85rem;
@@ -204,34 +198,18 @@ main {
   transition: transform 0.24s ease;
 }
 
-.subculture-link:hover {
-  transform: scale(1.2);
+.tadashikunai:hover {
+  transform: scale(1.1);
   text-decoration: none;
 }
 
-.subculture-message {
-  position: absolute;
-  bottom: calc(100% + 0.75rem);
-  left: 50%;
-  z-index: 1;
-  padding: 0.45rem 0.65rem;
-  border: 1px solid var(--line);
-  border-radius: 0.55rem;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 0.85rem;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, 0.3rem);
-  transition:
-    opacity 0.24s ease,
-    transform 0.24s ease;
-}
-
-.subculture-message.is-visible {
-  opacity: 1;
-  transform: translate(-50%, 0);
+button.tadashikunai {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 .site-copyright {
