@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "애니메이션"
+title: "Anime"
 subtitle: "백합이 좋아요"
 permalink: /anime/
 ---
@@ -10,28 +10,27 @@ permalink: /anime/
   <canvas id="anime-watch-chart"></canvas>
 </div>
 
-<section class="anime-archive" aria-labelledby="anime-archive-title">
-  <div class="anime-filters" role="group" aria-label="작품 유형 필터">
-    <button type="button" class="anime-filter" data-filter="all" aria-pressed="true">
-      전체
-    </button>
-    <button type="button" class="anime-filter" data-filter="series" aria-pressed="false">
-      TVA
-    </button>
-    <button type="button" class="anime-filter" data-filter="movie" aria-pressed="false">
-      극장판
-    </button>
-    <span class="anime-filter-divider" aria-hidden="true"></span>
-    <button type="button" class="anime-filter" data-filter="perfect" aria-pressed="false">
-      인생작
-    </button>
-    <button type="button" class="anime-filter" data-filter="yuri" aria-pressed="false">
-      백합
-    </button>
-  </div>
+## 이런 작품들을 봤어요.
+<div class="anime-filters" role="group" aria-label="작품 유형 필터">
+  <button type="button" class="anime-filter" data-filter="all" aria-pressed="true">
+    전체
+  </button>
+  <button type="button" class="anime-filter" data-filter="series" aria-pressed="false">
+    TVA
+  </button>
+  <button type="button" class="anime-filter" data-filter="movie" aria-pressed="false">
+    극장판
+  </button>
+  <span class="anime-filter-divider" aria-hidden="true"></span>
+  <button type="button" class="anime-filter" data-filter="perfect" aria-pressed="false">
+    인생작
+  </button>
+  <button type="button" class="anime-filter" data-filter="yuri" aria-pressed="false">
+    백합
+  </button>
+</div>
 
-  <div id="anime-list" class="anime-groups"></div>
-</section>
+<div id="anime-list" class="anime-groups"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -88,12 +87,22 @@ permalink: /anime/
       item.rating === null || item.rating === undefined || item.rating === ""
         ? null
         : Number(item.rating);
+
     const rating = Number.isFinite(rawRating) ? rawRating : null;
+    const season = Number(item.season);
+    const isValidSeason =
+      Number.isInteger(season) && season >= 0 && season <= 4;
 
     return {
       ...item,
       yearLabel: formatYear(item.year),
-      type: item.season === "극장판" ? "movie" : "series",
+      season: isValidSeason ? season : null,
+      seasonLabel: season === 0
+        ? "극장판"
+        : season >= 1 && season <= 4
+          ? `${season}분기`
+          : "",
+      type: season === 0 ? "movie" : "series",
       rating,
       perfect: rating === 5
     };
@@ -231,11 +240,11 @@ permalink: /anime/
     const movieClass = item.type === "movie" ? " is-movie" : "";
     const ratingMarkup = item.rating === null
       ? ""
-      : `<span class="anime-rating${perfectClass}" aria-label="평점 ${item.rating}점">★${item.rating}</span>`;
+      : `<span class="anime-rating${perfectClass}">★${item.rating}</span>`;
 
     return `
       <div class="anime-card${perfectClass}">
-        <span class="anime-season${movieClass}">${escapeHtml(item.season ?? "")}</span>
+        <span class="anime-season${movieClass}">${escapeHtml(item.seasonLabel)}</span>
         ${ratingMarkup}
         <span class="anime-title">${escapeHtml(item.title ?? "")}</span>
       </div>
