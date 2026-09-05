@@ -197,8 +197,11 @@
       });
     })();
 
-    const ANIME_URL = "{{ '/anime/' | relative_url }}";
-    const PASSWORD_HASH = "5fd0ddd64b4a3992b2f1834e0db26007393acd8c40b0ad93477a779e97b612cb";
+    const ANIME_URL = "{{ '/aburibinninaruyo/' | relative_url }}";
+    const PASSWORD_HASHES = new Set([
+      "5fd0ddd64b4a3992b2f1834e0db26007393acd8c40b0ad93477a779e97b612cb",
+      "7304f1ab9f7fa65ab6e2a95bcc824999334fbda9415f498c88d50066e0bf47dc"
+    ]);
 
     const easterEggButton = document.querySelector(".tadashikunai");
 
@@ -216,9 +219,9 @@
 
       if (password === null) return;
 
-      const passwordHash = await sha256(password);
+      const passwordHash = await sha256(password.trim());
 
-      if (passwordHash === PASSWORD_HASH) {
+      if (PASSWORD_HASHES.has(passwordHash)) {
         window.location.assign(ANIME_URL);
         return;
       }

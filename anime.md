@@ -1,8 +1,8 @@
 ---
 layout: page
-title: "Anime"
+title: "애니메이션"
 subtitle: "백합이 좋아요"
-permalink: /anime/
+permalink: /aburibinninaruyo/
 ---
 
 ## 지금까지 총 <span id="anime-count">-</span>의 작품을 봤어요.
