@@ -302,26 +302,11 @@ a:hover {
   background: var(--paper);
 }
 
-.links {
+.contact {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.links a {
-  padding: .24rem .72rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--bg);
-  font-size: 0.94rem;
-  text-decoration: none;
-  transition: border-color 0.16s ease, background-color 0.16s ease;
-}
-
-.links a:hover {
-  border-color: var(--text);
-  background: var(--paper);
+  align-items: center;
+  gap: 0.65rem;
 }
 
 /* Sections / Lists */
@@ -336,7 +321,7 @@ a:hover {
   margin: 0;
   color: var(--muted);
   font-size: 0.94rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -355,7 +340,7 @@ a:hover {
 }
 
 .post-list a {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .post-list time {

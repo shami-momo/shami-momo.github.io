@@ -11,17 +11,12 @@ layout: default
   </p>
 
   <p>
-    공부하면서 개인적으로 정리한 내용을 모아둡니다. 여행 다니며 사진 찍는 것을 좋아하기에 이러저러 하고 싶은 말들을 적기도.
+    공부하면서 개인적으로 정리한 내용들을 씁니다. <b><a href="{{ '/travel/' | relative_url }}">여행</a></b> 다니며 <b><a href="https://www.instagram.com/yyuuu.sei">사진</a></b> 찍는 것을 좋아하기에 관련된 것들을 모아놓기도 합니다.
   </p>
 
-  <p>
+  <p class="contact">
     <b>Contact via</b> <a href="mailto:jayyoo2002@snu.ac.kr">jayyoo2002@snu.ac.kr</a>
   </p>
-
-  <div class="links">
-    <a href="{{ '/travel/' | relative_url }}">Travel</a>
-    <a href="https://www.instagram.com/yyuuu.sei">Instagram</a>
-  </div>
   </div>
 
   <img
@@ -29,6 +24,7 @@ layout: default
     src="{{ '/assets/images/profile.webp' | relative_url }}"
   >
 </section>
+
 <section class="section">
   <div class="section-header">
     <h2>최근 글</h2>

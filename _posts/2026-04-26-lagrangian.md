@@ -123,9 +123,11 @@ $$\mathbf{v}=\mathbf{v}_\mathrm{rot}+\boldsymbol{\omega}\times\mathbf{r}$$
 
 $$v_\mathrm{rot}^2=\lVert\mathbf{v}-\boldsymbol{\omega}\times\mathbf{r}\rVert^2=v^2+\lVert\boldsymbol{\omega}\times\mathbf{r}\rVert^2-2\mathbf{v}\cdot(\boldsymbol{\omega}\times\mathbf{r})$$
 
-이때 정규화에 의해 $\lVert\boldsymbol{\omega}\rVert=1$이었으므로, $z$-축이 회전축인 것을 생각하면 $\lVert\boldsymbol{\omega}\times\mathbf{r}\rVert^2=x^2+y^2$이다. 또한 삼중곱 계산에 의해 $\mathbf{v}\cdot(\boldsymbol{\omega}\times\mathbf{r})=\boldsymbol{\omega}\cdot(\mathbf{r}\times\mathbf{v})=h_z$이다.
+이때 정규화에 의해 $\lVert\boldsymbol{\omega}\rVert=1$이었으므로, $z$-축이 회전축인 것과 삼중곱 계산을 통해 다음과 같이 계산할 수 있다.
 
-따라서 계산하면 회전좌표계에서의 속도는 다음과 같다.
+$$\begin{aligned} \lVert\boldsymbol{\omega}\times\mathbf{r}\rVert^2&=x^2+y^2 \\ \mathbf{v}\cdot(\boldsymbol{\omega}\times\mathbf{r})&=\boldsymbol{\omega}\cdot(\mathbf{r}\times\mathbf{v})=h_z \end{aligned}$$
+
+따라서 회전좌표계에서의 속도는 다음과 같다.
 
 $$v_\mathrm{rot}^2=v^2+x^2+y^2-2h_z$$
 
@@ -139,7 +141,7 @@ $$C_J \approx \frac{\mu_1}{a}+2h_z$$
 
 이때 앞선 글에서 살펴본 바와 같이 각운동량의 $z$-축 성분은 이렇게 쓸 수 있었다.
 
-$$h_z=h\cos i=h\sqrt{\mu_1 a(1-e^2)}\cos i$$
+$$h_z=h\cos i=\sqrt{\mu_1 a(1-e^2)}\cos i$$
 
 이때 섭동천체의 질량이 중심천체에 비해 매우 작으면 $\mu_1\approx 1$이므로, 결국 야코비 상수는 이렇게 된다.
 

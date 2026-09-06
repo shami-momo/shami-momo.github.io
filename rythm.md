@@ -33,7 +33,7 @@ permalink: /rythm/
   ];
 
   const FALL_TIME = 700;
-  const MAX_100 = 22;
+  const MAX_100 = 42;
   const BREAK = 180;
 
   const KEYS = ["s", "d", ";", "'"];

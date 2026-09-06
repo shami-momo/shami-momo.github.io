@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Travel"
+title: "여행"
 subtitle: "지금까지 갔던 곳들을 한눈에 돌아봅니다."
 permalink: /travel/
 ---
