@@ -120,6 +120,55 @@
   color: var(--muted);
 }
 
+.content .table-scroll {
+  width: 100%;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--line-soft);
+  border-radius: 0.45rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.content table {
+  width: 100%;
+  min-width: 34rem;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.content th,
+.content td {
+  padding: 0.65rem 0.85rem;
+  border-top: 1px solid var(--line-soft);
+  border-right: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.content th:last-child,
+.content td:last-child {
+  border-right: 0;
+}
+
+.content th {
+  background: var(--highlight-soft);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.content td > :first-child,
+.content th > :first-child {
+  margin-top: 0;
+}
+
+.content td > :last-child,
+.content th > :last-child {
+  margin-bottom: 0;
+}
+
 /* Post MathJax */
 
 mjx-container[display="true"] {
