@@ -41,27 +41,80 @@
   background-position: 0 88%;
 }
 
-.content code {
-  padding: 0.1em 0.32em;
-  border: 1px solid var(--line-soft);
-  border-radius: 5px;
+.content code{
+  font-family: 'Roboto Mono Variable', monospace;
+}
+
+.highlight {
+  margin: 1.4rem 0;
+  border-radius: 0.45rem;
+  overflow-x: auto;
   background: var(--paper);
   font-size: 0.92em;
 }
 
-.content pre {
-  max-width: 100%;
-  padding: 16px;
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--paper);
+.highlight pre {
+  margin: 0;
+  padding: 1rem 1.15rem;
+  background: transparent;
 }
 
-.content pre code {
-  padding: 0;
-  border: 0;
-  background: transparent;
+.content :not(pre) > code {
+  margin: 0.125rem;
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+  background: var(--muted-soft);
+  font-size: 0.84em;
+  white-space: normal;
+}
+
+.highlight .k,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt {
+  color: #8b3a62; /* 예약어: def, for, import 등 */
+  font-weight: 600;
+}
+
+.highlight .nf,
+.highlight .fm {
+  color: #226b92; /* 함수 */
+}
+
+.highlight .nc {
+  color: #8a5a12; /* 클래스 */
+}
+
+.highlight .s,
+.highlight .s1,
+.highlight .s2,
+.highlight .sa,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd {
+  color: #4d7a42; /* 문자열 */
+}
+
+.highlight .mi,
+.highlight .mf,
+.highlight .mh,
+.highlight .mo {
+  color: #9a5528; /* 숫자 */
+}
+
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cp {
+  color: var(--muted); /* 주석 */
+  font-style: italic;
+}
+
+.highlight .o,
+.highlight .p {
+  color: inherit;
 }
 
 .content blockquote {
