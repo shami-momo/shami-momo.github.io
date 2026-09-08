@@ -130,26 +130,34 @@
   margin: 0.5rem 0;
 }
 
-.content img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 1.6rem auto;
-  border-radius: 10px;
-}
-
 .content figure {
-  margin: 2rem 0;
+  max-width: 100%;
+  margin: 2rem auto;
 }
 
 .content figure img {
   margin-bottom: 0.6rem;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .content figcaption {
   color: var(--muted);
   font-size: 0.8rem;
   text-align: center;
+}
+
+.content .figure-45 { width: 45%; }
+.content .figure-60 { width: 60%; }
+.content .figure-70 { width: 70%; }
+.content .figure-85 { width: 85%; }
+.content .figure-full { width: 100%; }
+
+@media (max-width: 640px) {
+  .content figure[class*="figure-"] {
+    width: 100%;
+  }
 }
 
 .tag-list {
