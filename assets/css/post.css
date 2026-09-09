@@ -183,10 +183,7 @@
 
 .content .table-scroll {
   width: 100%;
-  margin: 1.6rem 0;
   overflow-x: auto;
-  border: 1px solid var(--line-soft);
-  border-radius: 0.45rem;
   -webkit-overflow-scrolling: touch;
 }
 

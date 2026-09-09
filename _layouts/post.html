@@ -126,6 +126,15 @@ layout: default
       
     `;
   })();
+
+  document.querySelectorAll(".content table").forEach((table) => {
+    const wrapper = document.createElement("div");
+
+    wrapper.className = "table-scroll";
+    table.before(wrapper);
+    wrapper.append(table);
+  });
 </script>
+
 
 </article>
