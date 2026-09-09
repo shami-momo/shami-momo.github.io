@@ -413,9 +413,6 @@ a:hover {
   color: var(--muted);
   margin-bottom: 0;
 }
-.post-header h1 + .meta {
-  margin-top: 14px;
-}
 
 .back {
   margin: 0 0 32px;

@@ -14,7 +14,7 @@
   width: min(62vw, 240px);
 }
 
-.meta {
+.play-area .meta {
   height: 2rem;
   display: flex;
   align-items: center;

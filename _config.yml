@@ -5,6 +5,8 @@ lang: "ko"
 url: ""
 baseurl: ""
 
+social_image: "/assets/images/og-default.webp"
+
 markdown: kramdown
 
 permalink: /posts/:title/

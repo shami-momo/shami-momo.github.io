@@ -168,16 +168,15 @@
 }
 
 .tag {
-  padding: .2rem .6rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--bg);
+  padding: .15rem .55rem;
+  border-radius: 8px;
+  background: var(--muted-soft);
   font-size: 0.8rem;
   text-decoration: none;
 }
 
-.meta {
-  margin: 0;
+.post-header .meta {
+  margin: 12px 0 0;
   color: var(--muted);
 }
 
@@ -189,7 +188,6 @@
 
 .content table {
   width: 100%;
-  min-width: 34rem;
   margin: 0;
   border-collapse: collapse;
   font-size: 0.92rem;
