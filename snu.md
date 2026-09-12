@@ -6,11 +6,25 @@ logo: "/assets/images/snu.webp"
 permalink: /snu/
 ---
 
-주로 궤도 역학 및 추진(로켓 엔진 및 우주 추진) 분야에 관심을 갖고 공부하고 있습니다. 이외에 천문학, 지질학 등 전반적인 지식의 폭을 넓히기 위해 다양한 과목을 수강하였습니다.
+## Research Interests
+- Orbital mechanics and astrodynamics
+- Spacecraft trajectory design and numerical simulation
+- Space propulsion
 
-## 관심 분야
-- 궤도 역학
-- 추진
+## Academic Projects & Experience
+- 2002 AA29 Mission Trajectory Design Project, 2026.
+    - `Python`으로 2체 Lambert 문제 기반 지구 출발–소행성 도착 궤적 계산, 데이터 분석・시각화
+    - `Mercury6`로 태양계 다체 중력계 수치 적분, 소행성 도착 위치 오차 분석
+    - 태양계천문학 및 실험에서 배운 내용을 확장·응용
+- Solar System Astronomy and Lab (3345.321), 2025.
+    - 천체 궤도와 태양계 동역학 관련 이론 학습 및 수치실험 수행
 
-## 프로젝트
-- [2002AA29 탐사]({{ '/posts/2002AA29' | relative_url }})
+## Other Activities & Experience
+- 고등학교 지구과학 II TA・문항 개발 및 검토, 2022-2026.
+- 서울대학교 항공우주공학과 로켓 동아리 HANARO, 2026.
+- 서울대학교 천체관측동아리 AAA, 2022.
+
+## Skills
+- Languages: English (TOEIC 985, 2021; expired), Japanese (JLPT N1, 2024)
+- Programing languages: `Python`(`NumPy`, `SciPy`, `Pandas`, `Matplotlib`...), `C`
+- Tools: `Mercury6`, `Git/GitHub`, `Jupyter Notebook`
