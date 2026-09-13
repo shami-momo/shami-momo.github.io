@@ -20,11 +20,13 @@ permalink: /snu/
     - 천체 궤도와 태양계 동역학 관련 이론 학습 및 수치실험 수행
 
 ## Other Activities & Experience
-- 고등학교 지구과학 II TA・문항 개발 및 검토, 2022-2026.
+- 시대인재 지구과학 II TA 및 문항 검토, 2022・2024-2026.
 - 서울대학교 항공우주공학과 로켓 동아리 HANARO, 2026.
+- KATUSA(25L / RSG HQ, Camp Humphreys), 2023-2024.
 - 서울대학교 천체관측동아리 AAA, 2022.
 
 ## Skills
 - Languages: English (TOEIC 985, 2021; expired), Japanese (JLPT N1, 2024)
-- Programing languages: `Python`(`NumPy`, `SciPy`, `Pandas`, `Matplotlib`...), `C`
-- Tools: `Mercury6`, `Git/GitHub`, `Jupyter Notebook`
+- Programing: `Python`, `C`
+    - Tools: `Mercury6`, `Git/GitHub`, `Jupyter Notebook`
+- Others : Design & Photography (`Adobe Illustrator`, `Photoshop`, `Lightroom`)
