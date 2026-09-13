@@ -383,12 +383,12 @@ styles: [anime]
           {
             label: "백합",
             data: chartSeries.yuri,
-            backgroundColor: cssVar("--main-soft")
+            backgroundColor: cssVar("--main-bright")
           },
           {
             label: "노말",
             data: chartSeries.normal,
-            backgroundColor: cssVar("--highlight")
+            backgroundColor: cssVar("--main-softer")
           }
         ]
       },

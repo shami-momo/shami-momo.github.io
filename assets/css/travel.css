@@ -55,22 +55,22 @@
 
 .world-map .visited,
 .japan-map .prefecture.is-stayed {
-  fill: var(--main);
+  fill: var(--main-bright);
 }
 
 .japan-map .prefecture.is-walked {
-  fill: color-mix(in srgb, var(--main) 72%, var(--bg));
+  fill: color-mix(in srgb, var(--main-bright) 64%, var(--bg));
 }
 
 .japan-map .prefecture.is-landed {
-  fill: color-mix(in srgb, var(--main) 48%, var(--bg));
-  stroke: var(--main);
+  fill: color-mix(in srgb, var(--main-bright) 36%, var(--bg));
+  stroke: var(--main-bright);
   stroke-dasharray: 2 1;
 }
 
 .japan-map .prefecture.is-passed {
   fill: var(--bg);
-  stroke: var(--main);
+  stroke: var(--main-bright);
   stroke-width: 1px;
   stroke-dasharray: 2 1;
 }
@@ -89,8 +89,6 @@
 .world-map .is-clickable:is(:hover, .is-map-active),
 .japan-map .is-clickable:is(:hover, .is-map-active) {
   opacity: 0.76;
-  stroke: var(--text);
-  stroke-width: 1.25px;
 }
 
 .world-map .is-clickable:focus:not(:focus-visible),
@@ -101,8 +99,6 @@
 .world-map .is-clickable:focus-visible,
 .japan-map .is-clickable:focus-visible {
   outline: 0;
-  stroke: var(--focus-ring);
-  stroke-width: 2px;
 }
 
 .map-legend {
@@ -126,14 +122,14 @@
 .map-legend-swatch {
   width: 1rem;
   height: 0.75rem;
-  border: 1px solid var(--main);
+  border: 1px solid var(--main-bright);
   border-radius: 2px;
 }
 
-.map-legend-swatch.is-stayed { background: var(--main); }
-.map-legend-swatch.is-walked { background: color-mix(in srgb, var(--main) 72%, var(--bg)); }
+.map-legend-swatch.is-stayed { background: var(--main-bright); }
+.map-legend-swatch.is-walked { background: color-mix(in srgb, var(--main-bright) 64%, var(--bg)); }
 .map-legend-swatch.is-landed {
-  background: color-mix(in srgb, var(--main) 48%, var(--bg));
+  background: color-mix(in srgb, var(--main-bright) 36%, var(--bg));
   border-style: dashed;
 }
 .map-legend-swatch.is-passed {
@@ -380,6 +376,10 @@ body.is-popup-open {
 .travel-popup-list .travel-year-section:first-child {
   padding-top: 0;
   border-top: 0;
+}
+
+.travel-popup-list .travel-year-section:last-child {
+  padding-bottom: 0;
 }
 
 @media (max-width: 640px) {

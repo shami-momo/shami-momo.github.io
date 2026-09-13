@@ -347,12 +347,12 @@ styles: [travel]
           {
             label: "일본",
             data: japanData,
-            backgroundColor: cssVar("--main-soft")
+            backgroundColor: cssVar("--main-bright")
           },
           {
             label: "일본 외",
             data: nonJapanData,
-            backgroundColor: cssVar("--highlight")
+            backgroundColor: cssVar("--main-softer")
           }
         ]
       },

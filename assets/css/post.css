@@ -352,7 +352,7 @@ mjx-container[display="true"] mjx-math {
 
 .post-toc-mobile {
   display: none;
-  margin: 0 0 var(--space-7);
+  margin: 0 0 var(--space-6);
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--line-soft);
   border-radius: var(--radius-md);
