@@ -3,17 +3,24 @@ layout: page
 title: "여행"
 subtitle: "지금까지 갔던 곳들을 한눈에 돌아봅니다."
 permalink: /travel/
+styles: [travel]
 ---
 
 ## 지금까지 <span id="totalTravelDays">-</span> 동안 여행했어요.
 
-<div class="chart-wrap">
-  <canvas id="travelDaysChart"></canvas>
+<div class="travel-chart-wrap">
+  <canvas
+    id="travelDaysChart"
+    role="img"
+    aria-label="연도별 여행 일수를 일본과 일본 외 지역으로 나눈 막대그래프"
+    aria-describedby="travelChartSummary"
+  ></canvas>
 </div>
+<div id="travelChartSummary" class="visually-hidden"></div>
 
 ## 세계의 <span id="visitedCountryCount">-</span>를 여행했어요.
 
-<figure>
+<figure aria-label="방문한 나라를 표시한 세계 지도">
   <div class="map-wrap">
     {% include world-map.svg %}
   </div>
@@ -25,15 +32,21 @@ permalink: /travel/
 
 ## 일본의 <span id="visitedPrefectureCount">-</span>을 여행했어요.
 
-<figure>
+<figure aria-label="방문 경험 단계별로 표시한 일본 지도">
   <div class="map-wrap">
     {% include japan-map.svg %}
   </div>
   <figcaption>
     <div class="keikenchi-summary">
-      <span class="keikenchi-label">경현치・</span>
+      <span>경현치・</span>
       <span class="keikenchi-value" id="keikenchi">-</span>
     </div>
+    <ul class="map-legend" aria-label="일본 지도 범례">
+      <li><span class="map-legend-swatch is-stayed"></span>숙박·거주</li>
+      <li><span class="map-legend-swatch is-walked"></span>방문</li>
+      <li><span class="map-legend-swatch is-landed"></span>착륙</li>
+      <li><span class="map-legend-swatch is-passed"></span>통과</li>
+    </ul>
     Map adapted from
     <a href="https://github.com/Snack-X/keikenchi">Snack-X/keikenchi</a>.
   </figcaption>
@@ -43,14 +56,11 @@ permalink: /travel/
 
 <div id="travelList" class="travel-list-root"></div>
 
-<div id="travelPopup" class="travel-popup" hidden>
-  <div class="travel-popup-backdrop" data-popup-close></div>
-  <section
-    class="travel-popup-panel"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="travelPopupTitle"
-  >
+<dialog
+  id="travelPopup"
+  class="travel-popup"
+  aria-labelledby="travelPopupTitle"
+>
     <header class="travel-popup-header">
       <h2 id="travelPopupTitle">여행 목록</h2>
       <button
@@ -78,10 +88,9 @@ permalink: /travel/
       </button>
     </header>
     <div id="travelPopupList" class="travel-popup-list"></div>
-  </section>
-</div>
+</dialog>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 
 <script>
 
@@ -111,10 +120,13 @@ permalink: /travel/
 
   // 상태
   let travelChart = null;
+  let popupTrigger = null;
 
   // DOM 선택
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+  const cssVar = (name) =>
+    getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
   // 공통 유틸
 
@@ -125,10 +137,6 @@ permalink: /travel/
 
   function sortByStart(items) {
     return [...items].sort((a, b) => parseDate(b.start) - parseDate(a.start));
-  }
-
-  function getDaysBetween(start, end) {
-    return Math.round((parseDate(end) - parseDate(start)) / DAY) + 1;
   }
 
   function escapeHtml(value) {
@@ -185,9 +193,6 @@ permalink: /travel/
   }
 
   const sortedTrips = sortByStart(trips);
-  const linkedTrips = sortedTrips.filter(
-    (trip) => typeof trip.url === "string" && trip.url.trim()
-  );
   const countries = getUniqueValues("countries");
   const prefectureLevels = getPrefectureLevels();
   const visitedPrefectures = [...prefectureLevels]
@@ -254,7 +259,7 @@ permalink: /travel/
     `;
     return trip.url
       ? `<a class="travel-card" href="${escapeHtml(trip.url)}" role="listitem">${content}</a>`
-      : `<article class="travel-card is-unlinked" role="listitem">${content}</article>`;
+      : `<article class="travel-card" role="listitem">${content}</article>`;
   }
 
   function groupTripsByYear(items) {
@@ -272,8 +277,8 @@ permalink: /travel/
     return [...groupTripsByYear(items)]
       .map(
         ([year, yearTrips]) => `
-          <section class="travel-year-section" aria-label="${escapeHtml(year)}년 여행">
-            <span class="travel-year">${escapeHtml(year)}</span>
+          <section id="travel-year-${escapeHtml(year)}" class="travel-year-section" aria-labelledby="travel-year-title-${escapeHtml(year)}">
+            <h3 id="travel-year-title-${escapeHtml(year)}" class="travel-year">${escapeHtml(year)}</h3>
             <div class="travel-year-list" role="list">
               ${yearTrips.map(createTravelCard).join("")}
             </div>
@@ -317,6 +322,22 @@ permalink: /travel/
     const font = getComputedStyle(document.body).fontFamily;
     const totalEl = $("#totalTravelDays");
     if (totalEl) totalEl.textContent = `${total}일`;
+
+    const summary = $("#travelChartSummary");
+    if (summary) {
+      summary.innerHTML = `
+        <table>
+          <caption>연도별 여행 일수</caption>
+          <thead><tr><th>연도</th><th>일본</th><th>일본 외</th></tr></thead>
+          <tbody>
+            ${yearly.map(({ year, japan, nonJapan }) =>
+              `<tr><th>${year}</th><td>${japan}일</td><td>${nonJapan}일</td></tr>`
+            ).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
     travelChart?.destroy();
     travelChart = new Chart(chartCanvas, {
       type: "bar",
@@ -341,6 +362,12 @@ permalink: /travel/
         interaction: {
           mode: "index",
           intersect: false
+        },
+        onClick: (_, elements) => {
+          const element = elements[0];
+          if (!element) return;
+          document.querySelector(`#travel-year-${labels[element.index]}`)
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
         },
         plugins: {
           legend: {
@@ -396,7 +423,7 @@ permalink: /travel/
     const root = $("#travelList");
     if (!root) return;
 
-    root.innerHTML = createTravelListMarkup(linkedTrips);
+    root.innerHTML = createTravelListMarkup(sortedTrips);
   }
 
   // 지역별 여행 팝업
@@ -408,7 +435,7 @@ permalink: /travel/
     );
   }
 
-  function openTravelPopup(type, value, label) {
+  function openTravelPopup(type, value, label, trigger) {
     const popup = $("#travelPopup");
     const title = $("#travelPopupTitle");
     const list = $("#travelPopupList");
@@ -418,7 +445,8 @@ permalink: /travel/
     if (!matchedTrips.length) return;
     title.textContent = label;
     list.innerHTML = createTravelListMarkup(matchedTrips);
-    popup.hidden = false;
+    popupTrigger = trigger || document.activeElement;
+    popup.showModal();
     document.body.classList.add("is-popup-open");
     close?.focus();
   }
@@ -426,22 +454,28 @@ permalink: /travel/
   function closeTravelPopup() {
     const popup = $("#travelPopup");
     if (!popup) return;
-    popup.hidden = true;
+    popup.close();
     document.body.classList.remove("is-popup-open");
+    popupTrigger?.focus();
+    popupTrigger = null;
   }
 
   function setupTravelPopup() {
     const popup = $("#travelPopup");
     if (!popup) return;
+    popup.querySelector("[data-popup-close]")
+      ?.addEventListener("click", closeTravelPopup);
     popup.addEventListener("click", (event) => {
-      if (event.target.closest("[data-popup-close]")) {
-        closeTravelPopup();
-      }
+      const rect = popup.getBoundingClientRect();
+      const outside = event.clientX < rect.left
+        || event.clientX > rect.right
+        || event.clientY < rect.top
+        || event.clientY > rect.bottom;
+      if (outside) closeTravelPopup();
     });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !popup.hidden) {
-        closeTravelPopup();
-      }
+    popup.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      closeTravelPopup();
     });
   }
 
@@ -505,9 +539,14 @@ permalink: /travel/
           element.classList.toggle("is-map-active", active);
         });
       };
-      const open = () => openTravelPopup(type, value, label);
+      const open = () => openTravelPopup(type, value, label, focusTarget);
       elements.forEach((element) => {
         element.classList.add("is-clickable");
+        if (!element.querySelector("title")) {
+          const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+          title.textContent = label;
+          element.prepend(title);
+        }
         element.addEventListener("pointerenter", () => {
           isPointed = true;
           updateActiveState();
@@ -558,4 +597,5 @@ permalink: /travel/
   }
 
   init();
+  window.addEventListener("themechange", renderChart);
 </script>

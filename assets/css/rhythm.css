@@ -1,0 +1,228 @@
+:root {
+  --game-blue: #61d0ff;
+  --game-yellow: #ffd13b;
+  --game-miss: #f47676;
+}
+
+.game-help {
+  margin: 0 0 var(--space-4);
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.game-help kbd {
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--text);
+  font-family: "Roboto Mono Variable", "D2Coding", ui-monospace, monospace;
+  font-size: 0.8125rem;
+}
+
+.game-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.play-area {
+  width: min(62vw, 240px);
+}
+
+.play-area .meta {
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: min(110vw, 500px);
+  max-height: 70svh;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-bottom: 0;
+  background: #222222;
+}
+
+.notes,
+.hit-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.note,
+.hit-effect {
+  position: absolute;
+  width: 25%;
+}
+
+.note {
+  z-index: 2;
+  height: 9px;
+  opacity: 0;
+  transform: translateY(-50%);
+}
+
+.note.blue { background: linear-gradient(to left, rgb(0 94 159), rgb(90 220 255)); }
+.note.yellow { background: linear-gradient(to left, rgb(189 151 57), rgb(255 209 97)); }
+.note.hit { opacity: 0 !important; }
+
+.lane-0 { left: 0; }
+.lane-1 { left: 25%; }
+.lane-2 { left: 50%; }
+.lane-3 { left: 75%; }
+
+.hit-effect {
+  bottom: 20px;
+  height: 48px;
+  opacity: 0;
+  animation: hit-flash 180ms ease-out;
+}
+
+.hit-effect.blue { background: linear-gradient(to top, rgb(97 208 255 / 0.8), transparent); }
+.hit-effect.yellow { background: linear-gradient(to top, rgb(255 209 59 / 0.8), transparent); }
+
+.judge-line {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  left: 0;
+  z-index: 3;
+  height: 2px;
+  background: var(--line);
+}
+
+.judgement {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 8px #000000;
+}
+
+.judgement.show { animation: judgement-pop 380ms ease-out; }
+.judgement.perfect { color: #f4f4f4; }
+.judgement.normal { color: var(--game-blue); }
+.judgement.miss { color: var(--game-miss); }
+
+.game-controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.game-key {
+  min-height: 40px;
+  padding: 0.45rem 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 60ms,
+    color 60ms,
+    border-color 60ms,
+    box-shadow 60ms;
+}
+
+.game-key.active {
+  border-color: var(--main);
+  background: var(--highlight-soft);
+  color: var(--main);
+  box-shadow: 0 0 12px var(--highlight);
+  transform: translateY(2px);
+}
+
+.game-start {
+  width: 100%;
+  min-height: 40px;
+  margin-top: var(--space-2);
+  border: 1px solid var(--main);
+  border-radius: var(--radius-sm);
+  background: var(--main);
+  color: var(--on-main);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.result {
+  min-width: 9rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.result .judge-title {
+  color: var(--main);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.judge-counts {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.judge-count-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-4);
+}
+
+.judge-count-row span:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-divider {
+  height: 1px;
+  margin: 0.35rem 0;
+  background: var(--line-soft);
+}
+
+@keyframes judgement-pop {
+  0% { opacity: 0; transform: scale(0.8); }
+  20% { opacity: 0.72; transform: scale(1); }
+  100% { opacity: 0; transform: translateY(-10px) scale(1.04); }
+}
+
+@keyframes hit-flash {
+  0% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  .game-layout {
+    display: block;
+  }
+
+  .play-area {
+    margin: 0 auto;
+  }
+
+  .result {
+    margin: var(--space-4) auto 0;
+    text-align: center;
+  }
+}

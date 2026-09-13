@@ -2,10 +2,9 @@ title: "Hojun Yoo"
 description: "Personal academic site and study notes"
 lang: "ko"
 
-url: ""
+url: "https://shami-momo.github.io"
 baseurl: ""
-
-social_image: "/assets/images/og-default.webp"
+social_image: "/assets/images/profile.webp"
 
 markdown: kramdown
 

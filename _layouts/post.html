@@ -3,8 +3,12 @@ layout: default
 ---
 
 <article class="post">
+  <div class="reading-progress" aria-hidden="true">
+    <span class="reading-progress-bar"></span>
+  </div>
+
   <p class="back">
-    <a href="{{ '/posts/' | relative_url }}">← Posts</a>
+    <a href="{{ '/posts/' | relative_url }}">← 글 목록</a>
   </p>
 
   <header class="post-header">
@@ -24,17 +28,23 @@ layout: default
 
     <p class="meta">
       {{ page.date | date: "%Y.%m.%d" }}
-      · {{ reading_minutes }}분 소요
+      · 약 {{ reading_minutes }}분
     </p>
   </header>
+
+  <nav id="postToc" class="post-toc post-toc-desktop" aria-label="목차"></nav>
+  <details id="postTocMobile" class="post-toc-mobile">
+    <summary>목차</summary>
+    <nav aria-label="모바일 목차"></nav>
+  </details>
 
   <div class="content">
     {{ content }}
   </div>
 
-  <nav class="post-nav" aria-label="Post navigation">
+  <nav class="post-nav" aria-label="게시글 이동">
     {% if page.previous %}
-      <a class="post-nav-item post-nav-prev" href="{{ page.previous.url | relative_url }}">
+      <a class="post-nav-item" href="{{ page.previous.url | relative_url }}">
         <span class="post-nav-label">이전 글</span>
         <span class="post-nav-title">{{ page.previous.title }}</span>
       </a>
@@ -52,8 +62,6 @@ layout: default
     {% endif %}
   </nav>
 
-  <nav id="postToc" class="post-toc" aria-label="목차"></nav>
-
   <script src="https://giscus.app/client.js"
           data-repo="shami-momo/shami-momo.github.io"
           data-repo-id="R_kgDOTU89Zg"
@@ -70,71 +78,121 @@ layout: default
           async>
   </script>
 
-<script>
-  (() => {
-    const content = document.querySelector(".post .content");
-    const toc = document.querySelector("#postToc");
+  <script>
+    (() => {
+      const article = document.querySelector(".post");
+      const content = article?.querySelector(".content");
+      const desktopToc = document.querySelector("#postToc");
+      const mobileToc = document.querySelector("#postTocMobile");
+      const mobileTocNav = mobileToc?.querySelector("nav");
+      if (!article || !content) return;
 
-    if (!content || !toc) return;
+      const headings = [...content.querySelectorAll("h2, h3")];
+      const usedIds = new Set();
 
-    const headings = [...content.querySelectorAll("h2, h3")];
+      headings.forEach((heading) => {
+        if (heading.id && !usedIds.has(heading.id)) {
+          usedIds.add(heading.id);
+          return;
+        }
 
-    if (headings.length === 0) {
-      toc.remove();
-      return;
-    }
+        const baseId = heading.textContent
+          .trim()
+          .toLowerCase()
+          .replace(/[^\p{Letter}\p{Number}\s-]/gu, "")
+          .replace(/\s+/g, "-") || "section";
+        let id = baseId;
+        let index = 2;
 
-    function slugify(text) {
-      return text
-        .trim()
-        .toLowerCase()
-        .replace(/[^\p{Letter}\p{Number}\s-]/gu, "")
-        .replace(/\s+/g, "-");
-    }
+        while (usedIds.has(id)) id = `${baseId}-${index++}`;
+        heading.id = id;
+        usedIds.add(id);
+      });
 
-    const usedIds = new Set();
+      function buildToc(target) {
+        if (!target) return;
+        const title = document.createElement("p");
+        const list = document.createElement("ol");
+        title.className = "post-toc-title";
+        title.textContent = "목차";
 
-    headings.forEach((heading) => {
-      if (heading.id) {
-        usedIds.add(heading.id);
-        return;
+        headings.forEach((heading) => {
+          const item = document.createElement("li");
+          const link = document.createElement("a");
+          item.className = `toc-${heading.tagName.toLowerCase()}`;
+          link.href = `#${heading.id}`;
+          link.textContent = heading.textContent;
+          item.append(link);
+          list.append(item);
+        });
+
+        if (target === desktopToc) target.append(title);
+        target.append(list);
       }
 
-      const baseId = slugify(heading.textContent) || "section";
-      let id = baseId;
-      let index = 2;
+      if (!headings.length) {
+        desktopToc?.remove();
+        mobileToc?.remove();
+      } else {
+        buildToc(desktopToc);
+        buildToc(mobileTocNav);
 
-      while (usedIds.has(id)) {
-        id = `${baseId}-${index}`;
-        index += 1;
+        const links = [...document.querySelectorAll(".post-toc a, .post-toc-mobile a")];
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+          if (!visible) return;
+          links.forEach((link) => {
+            link.toggleAttribute("aria-current", link.hash === `#${visible.target.id}`);
+          });
+        }, { rootMargin: "-15% 0px -75% 0px" });
+        headings.forEach((heading) => observer.observe(heading));
       }
 
-      heading.id = id;
-      usedIds.add(id);
-    });
+      content.querySelectorAll("table").forEach((table, index) => {
+        if (table.closest(".table-scroll")) return;
+        const wrapper = document.createElement("div");
+        wrapper.className = "table-scroll";
+        wrapper.tabIndex = 0;
+        wrapper.setAttribute("role", "region");
+        wrapper.setAttribute("aria-label", `가로로 스크롤할 수 있는 표 ${index + 1}`);
+        table.before(wrapper);
+        wrapper.append(table);
+      });
 
-    toc.innerHTML = `
-      <p class="post-toc-title">목차</p>
+      content.querySelectorAll("img").forEach((image) => {
+        image.loading ||= "lazy";
+        image.decoding ||= "async";
+        if (!image.hasAttribute("alt")) {
+          image.alt = image.closest("figure")?.querySelector("figcaption")?.textContent.trim() || "";
+        }
+      });
 
-      <ol>
-        ${headings.map((heading) => `
-          <li class="toc-${heading.tagName.toLowerCase()}">
-            <a href="#${heading.id}">${heading.textContent}</a>
-          </li>
-        `).join("")}
-      </ol>
-      
-    `;
-  })();
+      const progressBar = document.querySelector(".reading-progress-bar");
+      function updateProgress() {
+        if (!progressBar) return;
+        const start = article.offsetTop;
+        const distance = Math.max(article.offsetHeight - innerHeight, 1);
+        const value = Math.min(Math.max((scrollY - start) / distance, 0), 1);
+        progressBar.style.transform = `scaleX(${value})`;
+      }
+      addEventListener("scroll", updateProgress, { passive: true });
+      addEventListener("resize", updateProgress);
+      updateProgress();
 
-  document.querySelectorAll(".content table").forEach((table) => {
-    const wrapper = document.createElement("div");
-
-    wrapper.className = "table-scroll";
-    table.before(wrapper);
-    wrapper.append(table);
-  });
-</script>
-
-
+      function syncGiscusTheme(theme) {
+        document.querySelector("iframe.giscus-frame")?.contentWindow?.postMessage({
+          giscus: { setConfig: { theme } }
+        }, "https://giscus.app");
+      }
+      addEventListener("themechange", (event) => syncGiscusTheme(event.detail.theme));
+      addEventListener("message", (event) => {
+        if (event.origin !== "https://giscus.app") return;
+        const theme = document.documentElement.dataset.theme
+          || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        syncGiscusTheme(theme);
+      });
+    })();
+  </script>
 </article>

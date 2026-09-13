@@ -1,11 +1,11 @@
-/* Content */
+/* Long-form content */
 
 .content h2 {
   position: relative;
-  margin-top: 3rem;
+  margin-top: var(--space-7);
   padding-top: 1.25rem;
   border-top: 0;
-  font-size: 1.35rem;
+  font-size: 1.375rem;
   letter-spacing: -0.025em;
 }
 
@@ -14,14 +14,15 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 3rem;
+  width: var(--space-7);
   height: 3px;
+  border-radius: var(--radius-pill);
   background: var(--main-soft);
 }
 
 .content h3 {
-  margin-top: 30px;
-  font-size: 1.08rem;
+  margin-top: var(--space-6);
+  font-size: 1.125rem;
 }
 
 .content ul,
@@ -30,39 +31,39 @@
 }
 
 .content li + li {
-  margin-top: 0.25rem;
+  margin-top: var(--space-1);
 }
 
 .content strong {
-  font-weight: 750;
+  font-weight: 700;
   background-image: linear-gradient(var(--highlight), var(--highlight));
   background-repeat: no-repeat;
-  background-size: 100% 0.42em;
   background-position: 0 88%;
+  background-size: 100% 0.42em;
 }
 
-.content code{
-  font-family: 'Roboto Mono Variable', monospace;
+.content code {
+  font-family: "Roboto Mono Variable", "D2Coding", ui-monospace, monospace;
 }
 
 .highlight {
-  margin: 1.4rem 0;
-  border-radius: 0.45rem;
+  margin: 1.5rem 0;
   overflow-x: auto;
+  border-radius: var(--radius-md);
   background: var(--paper);
-  font-size: 0.92em;
+  font-size: 0.9em;
 }
 
 .highlight pre {
   margin: 0;
-  padding: 1rem 1.15rem;
+  padding: var(--space-4) 1.125rem;
   background: transparent;
 }
 
 .content :not(pre) > code {
   margin: 0.125rem;
   padding: 0.1em 0.35em;
-  border-radius: 0.25rem;
+  border-radius: var(--radius-sm);
   background: var(--muted-soft);
   font-size: 0.84em;
   white-space: normal;
@@ -74,17 +75,17 @@
 .highlight .kp,
 .highlight .kr,
 .highlight .kt {
-  color: #8b3a62; /* 예약어: def, for, import 등 */
+  color: var(--syntax-keyword);
   font-weight: 600;
 }
 
 .highlight .nf,
 .highlight .fm {
-  color: #226b92; /* 함수 */
+  color: var(--syntax-function);
 }
 
 .highlight .nc {
-  color: #8a5a12; /* 클래스 */
+  color: var(--syntax-class);
 }
 
 .highlight .s,
@@ -94,21 +95,21 @@
 .highlight .sb,
 .highlight .sc,
 .highlight .sd {
-  color: #4d7a42; /* 문자열 */
+  color: var(--syntax-string);
 }
 
 .highlight .mi,
 .highlight .mf,
 .highlight .mh,
 .highlight .mo {
-  color: #9a5528; /* 숫자 */
+  color: var(--syntax-number);
 }
 
 .highlight .c,
 .highlight .c1,
 .highlight .cm,
 .highlight .cp {
-  color: var(--muted); /* 주석 */
+  color: var(--muted);
   font-style: italic;
 }
 
@@ -118,71 +119,63 @@
 }
 
 .content blockquote {
-  margin: 1.6rem 0;
-  padding: 0.5rem 1.2rem;
+  margin: 1.5rem 0;
+  padding: var(--space-2) 1.125rem;
   border-left: 4px solid var(--main);
   background: var(--paper);
   color: var(--text-soft);
-  font-size: 1rem;
 }
 
 .content blockquote p {
-  margin: 0.5rem 0;
+  margin: var(--space-2) 0;
 }
 
 .content figure {
   max-width: 100%;
-  margin: 2rem auto;
+  margin: var(--space-6) auto;
 }
 
 .content figure img {
-  margin-bottom: 0.6rem;
   display: block;
   width: 100%;
   height: auto;
+  margin-bottom: 0.6rem;
 }
 
 .content figcaption {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   text-align: center;
 }
 
-.content .figure-45 { width: 45%; }
-.content .figure-60 { width: 60%; }
-.content .figure-70 { width: 70%; }
 .content .figure-85 { width: 85%; }
-.content .figure-full { width: 100%; }
-
-@media (max-width: 640px) {
-  .content figure[class*="figure-"] {
-    width: 100%;
-  }
-}
 
 .tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 16px;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-4);
 }
 
 .tag {
-  padding: .15rem .55rem;
-  border-radius: 8px;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
   background: var(--muted-soft);
-  font-size: 0.8rem;
-  text-decoration: none;
+  font-size: 0.8125rem;
 }
 
 .post-header .meta {
-  margin: 12px 0 0;
+  margin: var(--space-3) 0 0;
   color: var(--muted);
 }
 
+/* Tables and equations */
+
 .content .table-scroll {
   width: 100%;
+  margin: var(--space-5) 0;
   overflow-x: auto;
+  border-radius: var(--radius-sm);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -190,7 +183,7 @@
   width: 100%;
   margin: 0;
   border-collapse: collapse;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.55;
 }
 
@@ -225,11 +218,9 @@
   margin-bottom: 0;
 }
 
-/* Post MathJax */
-
 mjx-container[display="true"] {
   margin: 1.4rem 0;
-  padding: 0.25rem 0;
+  padding: var(--space-1) 0;
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -239,28 +230,43 @@ mjx-container[display="true"] mjx-math {
 }
 
 .content blockquote mjx-container[display="true"] {
-  margin: 1rem 0;
+  margin: var(--space-4) 0;
 }
 
-/* Table of Contents */
+/* Post navigation and table of contents */
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 3px;
+  pointer-events: none;
+}
+
+.reading-progress-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--main);
+  transform: scaleX(0);
+  transform-origin: left;
+}
 
 .post-nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 64px;
-  padding-top: 24px;
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
   border-top: 1px solid var(--line);
 }
 
 .post-nav-item {
   min-width: 0;
-  padding: 14px 0;
+  padding: 0.875rem 0;
   text-decoration: none;
-}
-
-.post-nav-prev {
-  text-align: left;
 }
 
 .post-nav-next {
@@ -270,15 +276,14 @@ mjx-container[display="true"] mjx-math {
 .post-nav-label {
   display: block;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
 .post-nav-title {
   display: block;
-  margin-top: 4px;
+  margin-top: var(--space-1);
   color: var(--text);
   font-weight: 700;
   line-height: 1.45;
@@ -293,64 +298,92 @@ mjx-container[display="true"] mjx-math {
   pointer-events: none;
 }
 
-.post-toc {
+.post-toc-desktop {
   position: fixed;
-  top: 160px;
-  left: calc(50% + var(--max-width) / 2 + 32px);
-  width: 180px;
-  max-height: calc(100vh - 160px);
+  top: 10rem;
+  left: calc(50% + var(--max-width) / 2 + var(--space-6));
+  width: 12.5rem;
+  max-height: calc(100vh - 12rem);
   overflow-y: auto;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.45;
-  padding-left: 1.2rem;
+  padding-left: var(--space-4);
   border-left: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
 }
 
 .post-toc-title {
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--space-2);
   color: var(--text);
-  font-size: 0.82rem;
+  font-size: 0.8125rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
-.post-toc ol {
+.post-toc ol,
+.post-toc-mobile ol {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.post-toc li + li {
+.post-toc li + li,
+.post-toc-mobile li + li {
   margin-top: 0.45rem;
 }
 
-.post-toc a {
+.post-toc a,
+.post-toc-mobile a {
   display: block;
   color: inherit;
+  text-decoration: none;
 }
 
-.post-toc .toc-h3 {
-  padding-left: 0.8rem;
+.post-toc a[aria-current="true"],
+.post-toc-mobile a[aria-current="true"] {
+  color: var(--main);
+  font-weight: 700;
 }
 
-.post-toc-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 20px;
+.post-toc .toc-h3,
+.post-toc-mobile .toc-h3 {
+  padding-left: var(--space-3);
 }
 
-/* Responsive */
+.post-toc-mobile {
+  display: none;
+  margin: 0 0 var(--space-7);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
 
-@media (max-width: 640px) {
-  .post-list li {
-    display: block;
+.post-toc-mobile summary {
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.post-toc-mobile nav {
+  margin-top: var(--space-3);
+}
+
+@media (max-width: 1180px) {
+  .post-toc-desktop {
+    display: none;
   }
 
-  .post-list time {
+  .post-toc-mobile {
     display: block;
-    margin-top: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .content figure[class*="figure-"] {
+    width: 100%;
   }
 
   .post-nav {
@@ -363,12 +396,6 @@ mjx-container[display="true"] mjx-math {
   }
 
   .post-nav-empty {
-    display: none;
-  }
-}
-
-@media (max-width: 1120px) {
-  .post-toc {
     display: none;
   }
 }

@@ -3,227 +3,225 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    {% if page.title %}
-      {{ page.title }} · {{ site.title }}
-    {% else %}
-      {{ site.title }}
-    {% endif %}
-  </title>
-  <meta name="description" content="{{ site.description }}">
-  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
 
   {% assign social_image = page.image | default: site.social_image %}
   {% assign social_description = page.description
     | default: page.excerpt
+    | default: page.subtitle
     | default: site.description
     | strip_html
     | normalize_whitespace
     | truncate: 160
   %}
 
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ social_description | escape }}">
+  {% if page.robots %}<meta name="robots" content="{{ page.robots }}">{% endif %}
+  <meta id="themeColor" name="theme-color" content="#ffffff">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
   <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
   <meta property="og:description" content="{{ social_description | escape }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:image" content="{{ social_image | absolute_url }}">
+  <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
 
   <script>
-    (function () {
+    (() => {
       try {
         const theme = localStorage.getItem("theme");
-
         if (theme === "dark" || theme === "light") {
           document.documentElement.dataset.theme = theme;
         }
-      } catch (e) {
-      }
+      } catch (_) {}
     })();
   </script>
 
   <link rel="stylesheet" href="{{ '/assets/css/common.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/post.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/travel.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/anime.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/rythm.css' | relative_url }}">
+  {% if page.layout == 'page' or page.layout == 'post' %}
+    <link rel="stylesheet" href="{{ '/assets/css/post.css' | relative_url }}">
+  {% endif %}
+  {% for style in page.styles %}
+    <link rel="stylesheet" href="{{ '/assets/css/' | append: style | append: '.css' | relative_url }}">
+  {% endfor %}
 
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        macros: {
-          odv: ["{\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}}", 2],
-          odif: ["{\\mathrm{d}#1}", 1],
-          pdv: ["{\\frac{\\partial#1}{\\partial#2}}", 2],
-          mdv: ["{\\frac{\\mathrm{D}#1}{\\mathrm{D}#2}}", 2],
-          grad: "{\\nabla}",
-          divg: "{\\nabla \\cdot}",
-          curl: "{\\nabla \\times}",
-          laplacian: "{\\nabla^2}",
-          oddv: ["{\\frac{\\mathrm{d}^2#1}{\\mathrm{d}#2^2}}", 2],
-          pddv: ["{\\frac{\\partial^2#1}{\\partial#2^2}}", 2],
-          ehat: ["{\\hat{\\mathbf{e}}_{#1}}", 1],
-          uhat: ["{\\hat{\\mathbf{u}}_{#1}}", 1]
-        }
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
+  {% if page.layout == 'post' %}
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          macros: {
+            odv: ["{\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}}", 2],
+            odif: ["{\\mathrm{d}#1}", 1],
+            pdv: ["{\\frac{\\partial#1}{\\partial#2}}", 2],
+            mdv: ["{\\frac{\\mathrm{D}#1}{\\mathrm{D}#2}}", 2],
+            grad: "{\\nabla}",
+            divg: "{\\nabla \\cdot}",
+            curl: "{\\nabla \\times}",
+            laplacian: "{\\nabla^2}",
+            oddv: ["{\\frac{\\mathrm{d}^2#1}{\\mathrm{d}#2^2}}", 2],
+            pddv: ["{\\frac{\\partial^2#1}{\\partial#2^2}}", 2],
+            ehat: ["{\\hat{\\mathbf{e}}_{#1}}", 1],
+            uhat: ["{\\hat{\\mathbf{u}}_{#1}}", 1]
+          }
+        },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+  {% endif %}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+    "name": {{ page.title | default: site.title | jsonify }},
+    "headline": {{ page.title | default: site.title | jsonify }},
+    "description": {{ social_description | jsonify }},
+    "url": {{ page.url | absolute_url | jsonify }},
+    "author": {
+      "@type": "Person",
+      "name": {{ site.title | jsonify }},
+      "url": {{ '/' | absolute_url | jsonify }}
+    }{% if page.layout == 'post' %},
+    "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+    "image": {{ social_image | absolute_url | jsonify }}{% endif %}
+  }
   </script>
-  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+
   <div class="site">
     <header class="topbar">
-      <a class="site-title" href="{{ '/' | relative_url }}">Home</a>
+      <a class="site-title" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Hojun Yoo</a>
 
-      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" data-next-theme="dark">
+      <nav aria-label="주요 메뉴">
+        <a href="{{ '/posts/' | relative_url }}"{% if page.url == '/posts/' or page.layout == 'post' %} aria-current="page"{% endif %}>글</a>
+        <a href="{{ '/snu/' | relative_url }}"{% if page.url == '/snu/' %} aria-current="page"{% endif %}>소개</a>
+        <a href="{{ '/travel/' | relative_url }}"{% if page.url == '/travel/' %} aria-current="page"{% endif %}>여행</a>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-label="다크 테마로 전환" data-next-theme="dark">
         <span class="theme-toggle-icon theme-toggle-icon-dark" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
         </span>
-
         <span class="theme-toggle-icon theme-toggle-icon-light" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         </span>
       </button>
     </header>
 
-    <main>
+    <main id="main-content">
       {{ content }}
     </main>
 
     <footer class="footer">
       <span>© {{ site.time | date: "%Y" }} {{ site.title }}</span>
-
-      <button class="tadashikunai" type="button">
-        🌸✋
-      </button>
-
-      <a
-        class="site-copyright"
-        href="https://github.com/shami-momo/shami-momo.github.io"
-      >
-        Site Source
-      </a>
+      <button class="tadashikunai" type="button" aria-label="숨겨진 페이지 열기">🌸✋</button>
+      <a class="site-copyright" href="https://github.com/shami-momo/shami-momo.github.io">소스 코드</a>
     </footer>
   </div>
 
   <script>
-    (function () {
+    (() => {
       const root = document.documentElement;
       const button = document.querySelector(".theme-toggle");
-
       if (!button) return;
 
       const media = window.matchMedia("(prefers-color-scheme: dark)");
-
-      function getStoredTheme() {
-        try {
-          return localStorage.getItem("theme");
-        } catch (e) {
-          return null;
-        }
-      }
-
-      function setStoredTheme(theme) {
-        try {
-          localStorage.setItem("theme", theme);
-        } catch (e) {}
-      }
-
-      function getCurrentTheme() {
+      const getStoredTheme = () => {
+        try { return localStorage.getItem("theme"); } catch (_) { return null; }
+      };
+      const getCurrentTheme = () => {
         const stored = getStoredTheme();
+        return stored === "dark" || stored === "light"
+          ? stored
+          : media.matches ? "dark" : "light";
+      };
 
-        if (stored === "dark" || stored === "light") {
-          return stored;
+      function applyTheme(theme, persist = false) {
+        root.dataset.theme = theme;
+        if (persist) {
+          try { localStorage.setItem("theme", theme); } catch (_) {}
         }
-
-        return media.matches ? "dark" : "light";
-      }
-
-      function updateButton() {
-        const theme = getCurrentTheme();
         const nextTheme = theme === "dark" ? "light" : "dark";
-
+        document.querySelector("#themeColor")
+          ?.setAttribute("content", theme === "dark" ? "#121212" : "#ffffff");
         button.dataset.nextTheme = nextTheme;
-        button.setAttribute("aria-label", "Switch to " + nextTheme + " theme");
+        button.setAttribute("aria-label", `${nextTheme === "dark" ? "다크" : "라이트"} 테마로 전환`);
+        window.dispatchEvent(new CustomEvent("themechange", { detail: { theme } }));
       }
 
-      button.addEventListener("click", function () {
-        const nextTheme = getCurrentTheme() === "dark" ? "light" : "dark";
-
-        root.dataset.theme = nextTheme;
-        setStoredTheme(nextTheme);
-        updateButton();
+      button.addEventListener("click", () => {
+        applyTheme(getCurrentTheme() === "dark" ? "light" : "dark", true);
       });
-
-      media.addEventListener("change", function () {
-        if (!getStoredTheme()) {
-          updateButton();
-        }
+      media.addEventListener("change", () => {
+        if (!getStoredTheme()) applyTheme(getCurrentTheme());
       });
-
-      updateButton();
+      applyTheme(getCurrentTheme());
     })();
-    
-    (function () {
-      const header = document.querySelector(".topbar");
 
+    (() => {
+      const header = document.querySelector(".topbar");
       if (!header) return;
 
       let lastY = window.scrollY;
+      let distance = 0;
+      let direction = 0;
       let ticking = false;
-
-      const threshold = 8;
-      const delta = 2;
 
       function updateHeader() {
         const currentY = window.scrollY;
         const diff = currentY - lastY;
+        const nextDirection = Math.sign(diff);
 
-        if (currentY <= threshold) {
+        if (nextDirection && nextDirection !== direction) {
+          distance = 0;
+          direction = nextDirection;
+        }
+        distance += Math.abs(diff);
+
+        if (currentY <= 64) {
           header.classList.remove("is-hidden");
-        } else if (diff > delta) {
-          header.classList.add("is-hidden");
-        } else if (diff < -delta) {
-          header.classList.remove("is-hidden");
+        } else if (distance >= 12) {
+          header.classList.toggle("is-hidden", direction > 0);
+          distance = 0;
         }
 
         lastY = currentY;
         ticking = false;
       }
 
-      window.addEventListener(
-        "scroll",
-        function () {
-          if (!ticking) {
-            window.requestAnimationFrame(updateHeader);
-            ticking = true;
-          }
-        },
-        { passive: true }
-      );
-
-      header.addEventListener("focusin", function () {
-        header.classList.remove("is-hidden");
-      });
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          requestAnimationFrame(updateHeader);
+          ticking = true;
+        }
+      }, { passive: true });
+      header.addEventListener("focusin", () => header.classList.remove("is-hidden"));
     })();
+
+    document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach((link) => {
+      try {
+        if (new URL(link.href).origin !== location.origin) link.classList.add("external-link");
+      } catch (_) {}
+    });
 
     const ANIME_URL = "{{ '/aburibinninaruyo/' | relative_url }}";
     const PASSWORD_HASHES = new Set([
       "5fd0ddd64b4a3992b2f1834e0db26007393acd8c40b0ad93477a779e97b612cb",
       "7304f1ab9f7fa65ab6e2a95bcc824999334fbda9415f498c88d50066e0bf47dc"
     ]);
-
     const easterEggButton = document.querySelector(".tadashikunai");
 
     async function sha256(value) {
       const data = new TextEncoder().encode(value);
       const hash = await crypto.subtle.digest("SHA-256", data);
-
       return [...new Uint8Array(hash)]
         .map((byte) => byte.toString(16).padStart(2, "0"))
         .join("");
@@ -231,17 +229,12 @@
 
     easterEggButton?.addEventListener("click", async () => {
       const password = window.prompt("병을 구우면 【   】가 돼!");
-
       if (password === null) return;
-
-      const passwordHash = await sha256(password.trim());
-
-      if (PASSWORD_HASHES.has(passwordHash)) {
+      if (PASSWORD_HASHES.has(await sha256(password.trim()))) {
         window.location.assign(ANIME_URL);
-        return;
+      } else {
+        window.alert("틀려버렸어...");
       }
-
-      window.alert("틀려버렸어...");
     });
   </script>
 </body>

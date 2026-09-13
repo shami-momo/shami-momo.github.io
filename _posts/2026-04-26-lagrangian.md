@@ -154,7 +154,7 @@ $$T_P = \frac{a_P}{a}+2\sqrt{\frac{a}{a_P}(1-e^2)}\cos i$$
 $a_P$는 섭동천체의 궤도장반경, $a$는 제3천체의 궤도장반경이다. 
 
 <figure>
-  <img src="{{ '/assets/images/posts/2026-04-26-lagrangian/parameter.webp' | relative_url }}">
+  <img src="{{ '/assets/images/posts/2026-04-26-lagrangian/parameter.webp' | relative_url }}" alt="장기적 관점에서 2022AA29의 궤도 요소와 야코비 상수, 티세랑 파라미터의 변화. 2600년경 지구의 준위성이 된다." loading="lazy" decoding="async">
   <figcaption>장기적 관점에서 2022AA29의 궤도 요소와 야코비 상수, 티세랑 파라미터의 변화. 2600년경 지구의 준위성이 된다.</figcaption>
 </figure>
 
@@ -163,7 +163,7 @@ $a_P$는 섭동천체의 궤도장반경, $a$는 제3천체의 궤도장반경�
 ## 라그랑주점
 
 <figure>
-  <img src="{{ '/assets/images/posts/2026-04-26-lagrangian/lagrangian.webp' | relative_url }}">
+  <img src="{{ '/assets/images/posts/2026-04-26-lagrangian/lagrangian.webp' | relative_url }}" alt="라그랑주점의 분포. @NASA" loading="lazy" decoding="async">
   <figcaption>라그랑주점의 분포. @NASA</figcaption>
 </figure>
 
