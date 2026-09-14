@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "글 모음"
+title: "Posts"
 permalink: /posts/
 ---
 

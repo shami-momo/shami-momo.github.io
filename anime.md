@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "애니메이션"
+title: "Animation"
 permalink: /aburibinninaruyo/
 styles: [anime]
 ---

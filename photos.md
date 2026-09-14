@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "사진"
+title: "Photos"
 permalink: /photos/
 styles:
   - photos
@@ -35,7 +35,7 @@ photos:
     caption: "Tochigi, Japan · 2026"
 
   - file: illustar.webp
-    caption: "Korea, Japan · 2025"
+    caption: "Ilsan, Korea · 2025"
 
   - file: positano.webp
     caption: "Positano, Italy · 2025"
