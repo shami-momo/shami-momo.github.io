@@ -16,7 +16,6 @@
   left: 0;
   width: var(--space-7);
   height: 3px;
-  border-radius: var(--radius-pill);
   background: var(--main-soft);
 }
 

@@ -1,7 +1,6 @@
 ---
 layout: page
 title: "애니메이션"
-subtitle: "백합이 좋아요"
 permalink: /aburibinninaruyo/
 styles: [anime]
 ---

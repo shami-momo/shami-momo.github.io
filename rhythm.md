@@ -1,13 +1,12 @@
 ---
 layout: page
-title: "리듬게임 실험"
-subtitle: "4키 판정과 노트 이동을 시험하는 작은 프로토타입입니다."
+title: "리듬게임"
 permalink: /rythm/
 styles: [rhythm]
 robots: "noindex, nofollow"
 ---
 
-<p class="game-help">시작 버튼을 누른 뒤 <kbd>Space</kbd>로 재시작하고, <kbd>S</kbd> <kbd>D</kbd> <kbd>;</kbd> <kbd>'</kbd> 키 또는 화면 버튼으로 연주합니다.</p>
+<p class="game-help">게임 시작 버튼을 눌러 시작, <kbd>Space</kbd>를 눌러 재시작</p>
 
 <div class="game-layout">
   <div class="play-area">

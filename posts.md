@@ -1,7 +1,6 @@
 ---
 layout: page
 title: "글 모음"
-subtitle: "공부하면서 정리한 글들을 모아둡니다."
 permalink: /posts/
 ---
 
