@@ -30,6 +30,33 @@ layout: default
   >
 </section>
 
+<section class="archive">
+  <a class="archive-link" href="{{ '/snu/' | relative_url }}">
+    <span>
+      <strong>소개</strong>
+      <span>경력과 관심사</span>
+    </span>
+    <span aria-hidden="true">→</span>
+  </a>
+
+  <a class="archive-link" href="{{ '/travel/' | relative_url }}">
+    <span>
+      <strong>여행</strong>
+      <span>지도와 목록</span>
+    </span>
+    <span aria-hidden="true">→</span>
+  </a>
+
+  <a class="archive-link" href="https://www.instagram.com/yyuuu.sei" aria-label="사진 Instagram 열기">
+    <span>
+      <strong>사진</strong>
+      <span>인스타그램</span>
+    </span>
+    <span aria-hidden="true">→</span>
+  </a>
+</section>
+
+
 <section class="section">
   <div class="section-header">
     <h2>대표 글</h2>
@@ -72,26 +99,4 @@ layout: default
       </li>
     {% endfor %}
   </ol>
-</section>
-
-<section class="section archive-section" aria-labelledby="archive-title">
-  <div class="section-header">
-    <h2 id="archive-title">개인 아카이브</h2>
-  </div>
-
-  <a class="archive-link" href="{{ '/travel/' | relative_url }}">
-    <span>
-      <strong>여행 기록</strong>
-      <span>지금까지 다녀온 여행 목록</span>
-    </span>
-    <span aria-hidden="true">→</span>
-  </a>
-
-  <a class="archive-link" href="https://www.instagram.com/yyuuu.sei" aria-label="사진 Instagram 열기">
-    <span>
-      <strong>사진</strong>
-      <span>여행 사진 업로드용 Instagram</span>
-    </span>
-    <span aria-hidden="true">→</span>
-  </a>
 </section>
