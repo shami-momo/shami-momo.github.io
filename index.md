@@ -34,7 +34,13 @@ layout: default
   <a class="archive-link" href="{{ '/introduction/' | relative_url }}">
     <span>
       <strong>소개</strong>
-      <span>Introduction</span>
+    </span>
+    <span aria-hidden="true">→</span>
+  </a>
+
+  <a class="archive-link" href="{{ '/posts/' | relative_url }}">
+    <span>
+      <strong>글</strong>
     </span>
     <span aria-hidden="true">→</span>
   </a>
@@ -42,7 +48,6 @@ layout: default
   <a class="archive-link" href="{{ '/travel/' | relative_url }}">
     <span>
       <strong>여행</strong>
-      <span>Travel History</span>
     </span>
     <span aria-hidden="true">→</span>
   </a>
@@ -50,7 +55,6 @@ layout: default
   <a class="archive-link" href="{{ '/photos/' | relative_url }}">
     <span>
       <strong>사진</strong>
-      <span>Photo Gallery</span>
     </span>
     <span aria-hidden="true">→</span>
   </a>

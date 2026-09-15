@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Travel"
+title: "여행"
 permalink: /travel/
 styles: [travel]
 ---

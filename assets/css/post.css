@@ -35,10 +35,6 @@
 
 .content strong {
   font-weight: 700;
-  background-image: linear-gradient(var(--highlight), var(--highlight));
-  background-repeat: no-repeat;
-  background-position: 0 88%;
-  background-size: 100% 0.42em;
 }
 
 .content code {
@@ -369,6 +365,71 @@ mjx-container[display="true"] mjx-math {
 .post-toc-mobile nav {
   margin-top: var(--space-3);
 }
+
+/* Resume-style history */
+
+.content .resume-list {
+  display: grid;
+  gap: var(--space-6);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.content .resume-item {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+  margin: 0;
+}
+
+.content .resume-item + .resume-item {
+  margin-top: 0;
+}
+
+.resume-date {
+  padding-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.resume-body {
+  min-width: 0;
+}
+
+.content .resume-body h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.content .resume-body p {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.content .resume-body ul {
+  margin: var(--space-3) 0 0;
+}
+
+@media (max-width: 640px) {
+  .content .resume-list {
+    gap: var(--space-5);
+  }
+
+  .content .resume-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+
+  .resume-date {
+    padding-top: 0;
+    font-size: 0.8125rem;
+  }
+}
+
 
 @media (max-width: 1180px) {
   .post-toc-desktop {

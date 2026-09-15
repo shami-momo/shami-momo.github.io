@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Photos"
+title: "사진"
 permalink: /photos/
 styles:
   - photos
