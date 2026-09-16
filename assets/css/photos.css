@@ -29,7 +29,6 @@
   color: inherit;
   font: inherit;
   cursor: zoom-in;
-  transition: border-color var(--motion-fast) var(--ease);
 }
 
 .photo-trigger img {
@@ -39,10 +38,6 @@
   object-fit: cover;
   object-position: var(--photo-position);
   transition: transform var(--motion-fast) var(--ease);
-}
-
-.photo-trigger:hover {
-  border-color: var(--main);
 }
 
 .photo-trigger:hover img {

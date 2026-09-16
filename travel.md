@@ -5,7 +5,7 @@ permalink: /travel/
 styles: [travel]
 ---
 
-## 지금까지 <span id="totalTravelDays">-</span> 동안 여행했어요.
+## 지금까지 여행을 떠난 날은 <span id="totalTravelDays">-</span>.
 
 <div class="travel-chart-wrap">
   <canvas
@@ -17,7 +17,7 @@ styles: [travel]
 </div>
 <div id="travelChartSummary" class="visually-hidden"></div>
 
-## 세계의 <span id="visitedCountryCount">-</span>를 여행했어요.
+## 방문한 국가는 <span id="visitedCountryCount">-</span>.
 
 <figure aria-label="방문한 나라를 표시한 세계 지도">
   <div class="map-wrap">
@@ -29,7 +29,7 @@ styles: [travel]
   </figcaption>
 </figure>
 
-## 일본의 <span id="visitedPrefectureCount">-</span>을 여행했어요.
+## 방문한 일본의 현은 <span id="visitedPrefectureCount">-</span>.
 
 <figure aria-label="방문 경험 단계별로 표시한 일본 지도">
   <div class="map-wrap">
@@ -51,7 +51,7 @@ styles: [travel]
   </figcaption>
 </figure>
 
-## 이런 여행들을 했어요.
+## 이런 여행들을 했습니다:
 
 <div id="travelList" class="travel-list-root"></div>
 
@@ -292,9 +292,9 @@ styles: [travel]
   function renderVisitedStats() {
     const countryEl = $("#visitedCountryCount");
     const prefectureEl = $("#visitedPrefectureCount");
-    if (countryEl) countryEl.textContent = `${countries.length}개 나라`;
+    if (countryEl) countryEl.textContent = `${countries.length}곳`;
     if (prefectureEl) {
-      prefectureEl.textContent = `${visitedPrefectures.length}개 현`;
+      prefectureEl.textContent = `${visitedPrefectures.length}곳`;
     }
   }
 

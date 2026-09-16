@@ -14,9 +14,6 @@
 
 .anime-controls {
   margin: var(--space-4) 0 var(--space-5);
-  padding: var(--space-3);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius-md);
 }
 
 .anime-search-row {
@@ -33,6 +30,7 @@
   border-radius: var(--radius-sm);
   background: var(--bg);
   color: var(--text);
+  font-size: 0.95rem;
 }
 
 .anime-search::placeholder {
@@ -65,7 +63,7 @@
 .anime-filter {
   padding: 0.15rem 0.6rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--muted);
   font-size: 0.875rem;
@@ -193,7 +191,7 @@
 
 .anime-card.is-perfect .anime-season,
 .anime-rating.is-perfect {
-  border-color: var(--highlight-soft);
+  border-color: var(--highlight);
   background: var(--highlight-soft);
   color: var(--main);
   font-weight: 700;

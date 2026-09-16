@@ -44,7 +44,7 @@
 .highlight {
   margin: 1.5rem 0;
   overflow-x: auto;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   background: var(--paper);
   font-size: 0.9em;
 }
@@ -58,7 +58,7 @@
 .content :not(pre) > code {
   margin: 0.125rem;
   padding: 0.1em 0.35em;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-tn);
   background: var(--muted-soft);
   font-size: 0.84em;
   white-space: normal;

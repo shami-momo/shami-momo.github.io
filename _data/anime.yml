@@ -30,7 +30,7 @@
 
 - year: 2026
   season: 0
-  title: "초(超) 가구야 공주!"
+  title: "초(超) 카구야 공주!"
   rating: 5
   yuri: true
 
@@ -1182,20 +1182,14 @@
 
 - year: "2008 이전"
   season: 0
-  title: "은하철도 999"
-  rating: 3
+  title: "천공의 성 라퓨타"
+  rating: 5
   yuri: false
 
 - year: "2008 이전"
   season: 0
   title: "안녕 은하철도 999: 안드로메다 종착"
   rating: 4
-  yuri: false
-
-- year: "2008 이전"
-  season: 0
-  title: "천공의 성 라퓨타"
-  rating: 5
   yuri: false
 
 - year: "2008 이전"
