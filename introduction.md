@@ -116,11 +116,9 @@ permalink: /introduction/
 
 ## 역량
 
-- 어학
-  - 영어: TOEIC 985, 2021.
-  - 일본어: JLPT N1, 2024.
-- 기타
-  - 프로그래밍 언어: `Python`
-  - 웹 개발: `HTML`, `CSS`
-  - 도구: `mercury6`, `Autodesk Fusion`, `Adobe Photoshop`, `Adobe Illustrator`, `Adobe Lightroom Classic`, `TeX`
-  - [GitHub](https://github.com/shami-momo)에서 제 프로젝트를 확인해보실 수 있습니다.
+- 프로그래밍: `Python`
+- 해석 및 설계: `Mercury6`, `Jupyter Notebook`, `Autodesk Fusion`
+- 문서 작성: `TeX`
+- 디자인 및 사진: `Photoshop`, `Illustrator`, `Lightroom Classic`
+- 어학: TOEIC 985, JLPT N1
+- [GitHub](https://github.com/shami-momo)

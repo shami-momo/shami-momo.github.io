@@ -44,7 +44,7 @@
   overflow-x: auto;
   border-radius: var(--radius-sm);
   background: var(--paper);
-  font-size: 0.95em;
+  font-size: 0.9em;
 }
 
 .highlight pre {
@@ -58,7 +58,7 @@
   padding: 0.1em 0.35em;
   border-radius: var(--radius-tn);
   background: var(--muted-soft);
-  font-size: 0.9em;
+  font-size: 0.85em;
   white-space: normal;
 }
 
@@ -307,9 +307,7 @@ mjx-container[display="true"] mjx-math {
 .post-toc-title {
   margin: 0 0 var(--space-2);
   color: var(--text);
-  font-size: 0.8125rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-weight: 600;
 }
 
 .post-toc ol,
