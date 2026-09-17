@@ -94,11 +94,9 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
-
   <div class="site">
     <header class="topbar{% if page.url == '/' %} topbar--home{% endif %}">
-      <a class="site-title" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
+      <a class="site-title" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{% if page.url == '/' %}Welcome!{% else %}hojun<span class="title-dot">.</span>yoo{% endif %}</a>
 
       <nav aria-label="주요 메뉴">
         <a href="{{ '/introduction/' | relative_url }}"{% if page.url == '/introduction/' %} aria-current="page"{% endif %}>소개</a>

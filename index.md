@@ -4,16 +4,13 @@ layout: default
 
 <section class="intro">
   <div class="intro-text">
-    <h1>Hojun Yoo</h1>
-
+    <h1>hojun<span class="intro-dot">.</span>yoo</h1>
     <p class="lead">
-      반갑습니다, 항공우주공학을 공부하는 <b><a href="{{ '/introduction/' | relative_url }}">유호준</a></b>입니다.
+      반갑습니다, 항공우주공학을 공부하는 <a href="{{ '/introduction/' | relative_url }}">유호준</a>입니다.
     </p>
-
     <p>
-      공부한 내용들과 진행한 프로젝트, 그리고 여행과 사진을 좋아하여 관련 아카이브도 함께 모아두었습니다.
+      공부한 내용을 정리한 글이나 진행한 프로젝트를 모아두었습니다. 평소에는 여행 다니며 사진 찍는 것을 좋아합니다.
     </p>
-
     <p class="contact">
       <strong>Contact</strong>
       jayyoo2002 [at] snu.ac.kr
@@ -33,7 +30,6 @@ layout: default
 <section class="section">
   <div class="section-header">
     <h2>최근 글</h2>
-
     <a class="section-more" href="{{ '/posts/' | relative_url }}">
       더보기 →
     </a>

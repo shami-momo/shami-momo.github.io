@@ -5,7 +5,7 @@ permalink: /aburibinninaruyo/
 styles: [anime]
 ---
 
-## 시청한 애니메이션은 총 <span id="anime-count">-</span>
+## 봤던 애니메이션은 <span id="anime-count">-</span>
 <div class="anime-chart-wrap">
   <canvas
     id="anime-watch-chart"
@@ -16,7 +16,7 @@ styles: [anime]
 </div>
 <div id="animeChartSummary" class="visually-hidden"></div>
 
-## 이런 작품들을 봤습니다:
+## 이런 작품들을 봤어요.
 <div class="anime-controls">
   <div class="anime-search-row">
     <label class="visually-hidden" for="animeSearch">작품 제목 검색</label>

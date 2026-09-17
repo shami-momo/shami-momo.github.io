@@ -87,7 +87,7 @@
 )[aria-pressed="true"] {
   border-color: var(--main);
   background: var(--main);
-  color: var(--on-main);
+  color: var(--bg);
   font-weight: 700;
 }
 

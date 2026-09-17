@@ -51,7 +51,7 @@ styles: [travel]
   </figcaption>
 </figure>
 
-## 이런 여행들을 했습니다:
+## 이런 여행들을 했어요.
 
 <div id="travelList" class="travel-list-root"></div>
 
