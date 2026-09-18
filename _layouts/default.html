@@ -99,7 +99,7 @@
       <a class="site-title" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{% if page.url == '/' %}Welcome!{% else %}hojun<span class="title-dot">.</span>yoo{% endif %}</a>
 
       <nav aria-label="주요 메뉴">
-        <a href="{{ '/introduction/' | relative_url }}"{% if page.url == '/introduction/' %} aria-current="page"{% endif %}>소개</a>
+        <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>소개</a>
         <a href="{{ '/posts/' | relative_url }}"{% if page.url == '/posts/' or page.layout == 'post' %} aria-current="page"{% endif %}>글</a>
         <a href="{{ '/travel/' | relative_url }}"{% if page.url == '/travel/' %} aria-current="page"{% endif %}>여행</a>
         <a href="{{ '/photos/' | relative_url }}"{% if page.url == '/photos/' %} aria-current="page"{% endif %}>사진</a>

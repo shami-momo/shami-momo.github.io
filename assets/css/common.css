@@ -14,8 +14,6 @@
   --space-5: 1.5rem;
   --space-6: 2rem;
   --space-7: 3rem;
-  --space-8: 4rem;
-  --space-9: 6rem;
 
   --radius-tn: 0.25rem;
   --radius-sm: 0.375rem;
@@ -24,7 +22,6 @@
   --radius-pill: 999px;
 
   --motion-fast: 160ms;
-  --motion-normal: 240ms;
   --ease: ease;
 
   --bg: #ffffff;
@@ -294,7 +291,7 @@ main {
   cursor: pointer;
   transition:
     background-color var(--motion-fast) var(--ease),
-    transform var(--motion-normal) var(--ease);
+    transform var(--motion-fast) var(--ease);
 }
 
 .tadashikunai:hover {
@@ -396,6 +393,7 @@ a.external-link::after {
   object-fit: cover;
   background: var(--paper);
   box-shadow: 8px 8px 16px var(--muted-soft);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
 }
 
@@ -587,7 +585,7 @@ a.external-link::after {
 
 @media (max-width: 640px) {
   .site {
-    padding: 1.25rem 1.125rem var(--space-7);
+    padding: 0 1.125rem var(--space-7);
   }
 
   main {

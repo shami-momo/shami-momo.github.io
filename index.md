@@ -6,16 +6,15 @@ layout: default
   <div class="intro-text">
     <h1>hojun<span class="intro-dot">.</span>yoo</h1>
     <p>
-      반갑습니다, 유호준입니다. <a href="{{ '/introduction/' | relative_url }}">항공우주공학</a>을 공부하고 있습니다.
+      반갑습니다, 유호준입니다. <a href="{{ '/about/' | relative_url }}">항공우주공학</a>을 공부하고 있습니다.
     </p>
 
     <p>
-      궤도역학과 우주추진에 관심이 있습니다. 이곳저곳 여행 다니며 제 최애 카메라인 Fujifilm X-E4로
-      <a href="{{ '/photos/' | relative_url }}">사진</a> 찍는 것을 좋아합니다.
+      궤도역학과 우주추진에 관심이 있습니다. 이곳저곳 <a href="{{ '/travel/' | relative_url }}">여행</a> 다니며 <a href="{{ '/photos/' | relative_url }}">사진</a> 찍는 것을 좋아합니다. 라이브를 보러 가기도.
     </p>
 
     <p class="contact">
-      Contact <a href="mailto:jayyoo2002@snu.ac.kr">jayyoo2002 [at] snu.ac.kr</a>
+      Contact <a href="mailto:jayyoo2002@snu.ac.kr">jayyoo2002@snu.ac.kr</a>
     </p>
   </div>
 

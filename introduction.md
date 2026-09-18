@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "소개"
-permalink: /introduction/
+permalink: /about/
 ---
 
 ## 관심 분야
