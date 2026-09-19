@@ -5,9 +5,9 @@ permalink: /travel/
 styles: [travel]
 ---
 
-## 지금까지 여행을 떠난 날은 <span id="totalTravelDays">-</span>.
+## 지금까지 여행을 떠난 날은 <span id="totalTravelDays" class="text-highlight">-</span>.
 
-<div class="travel-chart-wrap">
+<div class="chart-wrap">
   <canvas
     id="travelDaysChart"
     role="img"
@@ -17,7 +17,7 @@ styles: [travel]
 </div>
 <div id="travelChartSummary" class="visually-hidden"></div>
 
-## 방문한 국가는 <span id="visitedCountryCount">-</span>.
+## 방문한 국가는 <span id="visitedCountryCount" class="text-highlight">-</span>.
 
 <figure aria-label="방문한 나라를 표시한 세계 지도">
   <div class="map-wrap">
@@ -29,7 +29,7 @@ styles: [travel]
   </figcaption>
 </figure>
 
-## 방문한 일본의 현은 <span id="visitedPrefectureCount">-</span>.
+## 방문한 일본의 현은 <span id="visitedPrefectureCount" class="text-highlight">-</span>.
 
 <figure aria-label="방문 경험 단계별로 표시한 일본 지도">
   <div class="map-wrap">
@@ -134,10 +134,6 @@ styles: [travel]
     return new Date(Date.UTC(year, month - 1, day));
   }
 
-  function sortByStart(items) {
-    return [...items].sort((a, b) => parseDate(b.start) - parseDate(a.start));
-  }
-
   function escapeHtml(value) {
     return String(value)
       .replaceAll("&", "&amp;")
@@ -148,10 +144,6 @@ styles: [travel]
   }
 
   // 여행 데이터 계산
-
-  function getUniqueValues(key) {
-    return [...new Set(trips.flatMap((trip) => trip[key] ?? []))];
-  }
 
   function getPrefectureLevels() {
     const levels = new Map();
@@ -191,8 +183,9 @@ styles: [travel]
       .sort((a, b) => a.year - b.year);
   }
 
-  const sortedTrips = sortByStart(trips);
-  const countries = getUniqueValues("countries");
+  const sortedTrips = [...trips]
+    .sort((a, b) => parseDate(b.start) - parseDate(a.start));
+  const countries = [...new Set(trips.flatMap((trip) => trip.countries ?? []))];
   const prefectureLevels = getPrefectureLevels();
   const visitedPrefectures = [...prefectureLevels]
     .filter(([, level]) => level.score >= 3)
@@ -370,7 +363,6 @@ styles: [travel]
         },
         plugins: {
           legend: {
-            display: true,
             labels: {
               color: cssVar("--muted"),
               font: {
@@ -483,8 +475,6 @@ styles: [travel]
   function getAreaLabel(value, element) {
     return element.dataset.name
       || element.getAttribute("name")
-      || element.getAttribute("aria-label")
-      || element.querySelector("title")?.textContent?.trim()
       || value;
   }
 

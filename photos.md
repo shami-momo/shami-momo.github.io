@@ -130,20 +130,6 @@ photos:
 
   if (!dialog || triggers.length === 0) return;
 
-  /*
-    dialog를 지원하지 않는 구형 브라우저에서는
-    사진 파일을 직접 연다.
-  */
-  if (typeof dialog.showModal !== "function") {
-    triggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        window.location.assign(trigger.dataset.full);
-      });
-    });
-
-    return;
-  }
-
   const image = dialog.querySelector(".photo-lightbox-image");
   const caption = dialog.querySelector("#photo-lightbox-caption");
   const count = dialog.querySelector(".photo-lightbox-count");
@@ -167,16 +153,6 @@ photos:
     };
   }
 
-  function preloadAdjacentPhotos() {
-    [-1, 1].forEach((offset) => {
-      const index =
-        (currentIndex + offset + triggers.length) % triggers.length;
-
-      const preload = new Image();
-      preload.src = getPhoto(index).src;
-    });
-  }
-
   function renderPhoto() {
     const photo = getPhoto(currentIndex);
 
@@ -184,8 +160,6 @@ photos:
     image.alt = photo.alt;
     caption.textContent = photo.caption;
     count.textContent = `${currentIndex + 1} / ${triggers.length}`;
-
-    preloadAdjacentPhotos();
   }
 
   function showPhoto(index) {

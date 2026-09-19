@@ -1,17 +1,3 @@
-#anime-count {
-  color: inherit;
-  background-image: linear-gradient(var(--highlight), var(--highlight));
-  background-repeat: no-repeat;
-  background-position: 0 88%;
-  background-size: 100% 0.42em;
-}
-
-.anime-chart-wrap {
-  width: 100%;
-  height: 320px;
-  margin: var(--space-6) auto;
-}
-
 .anime-controls {
   margin: var(--space-4) 0 var(--space-5);
 }
@@ -168,10 +154,6 @@
   text-align: center;
 }
 
-.anime-rating {
-  font-variant-numeric: tabular-nums;
-}
-
 .anime-season {
   min-width: 2.8rem;
 }
@@ -189,6 +171,10 @@
   font-weight: 700;
 }
 
+.anime-rating {
+  font-variant-numeric: tabular-nums;
+}
+
 .anime-card.is-perfect .anime-season,
 .anime-rating.is-perfect {
   border-color: var(--highlight);
@@ -203,10 +189,6 @@
 }
 
 @media (max-width: 640px) {
-  .anime-chart-wrap {
-    height: 275px;
-  }
-
   .anime-controls {
     margin-inline: -0.25rem;
   }

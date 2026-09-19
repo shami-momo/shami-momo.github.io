@@ -14,7 +14,7 @@
   left: 0;
   width: var(--space-7);
   height: 3px;
-  background: var(--main-soft);
+  background: var(--highlight);
 }
 
 .content h3 {
@@ -36,7 +36,7 @@
 }
 
 .content code {
-  font-family: "IBM Plex Mono", "Pretendard Variable", monospace;
+  font-family: var(--font-mono);
 }
 
 .highlight {
@@ -56,7 +56,7 @@
 .content :not(pre) > code {
   margin: 0.125rem;
   padding: 0.1em 0.35em;
-  border-radius: var(--radius-tn);
+  border-radius: var(--radius-sm);
   background: var(--muted-soft);
   font-size: 0.85em;
   white-space: normal;
@@ -303,7 +303,7 @@ mjx-container[display="true"] mjx-math {
 .post-toc-desktop {
   position: fixed;
   top: 10rem;
-  left: calc(50% + var(--max-width) / 2 + var(--space-6));
+  left: calc(50% + var(--content-width) / 2 + var(--space-6));
   width: 12.5rem;
   max-height: calc(100vh - 12rem);
   overflow-y: auto;
@@ -418,6 +418,16 @@ mjx-container[display="true"] mjx-math {
   margin: var(--space-3) 0 0;
 }
 
+@media (max-width: 1180px) {
+  .post-toc-desktop {
+    display: none;
+  }
+
+  .post-toc-mobile {
+    display: block;
+  }
+}
+
 @media (max-width: 640px) {
   .content .resume-list {
     gap: var(--space-5);
@@ -432,20 +442,7 @@ mjx-container[display="true"] mjx-math {
     padding-top: 0;
     font-size: 0.8125rem;
   }
-}
 
-
-@media (max-width: 1180px) {
-  .post-toc-desktop {
-    display: none;
-  }
-
-  .post-toc-mobile {
-    display: block;
-  }
-}
-
-@media (max-width: 640px) {
   .content figure[class*="figure-"] {
     width: 100%;
   }

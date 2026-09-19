@@ -30,12 +30,18 @@
 
   <script>
     (() => {
+      const systemTheme = matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
       try {
-        const theme = localStorage.getItem("theme");
-        if (theme === "dark" || theme === "light") {
-          document.documentElement.dataset.theme = theme;
-        }
-      } catch (_) {}
+        const storedTheme = localStorage.getItem("theme");
+        document.documentElement.dataset.theme =
+          storedTheme === "dark" || storedTheme === "light"
+            ? storedTheme
+            : systemTheme;
+      } catch (_) {
+        document.documentElement.dataset.theme = systemTheme;
+      }
     })();
   </script>
 
@@ -135,12 +141,6 @@
       const getStoredTheme = () => {
         try { return localStorage.getItem("theme"); } catch (_) { return null; }
       };
-      const getCurrentTheme = () => {
-        const stored = getStoredTheme();
-        return stored === "dark" || stored === "light"
-          ? stored
-          : media.matches ? "dark" : "light";
-      };
 
       function applyTheme(theme, persist = false) {
         root.dataset.theme = theme;
@@ -156,59 +156,28 @@
       }
 
       button.addEventListener("click", () => {
-        applyTheme(getCurrentTheme() === "dark" ? "light" : "dark", true);
+        applyTheme(root.dataset.theme === "dark" ? "light" : "dark", true);
       });
       media.addEventListener("change", () => {
-        if (!getStoredTheme()) applyTheme(getCurrentTheme());
+        if (!getStoredTheme()) applyTheme(media.matches ? "dark" : "light");
       });
-      applyTheme(getCurrentTheme());
+      applyTheme(root.dataset.theme);
     })();
 
     (() => {
       const header = document.querySelector(".topbar");
       if (!header) return;
 
-      let lastY = window.scrollY;
-      let distance = 0;
-      let direction = 0;
-      let ticking = false;
-
-      function updateHeader() {
+      let lastY = scrollY;
+      addEventListener("scroll", () => {
         const currentY = window.scrollY;
-        const diff = currentY - lastY;
-        const nextDirection = Math.sign(diff);
+        if (Math.abs(currentY - lastY) < 12) return;
 
-        if (nextDirection && nextDirection !== direction) {
-          distance = 0;
-          direction = nextDirection;
-        }
-        distance += Math.abs(diff);
-
-        if (currentY <= 64) {
-          header.classList.remove("is-hidden");
-        } else if (distance >= 12) {
-          header.classList.toggle("is-hidden", direction > 0);
-          distance = 0;
-        }
-
+        header.classList.toggle("is-hidden", currentY > 64 && currentY > lastY);
         lastY = currentY;
-        ticking = false;
-      }
-
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          requestAnimationFrame(updateHeader);
-          ticking = true;
-        }
       }, { passive: true });
       header.addEventListener("focusin", () => header.classList.remove("is-hidden"));
     })();
-
-    document.querySelectorAll('a[href^="http://"], a[href^="https://"]').forEach((link) => {
-      try {
-        if (new URL(link.href).origin !== location.origin) link.classList.add("external-link");
-      } catch (_) {}
-    });
 
     const ANIME_URL = "{{ '/aburibinninaruyo/' | relative_url }}";
     const PASSWORD_HASHES = new Set([

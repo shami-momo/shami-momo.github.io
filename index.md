@@ -14,7 +14,7 @@ layout: default
     </p>
 
     <p class="contact">
-      Contact <a class="mail-link" href="mailto:jayyoo2002@snu.ac.kr">jayyoo2002@snu.ac.kr</a>
+      Contact <a href="mailto:jayyoo2002@snu.ac.kr">jayyoo2002@snu.ac.kr</a>
     </p>
   </div>
   

@@ -5,8 +5,8 @@ permalink: /aburibinninaruyo/
 styles: [anime]
 ---
 
-## 애니 <span id="anime-count">-</span>이나 본 오타쿠
-<div class="anime-chart-wrap">
+## 애니 <span id="anime-count" class="text-highlight">-</span>이나 본 오타쿠
+<div class="chart-wrap">
   <canvas
     id="anime-watch-chart"
     role="img"
@@ -67,7 +67,7 @@ styles: [anime]
     getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
   // 데이터
-  const anime = loadAnimeData(elements.data);
+  const anime = JSON.parse(elements.data.textContent).map(normalizeAnime);
 
   // 상태
   const filterState = {
@@ -101,51 +101,20 @@ styles: [anime]
   }
 
   function normalizeAnime(item) {
-    const rawRating =
-      item.rating === null || item.rating === undefined || item.rating === ""
-        ? null
-        : Number(item.rating);
-
-    const rating = Number.isFinite(rawRating) ? rawRating : null;
     const season = Number(item.season);
-    const isValidSeason =
-      Number.isInteger(season) && season >= 0 && season <= 4;
+    const rating = Number(item.rating);
 
     return {
       ...item,
       yearLabel: formatYear(item.year),
-      season: isValidSeason ? season : null,
+      season,
       seasonLabel: season === 0
         ? "극장판"
-        : season >= 1 && season <= 4
-          ? `${season}분기`
-          : "",
+        : `${season}분기`,
       type: season === 0 ? "movie" : "series",
       rating,
       perfect: rating === 5
     };
-  }
-
-  function loadAnimeData(source) {
-    if (!source) {
-      console.warn("Anime data element not found: #anime-data");
-      return [];
-    }
-
-    try {
-      const parsed = JSON.parse(source.textContent);
-
-      if (!Array.isArray(parsed)) {
-        throw new TypeError("Anime data must be an array.");
-      }
-
-      return parsed
-        .filter((item) => item && typeof item === "object")
-        .map(normalizeAnime);
-    } catch (error) {
-      console.error("Failed to parse anime data:", error);
-      return [];
-    }
   }
 
   function groupAnimeByYear(items) {
@@ -321,12 +290,6 @@ styles: [anime]
     `;
   }
 
-  function renderAnimeCount() {
-    if (elements.count) {
-      elements.count.textContent = `${anime.length}편`;
-    }
-  }
-
   function renderAnimeList() {
     if (!elements.list) return;
 
@@ -406,7 +369,6 @@ styles: [anime]
         },
         plugins: {
           legend: {
-            display: true,
             labels: {
               color: cssVar("--muted"),
               font: {
@@ -458,7 +420,7 @@ styles: [anime]
   // 초기화
   function init() {
     readFilterStateFromUrl();
-    renderAnimeCount();
+    elements.count.textContent = `${anime.length}편`;
     updateFilterButtons();
     renderAnimeList();
     renderChart();
