@@ -14,21 +14,19 @@ layout: default
     </p>
 
     <p class="contact">
-      Contact <a href="mailto:jayyoo2002@snu.ac.kr">jayyoo2002@snu.ac.kr</a>
+      <span class="contact-label">Contact</span>
+      <a href="mailto:jayyoo2002@snu.ac.kr">jayyoo2002@snu.ac.kr</a>
     </p>
   </div>
   
-  <div class="profile">
-    <img
-      class="profile-photo"
-      src="{{ '/assets/images/profile_pic.webp' | relative_url }}"
-      alt="유호준 프로필 사진"
-      width="180"
-      height="180"
-      decoding="async"
-    >
-    <span class="profile-desc">Toyama, Japan</span>
-  </div>
+  <img
+    class="profile-photo"
+    src="{{ '/assets/images/profile_pic.webp' | relative_url }}"
+    alt="유호준 프로필 사진"
+    width="180"
+    height="180"
+    decoding="async"
+  >
 </section>
 
 <section class="section">

@@ -36,7 +36,7 @@
 }
 
 .content code {
-  font-family: var(--font-mono);
+  font-family: "IBM Plex Mono", "Wanted Sans Variable";
 }
 
 .highlight {

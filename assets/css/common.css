@@ -199,35 +199,39 @@ main {
 .theme-toggle {
   display: inline-grid;
   place-items: center;
-  padding: var(--space-2) 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--radius-pill);
   border: 0;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  transition:
-    color var(--motion-fast) var(--ease),
-    background-color var(--motion-fast) var(--ease);
 }
 
 .theme-toggle:hover {
   color: var(--text);
+  background-color: var(--paper);
 }
 
 .theme-toggle-icon {
-  display: none;
+  display: block;
+  grid-area: 1 / 1;
   width: 1.15rem;
   height: 1.15rem;
+  opacity: 0;
+}
+
+.theme-toggle[data-next-theme="dark"] .theme-toggle-icon-dark,
+.theme-toggle[data-next-theme="light"] .theme-toggle-icon-light {
+  opacity: 1;
+  transform: none;
 }
 
 .theme-toggle-icon svg {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.theme-toggle[data-next-theme="dark"] .theme-toggle-icon-dark,
-.theme-toggle[data-next-theme="light"] .theme-toggle-icon-light {
-  display: block;
 }
 
 .footer {
@@ -298,7 +302,13 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card)::after,
   font-size: 0.75em;
   font-weight: 600;
   line-height: 1;
-  transform: translate(-1px, -4px);
+  transform: translate(-2px, -4px);
+  transition: transform var(--motion-fast) var(--ease);
+}
+
+a:is([href^="http://"], [href^="https://"]):not(.travel-card):hover::after,
+.intro a:hover::after {
+  transform: translate(0px, -6px);
 }
 
 /* Home */
@@ -357,14 +367,21 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card)::after,
 
 .contact {
   display: flex;
-  margin-bottom: 0;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   gap: 0.65rem;
-  font-family: var(--font-mono);
+  margin-bottom: 0;
 }
 
-/* Sections and lists */
+.contact-label {
+  font-weight: 600;
+}
+
+.contact a {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
 
 .section {
   margin-top: var(--space-7);
@@ -480,6 +497,18 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card)::after,
   background-repeat: no-repeat;
   background-position: 0 88%;
   background-size: 100% 0.42em;
+}
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+}
+
+.photo-lightbox[open] .photo-lightbox-figure,
+.travel-popup[open] {
+  animation: dialog-enter 240ms var(--ease);
 }
 
 @media (max-width: 720px) {
