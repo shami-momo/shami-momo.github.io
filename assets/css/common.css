@@ -164,7 +164,7 @@ main {
   top: 0;
   z-index: 100;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) 0;
@@ -232,11 +232,8 @@ main {
 .theme-toggle {
   display: inline-grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
   padding: 0;
   border: 0;
-  border-radius: var(--radius-pill);
   background: transparent;
   color: var(--muted);
   cursor: pointer;
@@ -246,7 +243,6 @@ main {
 }
 
 .theme-toggle:hover {
-  background: var(--muted-soft);
   color: var(--text);
 }
 
@@ -271,7 +267,7 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
   align-items: center;
-  margin-top: 5rem;
+  margin-top: var(--space-7);
   padding-top: var(--space-4);
   border-top: 1px solid var(--line);
   color: var(--muted);
@@ -326,15 +322,16 @@ a.external-link {
   color: var(--main);
 }
 
-a.external-link::after {
-  content: "↗";
+a.external-link::after, .intro a::after {
+  content: "\2197";
   display: inline-block;
   flex: 0 0 auto;
   margin-left: auto;
-  font-size: 0.85em;
-  font-weight: 700;
+  font-family: "Wanted Sans Variable";
+  font-size: 0.75em;
+  font-weight: 600;
   line-height: 1;
-  transform: translateY(-2px);
+  transform: translate(-1px, -4px);
 }
 
 .button {
@@ -386,6 +383,10 @@ a.external-link::after {
   color: var(--text-soft);
 }
 
+.profile {
+  text-align: center;
+}
+
 .profile-photo {
   width: 180px;
   aspect-ratio: 1;
@@ -397,6 +398,15 @@ a.external-link::after {
   border-radius: var(--radius-pill);
 }
 
+.profile-desc {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.025rem;
+}
+
 .contact {
   display: flex;
   margin-bottom: 0;
@@ -404,7 +414,7 @@ a.external-link::after {
   align-items: center;
   gap: 0.65rem;
   font-family: "IBM Plex Mono";
-  letter-spacing: -0.025rem;
+  font-weight: 500;
 }
 
 /* Sections and lists */

@@ -5,7 +5,7 @@ permalink: /aburibinninaruyo/
 styles: [anime]
 ---
 
-## 봤던 애니메이션은 <span id="anime-count">-</span>
+## 애니 <span id="anime-count">-</span>이나 본 오타쿠
 <div class="anime-chart-wrap">
   <canvas
     id="anime-watch-chart"

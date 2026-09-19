@@ -13,12 +13,6 @@ photos:
   - file: shomyo.webp
     caption: "Toyama, Japan · 2026"
 
-  - file: kamikochi.webp
-    caption: "Toyama, Japan · 2026"
-
-  - file: nagoya.webp
-    caption: "Nagoya, Japan · 2026"
-
   - file: seto.webp
     caption: "Ehime, Japan · 2026"
 
@@ -33,9 +27,6 @@ photos:
 
   - file: nikko.webp
     caption: "Tochigi, Japan · 2026"
-
-  - file: illustar.webp
-    caption: "Ilsan, Korea · 2025"
 
   - file: positano.webp
     caption: "Positano, Italy · 2025"
