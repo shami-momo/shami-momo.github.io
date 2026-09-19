@@ -31,11 +31,11 @@
   --line: #d8d6d1;
   --line-soft: #e6e8e8;
 
-  --main: #005eff;
-  --main-bright: #5090ff;
-  --main-softer: color-mix(in srgb, var(--main-bright) 36%, transparent);
-  --highlight: color-mix(in srgb, var(--main-bright) 24%, transparent);
-  --highlight-soft: color-mix(in srgb, var(--main-bright) 10%, transparent);
+  --main: #2859c5;
+  --main-bright: #5f82dd;
+  --main-softer: color-mix(in srgb, var(--main) 32%, transparent);
+  --highlight: color-mix(in srgb, var(--main) 22%, transparent);
+  --highlight-soft: color-mix(in srgb, var(--main) 10%, transparent);
   --map-base: #dadddd;
 
   --syntax-keyword: #8b3a62;
@@ -57,11 +57,11 @@
   --line: #4a4a4a;
   --line-soft: #303030;
 
-  --main: #6ea2ff;
-  --main-bright: #8ab3ff;
-  --main-softer: color-mix(in srgb, var(--main) 34%, transparent);
-  --highlight: color-mix(in srgb, var(--main) 48%, transparent);
-  --highlight-soft: color-mix(in srgb, var(--main) 15%, transparent);
+  --main: #8eacff;
+  --main-bright: #b2c5ff;
+  --main-softer: color-mix(in srgb, var(--main) 30%, transparent);
+  --highlight: color-mix(in srgb, var(--main) 26%, transparent);
+  --highlight-soft: color-mix(in srgb, var(--main) 12%, transparent);
   --map-base: #555555;
 
   --syntax-keyword: #e78ab5;
@@ -199,7 +199,7 @@ main {
 .theme-toggle {
   display: inline-grid;
   place-items: center;
-  padding: 0;
+  padding: var(--space-2) 0;
   border: 0;
   background: transparent;
   color: var(--muted);
@@ -341,17 +341,17 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card)::after,
   justify-self: end;
   object-fit: cover;
   background: var(--paper);
-  box-shadow: 8px 8px 16px var(--muted-soft);
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
 }
 
 .profile-desc {
+  display: block;
   font-size: 0.7rem;
-  color: var(--muted);
   font-family: var(--font-mono);
   font-weight: 400;
   font-style: italic;
+  color: var(--muted);
   letter-spacing: -0.025rem;
 }
 
@@ -362,7 +362,6 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card)::after,
   align-items: center;
   gap: 0.65rem;
   font-family: var(--font-mono);
-  font-weight: 500;
 }
 
 /* Sections and lists */

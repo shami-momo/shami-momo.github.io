@@ -4,53 +4,67 @@ title: "사진"
 permalink: /photos/
 styles:
   - photos
-image: /assets/images/photos/biei.webp
 
 photos:
   - file: cos_3.webp
     caption: "Tokyo, Japan · 2026"
+    alt: C107에서 촬영한 메이드복을 입고 총을 든 코스어 유키
 
   - file: shomyo.webp
     caption: "Toyama, Japan · 2026"
+    alt: 풀이 덮인 바위 사이를 내려오는 쇼묘폭포의 전경
 
   - file: seto.webp
     caption: "Ehime, Japan · 2026"
+    alt: 페리에서 촬영한 사다미사키 등대와 푸른 하늘
 
   - file: fuji.webp
     caption: "Yamanashi, Japan · 2026"
+    alt: 후지산을 배경으로 한 일주 사진
 
   - file: cos_1.webp
     caption: "Tokyo, Japan · 2026"
+    alt: C106에서 촬영한 비스크돌 이콜라의 코스를 한 코스어 에나코
 
   - file: biei.webp
     caption: "Hokkaido, Japan · 2026"
+    alt: 푸른색으로 소용돌이치는 강과 눈덮인 바위
 
   - file: nikko.webp
     caption: "Tochigi, Japan · 2026"
+    alt: 높은 곳에서 떨어지는 폭포수와 눈이 내리는 풍경
 
   - file: positano.webp
     caption: "Positano, Italy · 2025"
+    alt: 절벽 중간에 있는 색색의 건물들과 푸른 바다와 해수욕장
 
   - file: rome.webp
-    caption: "Rome, Italy · 2025"
+    caption: "Vatican City · 2025"
+    alt: 성당 돔 중간의 창으로 들어오는 빛 줄기
 
   - file: bernesealps.webp
     caption: "Bernese Alps, Switzerland · 2025"
+    alt: 푸른 하늘을 배경으로 한 높은 설산
 
   - file: eiger.webp
     caption: "Bernese Alps, Switzerland · 2025"
+    alt: 초원을 달리는 산악 열차 위의 높은 절벽과 눈
 
   - file: skogafoss.webp
     caption: "Skogafoss, Iceland · 2025"
+    alt: 넓고 높게 이끼가 쌓인 절벽 사이를 떨어지는 폭포
 
   - file: seljalandsfoss.webp
     caption: "Seljalandsfoss, Iceland · 2025"
+    alt: 절벽에서 떨어지는 여러 폭포들
 
   - file: nagasaki.webp
     caption: "Nagasaki, Japan · 2024"
+    alt: 산을 배경으로 작은 집과 두루미가 있는 호수의 흑백 풍경
 
   - file: oigawa.webp
     caption: "Shizuoka, Japan · 2024"
+    alt: 푸른 강 위로 지나가는 철길
 ---
 
 <ol class="photo-grid" aria-label="여행 사진 갤러리">

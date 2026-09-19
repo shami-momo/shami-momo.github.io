@@ -4,7 +4,7 @@ lang: "ko"
 
 url: "https://shami-momo.github.io"
 baseurl: ""
-social_image: "/assets/images/profile.webp"
+social_image: "/assets/images/photos/full/skogafoss.webp"
 
 markdown: kramdown
 

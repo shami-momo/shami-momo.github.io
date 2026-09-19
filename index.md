@@ -21,7 +21,7 @@ layout: default
   <div class="profile">
     <img
       class="profile-photo"
-      src="{{ '/assets/images/profilepic.webp' | relative_url }}"
+      src="{{ '/assets/images/profile_pic.webp' | relative_url }}"
       alt="유호준 프로필 사진"
       width="180"
       height="180"

@@ -5,6 +5,8 @@ permalink: /travel/
 styles: [travel]
 ---
 
+지역을 선택하면 관련 여행 기록을 볼 수 있습니다.
+
 ## 지금까지 여행을 떠난 날은 <span id="totalTravelDays" class="text-highlight">-</span>.
 
 <div class="chart-wrap">
@@ -43,7 +45,7 @@ styles: [travel]
     <ul class="map-legend" aria-label="일본 지도 범례">
       <li><span class="map-legend-swatch is-stayed"></span>숙박·거주</li>
       <li><span class="map-legend-swatch is-walked"></span>방문</li>
-      <li><span class="map-legend-swatch is-landed"></span>착륙</li>
+      <li><span class="map-legend-swatch is-landed"></span>접지</li>
       <li><span class="map-legend-swatch is-passed"></span>통과</li>
     </ul>
     Map adapted from

@@ -82,7 +82,8 @@
 
 .world-map .is-clickable:focus-visible,
 .japan-map .is-clickable:focus-visible {
-  outline: 0;
+  stroke: var(--text);
+  stroke-width: 2px;
 }
 
 .map-legend {
