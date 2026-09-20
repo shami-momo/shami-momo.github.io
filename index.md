@@ -6,7 +6,7 @@ layout: default
   <div class="intro-text">
     <h1>hojun<span class="intro-dot">.</span>yoo</h1>
     <p>
-      반갑습니다, 유호준입니다. <a href="{{ '/about/' | relative_url }}">항공우주공학</a>을 공부하고 있습니다.
+      반갑습니다, <b>유호준</b>입니다. <a href="{{ '/about/' | relative_url }}">항공우주공학</a>을 공부하고 있습니다.
     </p>
 
     <p>

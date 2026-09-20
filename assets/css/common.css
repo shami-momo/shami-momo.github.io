@@ -140,6 +140,12 @@ main {
   transition: transform var(--motion-fast) var(--ease);
 }
 
+body:has(.topbar--home),
+.topbar--home {
+  background: var(--paper);
+}
+
+
 .topbar.is-hidden {
   transform: translateY(calc(-100% - var(--space-3)));
 }
@@ -205,12 +211,12 @@ main {
   border-radius: var(--radius-pill);
   border: 0;
   background: transparent;
-  color: var(--muted);
+  fill: var(--muted);
   cursor: pointer;
 }
 
 .theme-toggle:hover {
-  color: var(--text);
+  fill: var(--text);
   background-color: var(--paper);
 }
 
@@ -329,7 +335,7 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card):hover::after,
   font-size: clamp(2.25rem, 6vw, 3.25rem);
   font-family: var(--font-mono);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.055em;
 }
 
