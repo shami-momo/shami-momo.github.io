@@ -418,6 +418,14 @@ mjx-container[display="true"] mjx-math {
   margin: var(--space-3) 0 0;
 }
 
+.content .skill-list {
+  gap: var(--space-4);
+}
+
+.content .skill-list .resume-date {
+  font-weight: 600;
+}
+
 @media (max-width: 1180px) {
   .post-toc-desktop {
     display: none;

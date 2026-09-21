@@ -140,12 +140,6 @@ main {
   transition: transform var(--motion-fast) var(--ease);
 }
 
-body:has(.topbar--home),
-.topbar--home {
-  background: var(--paper);
-}
-
-
 .topbar.is-hidden {
   transform: translateY(calc(-100% - var(--space-3)));
 }
@@ -158,23 +152,32 @@ body:has(.topbar--home),
   letter-spacing: -0.055em;
 }
 
-.topbar nav {
+.topbar .toggle {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.topbar .menu {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: var(--space-4);
   color: var(--muted);
   font-size: 0.9375rem;
 }
 
-.topbar nav a {
+.topbar .menu a {
   position: relative;
   padding: var(--space-2) 0;
   color: inherit;
   text-decoration: none;
 }
 
-.topbar nav a::after {
+.topbar .menu a::after {
   content: "";
   position: absolute;
   right: 0;
@@ -185,38 +188,38 @@ body:has(.topbar--home),
   transition: background-color var(--motion-fast) var(--ease);
 }
 
-.topbar nav a[aria-current="page"] {
+.topbar .menu a[aria-current="page"] {
   color: var(--text);
   font-weight: 600;
 }
 
-.topbar nav a:hover {
+.topbar .menu a:hover {
   color: var(--text);
 }
 
-.topbar nav a[aria-current="page"]::after {
+.topbar .menu a[aria-current="page"]::after {
   background: var(--main);
 }
 
-.topbar nav a:not([aria-current="page"]):hover::after {
+.topbar .menu a:not([aria-current="page"]):hover::after {
   background: var(--highlight);
 }
 
 .theme-toggle {
   display: inline-grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 40px;
   padding: 0;
   border-radius: var(--radius-pill);
   border: 0;
   background: transparent;
-  fill: var(--muted);
+  color: var(--muted);
   cursor: pointer;
 }
 
 .theme-toggle:hover {
-  fill: var(--text);
+  color: var(--text);
   background-color: var(--paper);
 }
 
@@ -238,6 +241,91 @@ body:has(.topbar--home),
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.search-toggle {
+  display: inline-grid;
+  width: 32px;
+  height: 40px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.search-toggle:hover {
+  color: var(--text);
+}
+
+.search-toggle svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.site-search {
+  width: min(40rem, calc(100% - var(--space-6)));
+  margin: 12vh auto 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 24px 80px rgb(0 0 0 / 22%);
+}
+
+.site-search::backdrop {
+  background: rgb(0 0 0 / 42%);
+  backdrop-filter: blur(2px);
+}
+
+.site-search-header {
+  display: grid;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-search-input {
+  width: 100%;
+  padding: var(--space-4);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  outline: 0;
+}
+
+.site-search-results {
+  max-height: min(60vh, 28rem);
+  margin: 0;
+  padding: var(--space-2);
+  overflow-y: auto;
+  list-style: none;
+}
+
+.site-search-results li {
+  margin: 0;
+}
+
+.site-search-result {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.site-search-result:is(:hover, :focus-visible) {
+  background: var(--paper);
+  text-decoration: none;
+}
+
+.site-search-message {
+  margin: 0;
+  padding: var(--space-6);
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-align: center;
 }
 
 .footer {
@@ -434,8 +522,8 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card):hover::after,
   border-bottom: 1px solid var(--line-soft);
 }
 
-.post-list li:first-child {
-  border-top: 1px solid var(--line-soft);
+.post-list li:last-child {
+  border-bottom: none;
 }
 
 .post-list a {
