@@ -6,7 +6,8 @@ permalink: /about/
 
 ## 관심 연구 분야
 
-- 우주추진 및 궤도역학 (Space propulsion & Otbital mechanics)
+- 우주추진 (Space propulsion)
+- 궤도역학 (Orbital mechanics)
 
 ## 학력
 
