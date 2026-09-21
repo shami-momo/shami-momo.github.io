@@ -434,9 +434,8 @@ a:is([href^="http://"], [href^="https://"]):not(.travel-card):hover::after,
   border-bottom: 1px solid var(--line-soft);
 }
 
-.post-list li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+.post-list li:first-child {
+  border-top: 1px solid var(--line-soft);
 }
 
 .post-list a {

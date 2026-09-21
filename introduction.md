@@ -120,5 +120,5 @@ permalink: /about/
 - 해석 및 설계: `Mercury6`, `Jupyter Notebook`, `Autodesk Fusion`
 - 문서 작성: `TeX`
 - 디자인 및 사진: `Photoshop`, `Illustrator`, `Lightroom Classic`
-- 어학: TOEIC 985, JLPT N1
+- 어학: 영어 (TEPS 515, TOEIC 985), 일본어 (JLPT N1)
 - [GitHub](https://github.com/shami-momo)
